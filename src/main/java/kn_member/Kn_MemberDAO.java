@@ -32,13 +32,23 @@ public class Kn_MemberDAO {
 				vo.setIdx(rs.getInt("idx"));
 				vo.setMid(rs.getString("mid"));
 				vo.setPwd(rs.getString("pwd"));
+				vo.setSalt(rs.getString("salt"));
 				vo.setName(rs.getString("name"));
-				vo.setGender(rs.getString("gender"));
-				vo.setBirthday(rs.getString("birthday"));
-				vo.setTel(rs.getString("tel"));
 				vo.setEmail(rs.getString("email"));
+				vo.setTel(rs.getString("tel"));
+				vo.setBirthday(rs.getString("birthday"));
+				vo.setAddress(rs.getString("address"));
+				vo.setGender(rs.getString("gender"));
 				vo.setLevel(rs.getInt("level"));
+				vo.setLevelStartDate(rs.getString("levelStartDate"));
+				vo.setLevelExpireDate(rs.getString("levelExpireDate"));
+				vo.setTotCnt(rs.getInt("totCnt"));
+				vo.setTodayCnt(rs.getInt("todayCnt"));
+				vo.setFirstVisit(rs.getString("firstVisit"));
+				vo.setLastVisit(rs.getString("lastVisit"));
+				vo.setMemberDel(rs.getString("memberDel"));
 			}
+			
 		} catch (SQLException e) {
 			System.out.println("SQL 에러 : " + e.getMessage());
 		} finally {
@@ -48,20 +58,22 @@ public class Kn_MemberDAO {
 	}
 
 	
-	// 회원가입 
-	public int setMemberJoin(Kn_MemberVO vo) {
+	// 회원가입 (JoinOkCommand)
+	public int setJoin(Kn_MemberVO vo) {
 		int res = 0;
 		try {
-			sql = "insert into kn_member values (default,?,?,?,?,?,?,?,?,?,default,default,default,default)";
+			sql = "insert into kn_member values (default,?,?,?,?,?,?,?,?,?,default,default,?,default,default,default,default,default)";
 			pstmt = conn.prepareStatement(sql);
 			pstmt.setString(1, vo.getMid());
 			pstmt.setString(2, vo.getPwd());
-			pstmt.setString(3, vo.getName());
-			pstmt.setString(5, vo.getTel());
-			pstmt.setString(6, vo.getEmail());
-			pstmt.setString(7, vo.getAddress());
-			pstmt.setString(8, vo.getGender());
-			pstmt.setString(9, vo.getBirthday());
+			pstmt.setString(3, vo.getSalt());
+			pstmt.setString(4, vo.getName());
+			pstmt.setString(5, vo.getEmail());
+			pstmt.setString(6, vo.getTel());
+			pstmt.setString(7, vo.getBirthday());
+			pstmt.setString(8, vo.getAddress());
+			pstmt.setString(9, vo.getGender());
+			pstmt.setString(10, vo.getLevelExpireDate());
 			
 			pstmt.executeUpdate();
 			res = 1;
@@ -73,19 +85,17 @@ public class Kn_MemberDAO {
 		}
 		return res;
 	}
-
-	//(로그인 확인용 메소드 들어갈 자리!!)
 	
-	// 로그인 시, point증가, todayCnt 증가, visitCnt 증가, lastDate 변경
-	// point용 table 따로 만들 예정이라 이건 사용 안 할 듯
-	public void setPointPlus(String mid, int point, int todayCount) {
+	// 쿠폰 증정 (JoinOkCommand)
+	public void setCoupon(int memIdx, int coupon, String date) {
 		try {
-      sql = "update kn_member set point=?, lastDate=now(), todayCount=?, lastDate=now() where mid=?";
-      pstmt = conn.prepareStatement(sql);
-	  	pstmt.setInt(1, point);
-	  	pstmt.setInt(2, todayCount);
-  		pstmt.setString(3, mid);
- 	  	pstmt.executeUpdate();
+			sql = "insert into kn_coupon values (default,?,?,default,?,default)";
+			pstmt = conn.prepareStatement(sql);
+			pstmt.setInt(1, memIdx);
+			pstmt.setInt(2, coupon);
+			pstmt.setString(3, date);
+			
+			pstmt.executeUpdate();
 			
 		} catch (SQLException e) {
 			System.out.println("SQL 에러 : " + e.getMessage());
@@ -93,4 +103,39 @@ public class Kn_MemberDAO {
 			getConn.pstmtClose();
 		}
 	}
+
+	//(로그인 확인용 메소드 들어갈 자리!!)
+	//오늘 처음 방문시에 방문카운트를 0으로 초기화.
+	public void setTodayCntUpdate(int idx) {
+		try {
+			sql = "update kn_member set todayCnt=0 where idx =?";
+			pstmt = conn.prepareStatement(sql);
+			pstmt.setInt(1, idx);
+			pstmt.executeUpdate();
+			
+		} catch (SQLException e) {
+			System.out.println("SQL 에러 : " + e.getMessage());
+		} finally {
+			getConn.pstmtClose();
+		}
+	}
+	
+	// 로그인 시, totCnt 증가, todayCnt 증가, lastVisit 변경
+	public void setMemberTotalUpdate(int idx) {
+		try {
+      sql = "update kn_member set totCnt=totCnt+1, todayCnt=todayCnt+1, lastVisit=now() where idx=?";
+      pstmt = conn.prepareStatement(sql);
+	  	pstmt.setInt(1, idx);
+ 	  	pstmt.executeUpdate();
+			
+		} catch (SQLException e) {
+			System.out.println("SQL 에러 : " + e.getMessage());
+		} finally {
+			getConn.pstmtClose();
+		}
+	}	
+
+
+
+
 }

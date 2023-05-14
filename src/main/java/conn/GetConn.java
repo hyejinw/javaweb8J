@@ -12,7 +12,7 @@ public class GetConn {
 	private ResultSet rs = null;
 
 	private String driver = "com.mysql.jdbc.Driver";
-	private String url = "jdbc:mysql://localhost:3306/javaweb";
+	private String url = "jdbc:mysql://localhost:3306/javaweb8";
 	private String user = "root";
 	private String password = "1234";
 	

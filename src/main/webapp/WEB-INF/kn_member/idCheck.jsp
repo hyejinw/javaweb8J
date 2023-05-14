@@ -8,7 +8,6 @@
 	<meta name="viewport" content="width=device-width, initial-scale=1">
 	<title>idCheck.jsp</title>
 	<jsp:include page="/include/bs4.jsp"/> 
-	<script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>  <!-- sweetalert -->
 	<script>
 		'use strict';
 		
@@ -17,6 +16,7 @@
 			opener.window.document.myform.mid.focus();
 			window.close();
 		}
+		
 		function idCheck() {
 			let mid = childForm.mid.value;
 			
@@ -61,7 +61,7 @@
 	</c:if>
 	<c:if test="${res != 1}">
 		<h4 class="mb-4"><mark><b>${mid}</b> 은/(는) 이미 사용 중 입니다.</mark></h4>
-		<form name="childForm" method="post" action="${ctp}/IdCheck.kn">
+		<form name="childForm" method="post" action="${ctp}/IdCheck.kn_mem">
 			<p>
 				<input type="text" name="mid" id="reCheck"/>
 		    <input type="button" class="btn" value="아이디 재 검색" onclick="idCheck()"/>

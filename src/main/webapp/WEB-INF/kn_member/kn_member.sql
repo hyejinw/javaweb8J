@@ -43,6 +43,8 @@ create table kn_coupon (
 	on delete cascade	
 );
 
+insert into kn_coupon values (default,1,1,default,now(),default);
+
 ALTER TABLE kn_coupon
 ADD CONSTRAINT fk_midx foreign KEY(memMid) references kn_member (mid);
 

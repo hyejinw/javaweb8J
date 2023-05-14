@@ -21,7 +21,8 @@
 		// 아이디 중복 검사 
 		function idCheck() {
 			let mid = myform.mid.value;
-			let url = "${ctp}/IdCheck.kn?mid="+mid;
+		
+			let url = "${ctp}/IdCheck.kn_mem?mid="+mid;
 			
 			if(mid.trim() == "") {
 				alert("아이디를 입력하세요");
@@ -53,7 +54,8 @@
 		const regex1 = /^[a-zA-Z0-9]{4,20}$/; //(아이디) 영문자 또는 숫자 4~20자 
 		const regex2 = /^(?=.*[0-9])(?=.*[a-zA-Z])[a-zA-Z0-9!@#$%^&*()._-]{4,20}$/g; //(비밀번호)4자 이상 20자 이하, 영어/숫자 1개 이상 필수, 특수문자 허용
 		const regex3 = /^[가-힣a-zA-Z]+$/;  // (성명)한글,영문만 적어도 1자이상 
-		const regex4 = /^[0-9a-zA-Z]+/g; // 이메일
+		const regex4 = /^[a-zA-Z0-9]+@[a-zA-Z0-9]+$/; // 이메일
+/* 		const regex4 = /^[0-9a-zA-Z]+$/g; // 이메일 */
 	  const regex5 = /\d{2,3}-\d{3,4}-\d{4}$/g; //(전화번호)
 		
 	  let check = true;
@@ -70,7 +72,6 @@
 		  let email = email1 + "@" + email2;
 		  
 		  let birthday = myform.birthday.value;
-		  console.log("birthday : ", birthday);
 		  
 		  let tel1 = myform.tel1.value;
 		  let tel2 = myform.tel2.value;
@@ -128,14 +129,14 @@
 		  }
 		   
 		  // 이메일확인
-		  if(!regex4.test(email1)){
+		  if(!regex4.test(email)){
 		    document.getElementById("emailError").innerHTML="이메일이 올바르지 않습니다.";
 		    check = false;
 		  }
 		  else {
 			  document.getElementById("emailError").innerHTML="";
 			  check = true;
-		  } 
+		  }	 
 				     
 				
 
@@ -185,6 +186,7 @@
 		
 		function midCheck() {
 			let mid = document.getElementById("mid").value.trim();
+			document.getElementById("midError").innerHTML="";
 			
 		  // 아이디 확인
 		  if(!regex1.test(mid)) {
@@ -198,6 +200,7 @@
 		}
 		function pwd1Check() {
 			let pwd1 = document.getElementById("pwd1").value.trim();
+			document.getElementById("pwdError").innerHTML="";
 			
 		  // 비밀번호 확인
 		  if(!regex2.test(pwd1)) {
@@ -212,6 +215,9 @@
 		function pwd2Check() {
 			let pwd1 = document.getElementById("pwd1").value.trim();
 			let pwd2 = document.getElementById("pwd2").value.trim();
+			document.getElementById("pwdError").innerHTML="";
+			document.getElementById("pwdError2").innerHTML="";
+			
 			
 		  // 비밀번호 확인2
 		  if(pwd1 !== pwd2) {
@@ -227,10 +233,10 @@
 		
 		function nameCheck() {
 			let name = document.getElementById("name").value.trim();
+			document.getElementById("nameError").innerHTML="";
 			
 		  // 성명 확인
 		  if(!regex3.test(name)){
-			  console.log('성명 여기로 왔어요',name);
 		    document.getElementById("nameError").innerHTML="성명이 올바르지 않습니다.(한글/영문만 1자이상)";
 		    check = false;
 		  }
@@ -241,16 +247,56 @@
 		}
 		
 		function emailCheck() {
-			let email1 = document.getElementById("email1").value.trim();
-			
+		  let email1 = document.getElementById("email1").value.trim();
+		  let email2 = document.getElementById("email2");
+		  let email = email1 + "@" + email2;
+		  document.getElementById("emailError").innerHTML="";
+		  
 		  // 이메일확인
-		  if(!regex4.test(email1)){
+		  if(!regex4.test(email)){
+			  console.log("여기임 : ", email);
 		    document.getElementById("emailError").innerHTML="이메일이 올바르지 않습니다.";
 		    check = false;
 		  }
 		  else {
 			  document.getElementById("emailError").innerHTML="";
 			  check = true;
+		  }			
+		}
+		
+		function telCheck() {
+		  let tel1 = myform.tel1.value;
+		  let tel2 = myform.tel2.value;
+		  let tel3 = myform.tel3.value;
+		  let tel = tel1 + "-" + tel2 + "-" + tel3;
+		  
+		  // 전화번호 확인
+		  if(tel2==="" || tel3===""){
+		    document.getElementById("telError").innerHTML="전화번호를 입력해주세요.";
+		    check = false;
+		  }
+		  else if(!regex5.test(tel)){
+		    document.getElementById("telError").innerHTML="전화번호를 완성해주세요.";
+		    check = false;
+		  }
+		  else {
+		    document.getElementById("telError").innerHTML="";
+		    check = true;
+		  }
+		}
+		
+		function birthdayCheck() {
+			let birthday = myform.birthday.value;
+			document.getElementById("birthError").innerHTML="";
+			
+		  // 생년월일 확인
+		  if(birthday==""){
+		    document.getElementById("birthError").innerHTML="생일에 맞춰 특별 쿠폰을 보내드립니다. 생년월일을 입력해주세요.";
+		    check = false;
+		  }
+		  else {
+		    document.getElementById("birthError").innerHTML="";
+		    check = true;
 		  }			
 		}
 	</script>
@@ -312,7 +358,7 @@
     	<div id="nameError" class="text-primary"></div>
     </div>
     <div class="form-group">
-      <label for="email1" >Email address <span class="must">*</span></label>
+      <label for="email1" >이메일 <span class="must">*</span></label>
         <div class="input-group mb-1">
           <input type="text" class="form-control" onchange="emailCheck()" placeholder="Email을 입력하세요." id="email1" name="email1" required />
           <div class="input-group-append">
@@ -327,6 +373,7 @@
           </div>
         </div>
     	<div id="emailError" class="text-primary"></div>
+      <input type="hidden" name="email" id="email">
     </div>
     <div class="form-group">
       <div class="input-group mb-1">
@@ -347,13 +394,14 @@
             </select>  -
         </div>
         <input type="number" name="tel2" id="tel2" size=4 maxlength=4 oninput='handleOnInput(this, 4)' class="form-control inputs"/>  -
-        <input type="number" name="tel3" id="tel3" size=4 maxlength=4 oninput='handleOnInput(this, 4)' class="form-control inputs"/>
+        <input type="number" name="tel3" id="tel3" size=4 maxlength=4 oninput='handleOnInput(this, 4)' onchange="telCheck()" class="form-control inputs"/>
+    	  <input type="hidden" name="tel" id="tel"/>
       </div>
       <div id="telError" class="text-primary"></div>
     </div>
     <div class="form-group">
       <label for="birthday">생년월일 <span class="must">*</span></label>
-			<input type="date" name="birthday" class="form-control"/>
+			<input type="date" name="birthday" onchange="birthdayCheck()" class="form-control"/>
 			<div id="birthError" class="text-primary"></div>
     </div>    
 <%--    	  <!-- 생일을 null로 보내면 자꾸 오류가 생겨서 기본값을 줘버렸다. -->

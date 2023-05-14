@@ -19,6 +19,7 @@ public class Kn_MemberVO {
 	private String firstVisit;
 	private String lastVisit;
 	private String memberDel;
+	
 	public int getIdx() {
 		return idx;
 	}

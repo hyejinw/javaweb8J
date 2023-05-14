@@ -21,26 +21,29 @@ public class Kn_MemberController extends HttpServlet {
 		String com = uri.substring(uri.lastIndexOf("/"), uri.lastIndexOf("."));
 		
 		// 로그인,로그아웃&회원가입 
-		if(com.equals("/Login")) {
+		if(com.equals("/Login")) {      // 함 
 			viewPage += "/login.jsp";
 		}
 		else if(com.equals("/LoginOk")) {
-			command = new LoginOkCommand();   // 안 함 
+			command = new LoginOkCommand();   // 함 
 			command.execute(request, response);
+			viewPage = "/include/message.jsp";
 		}
 		else if(com.equals("/Logout")) {    // 안 함 
 			viewPage += "/logout.jsp";
 		}
-		else if(com.equals("/Join")) {
+		else if(com.equals("/Join")) {     // 함 
 			viewPage += "/join.jsp";
 		}
-		else if(com.equals("/Join")) {
+		else if(com.equals("/JoinOk")) {    // 함 
 			command = new JoinOkCommand();
+			command.execute(request, response);
 			viewPage = "/include/message.jsp";
 		}
 		// 아이디 중복 검사용
-		else if(com.equals("/IdCheck")) {
-			command = new IdCheckCommand();
+		else if(com.equals("/IdCheck")) {   // 함 
+			command = new IdCheckCommand();    
+			command.execute(request, response);
 			viewPage += "/idCheck.jsp";
 		}
 
