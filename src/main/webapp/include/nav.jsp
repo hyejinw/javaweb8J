@@ -29,7 +29,7 @@
         <a class="nav-link"  style="color: #282828" href="${ctp}/Menu.kn_menu"><b class="hover">MENU</b></a>
       </li>
       <li class="nav-item">
-	      <a class="nav-link"  style="color: #282828" href="${ctp}/Location.kn_lo"><b class="hover">LOCATION</b></a>
+	      <a class="nav-link"  style="color: #282828" href="${ctp}/Store.kn_st"><b class="hover">LOCATION</b></a>
       </li>    
       <li class="nav-item">
 	      <a class="nav-link" style="color: #282828"  href="${ctp}/Brand.kn_br"><b class="hover">BRAND</b></a>

@@ -39,6 +39,7 @@ public class Kn_MemberDAO {
 				vo.setBirthday(rs.getString("birthday"));
 				vo.setAddress(rs.getString("address"));
 				vo.setGender(rs.getString("gender"));
+				vo.setMemType(rs.getString("memType"));
 				vo.setLevel(rs.getInt("level"));
 				vo.setLevelStartDate(rs.getString("levelStartDate"));
 				vo.setLevelExpireDate(rs.getString("levelExpireDate"));
@@ -62,7 +63,7 @@ public class Kn_MemberDAO {
 	public int setJoin(Kn_MemberVO vo) {
 		int res = 0;
 		try {
-			sql = "insert into kn_member values (default,?,?,?,?,?,?,?,?,?,default,default,?,default,default,default,default,default)";
+			sql = "insert into kn_member values (default,?,?,?,?,?,?,?,?,?,?,?,default,?,default,default,default,default,default)";
 			pstmt = conn.prepareStatement(sql);
 			pstmt.setString(1, vo.getMid());
 			pstmt.setString(2, vo.getPwd());
@@ -73,7 +74,16 @@ public class Kn_MemberDAO {
 			pstmt.setString(7, vo.getBirthday());
 			pstmt.setString(8, vo.getAddress());
 			pstmt.setString(9, vo.getGender());
-			pstmt.setString(10, vo.getLevelExpireDate());
+			pstmt.setString(10, vo.getMemType());
+			
+			if(vo.getMemType().equals("개인")) {
+				pstmt.setInt(11, 2);
+				pstmt.setString(12, vo.getLevelExpireDate());
+			}
+			else {
+				pstmt.setInt(11, 1);
+				pstmt.setString(12, "2500-12-31");
+			}
 			
 			pstmt.executeUpdate();
 			res = 1;
@@ -86,10 +96,10 @@ public class Kn_MemberDAO {
 		return res;
 	}
 	
-	// 쿠폰 증정 (JoinOkCommand)
+	// 쿠폰 증정 (LoginOkCommand)
 	public void setCoupon(int memIdx, int coupon, String date) {
 		try {
-			sql = "insert into kn_coupon values (default,?,?,default,?,default)";
+			sql = "insert into kn_coupon values (default,?,?,default,?,default,default,default)";
 			pstmt = conn.prepareStatement(sql);
 			pstmt.setInt(1, memIdx);
 			pstmt.setInt(2, coupon);
@@ -98,7 +108,7 @@ public class Kn_MemberDAO {
 			pstmt.executeUpdate();
 			
 		} catch (SQLException e) {
-			System.out.println("SQL 에러 : " + e.getMessage());
+			System.out.println("SQL 에러asaa : " + e.getMessage());
 		} finally {
 			getConn.pstmtClose();
 		}
@@ -114,7 +124,7 @@ public class Kn_MemberDAO {
 			pstmt.executeUpdate();
 			
 		} catch (SQLException e) {
-			System.out.println("SQL 에러 : " + e.getMessage());
+			System.out.println("SQL 에러saa : " + e.getMessage());
 		} finally {
 			getConn.pstmtClose();
 		}
@@ -129,7 +139,7 @@ public class Kn_MemberDAO {
  	  	pstmt.executeUpdate();
 			
 		} catch (SQLException e) {
-			System.out.println("SQL 에러 : " + e.getMessage());
+			System.out.println("SQL 에러sa : " + e.getMessage());
 		} finally {
 			getConn.pstmtClose();
 		}

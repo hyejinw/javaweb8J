@@ -35,7 +35,13 @@
 		}
 		.btn {
 			width:100%;
-		  max-width: 300px;
+		  max-width: 350px;
+	    padding: 15px;
+	    border-radius:500px; 
+		}
+		.btn2 {
+			width:50%;
+		  max-width: 180px;
 	    padding: 15px;
 	    border-radius:500px; 
 		}
@@ -81,7 +87,8 @@
 					<div class="col"><button type="submit" class="btn" style="background-color:#FFDB7E">로그인</button></div>
 				</div>
 				<div class="row text-center" style="margin-bottom:10px">
-					<div class="col"><button type="button" onclick="location.href='${ctp}/Join.kn_mem';" class="btn" style="background-color:#000; color:white">회원가입</button></div>
+					<div class="col pr-1 text-right"><button type="button" onclick="location.href='${ctp}/Join.kn_mem';" class="btn2" style="background-color:#ffa0c5; border-color:#ffa0c5; color:black">회원가입</button></div>
+					<div class="col pl-1 text-left"><button type="button" onclick="location.href='${ctp}/FranJoin.kn_mem';" class="btn2" style="background-color:#000; color:white">매장회원가입</button></div>
 				</div>
 			</div>
 		</form>

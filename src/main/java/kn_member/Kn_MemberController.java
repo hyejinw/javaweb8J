@@ -40,11 +40,24 @@ public class Kn_MemberController extends HttpServlet {
 			command.execute(request, response);
 			viewPage = "/include/message.jsp";
 		}
+		else if(com.equals("/FranJoin")) {     // 매장 회원가입 함 
+			viewPage += "/franJoin.jsp";
+		}
+		else if(com.equals("/FranJoinOk")) {    // 함 
+			command = new FranJoinOkCommand();
+			command.execute(request, response);
+			viewPage = "/include/message.jsp";
+		}
 		// 아이디 중복 검사용
 		else if(com.equals("/IdCheck")) {   // 함 
 			command = new IdCheckCommand();    
 			command.execute(request, response);
 			viewPage += "/idCheck.jsp";
+		}
+		else if(com.equals("/FranStoreCheck")) {   // 함 
+			command = new FranStoreCheckCommand();    
+			command.execute(request, response);
+			viewPage += "/franStoreCheck.jsp";
 		}
 
 		

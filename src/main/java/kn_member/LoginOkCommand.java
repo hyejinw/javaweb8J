@@ -23,19 +23,15 @@ public class LoginOkCommand implements MemInterface {
 		
 		Kn_MemberDAO dao = new Kn_MemberDAO();
 		Kn_MemberVO vo = dao.getMidCheck(mid);
-	
 		
-		String salt = vo.getSalt();
-		pwd = salt + pwd;
-		
-		
-		
+		System.out.println("pwd : " + pwd);
 		// salt 가져오기
 		pwd = vo.getSalt() + pwd;
 		
 		// 다시 암호화 처리!!!!!!
 		SecurityUtil security = new SecurityUtil();
 		pwd = security.encryptSHA256(pwd);
+		
 		System.out.println("vo.getSalt() : " +vo.getSalt());
 		System.out.println("pwd : " + pwd);
 
@@ -63,8 +59,8 @@ public class LoginOkCommand implements MemInterface {
 		session.setAttribute("sLastVisit", vo.getLastVisit());
 		
 		
-		// 1-1. 첫 로그인이면 가입 쿠폰을 준다.(회원 관리는 전부 고유 번호로 진행)
-		if(vo.getTotCnt() == 0) {
+		// 1-1. 일반 회원 첫 로그인이면 가입 쿠폰을 준다.(회원 관리는 전부 고유 번호로 진행)
+		if(vo.getTotCnt() == 0 && vo.getLevel() == 2) {
 			
 			// 쿠폰 만료 날짜 계산 (3개월 후)
 			Calendar couponExpired = Calendar.getInstance();
@@ -72,7 +68,6 @@ public class LoginOkCommand implements MemInterface {
 			
 			couponExpired.add(couponExpired.MONTH, +3);
 			String date = sdf.format(couponExpired.getTime());
-			System.out.println(date);
 			
 			dao.setCoupon(vo.getIdx(), 1, date);
 		}

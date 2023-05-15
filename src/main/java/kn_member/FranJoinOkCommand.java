@@ -10,10 +10,11 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import conn.SecurityUtil;
+import kn_store.Kn_StoreDAO;
+import kn_store.Kn_StoreVO;
 
-public class JoinOkCommand implements MemInterface {
+public class FranJoinOkCommand implements MemInterface {
 
-	@SuppressWarnings("static-access")
 	@Override
 	public void execute(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		String mid = request.getParameter("mid")==null ? "":request.getParameter("mid");
@@ -23,9 +24,11 @@ public class JoinOkCommand implements MemInterface {
 		String tel = request.getParameter("tel")==null ? "":request.getParameter("tel");
 		String birthday = request.getParameter("birthday")==null ? "" : request.getParameter("birthday");
 		String gender = request.getParameter("gender")==null ? "":request.getParameter("gender");
-		String address = request.getParameter("address")==null ? "":request.getParameter("address");
-		String memType = request.getParameter("memType")==null ? "개인":request.getParameter("memType");
+		String memType = request.getParameter("memType")==null ? "매장":request.getParameter("memType");
 		
+		String storeName = request.getParameter("storeName")==null ? "":request.getParameter("storeName");
+		String storeTel = request.getParameter("storeTel")==null ? "":request.getParameter("storeTel");
+		String storeAddress = request.getParameter("address")==null ? "":request.getParameter("address");
 		
 		// 1. BackEnd 체크(null값, 길이, 중복여부 확인)
 		
@@ -39,7 +42,6 @@ public class JoinOkCommand implements MemInterface {
 			return;
 		}		
 		
-		
 		// 2. 비밀번호 암호화 처리!!!!!!
 		UUID uid = UUID.randomUUID();
 		String salt = uid.toString().substring(0,8);
@@ -48,17 +50,6 @@ public class JoinOkCommand implements MemInterface {
     SecurityUtil security = new SecurityUtil();
     pwd = security.encryptSHA256(pwd);
 
-    System.out.println("salt 비밀번호 :"+pwd);
-    
-    
-    // 멤버십 만료 날짜 계산 (1년 후)
-    Calendar cal = Calendar.getInstance();
-    SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
-
-    cal.add(cal.YEAR, +1);
-    String date = sdf.format(cal.getTime());
-    
-    
     // 3. 모든 체크 완료 후, vo에 값을 담는다.
     vo = new Kn_MemberVO();
 		vo.setMid(mid);
@@ -68,15 +59,27 @@ public class JoinOkCommand implements MemInterface {
 		vo.setEmail(email);
 		vo.setTel(tel);
 		vo.setBirthday(birthday);
-		vo.setAddress(address);
 		vo.setGender(gender);
 		vo.setMemType(memType);
-		vo.setLevelExpireDate(date);
 		
 		int res = dao.setJoin(vo);
 		
 		if(res == 1) {
-			request.setAttribute("msg", "회원가입을 성공했습니다. 만나서 반갑습니다!");
+
+			// 4. 해당 매장 등록
+			vo = dao.getMidCheck(mid);
+			
+			// 매장 vo에 값을 담는다.
+			Kn_StoreVO vo2 = new Kn_StoreVO();
+			vo2.setMemIdx(vo.getIdx());
+			vo2.setStoreName(storeName);
+			vo2.setStoreTel(storeTel);
+			vo2.setStoreAddress(storeAddress);
+
+			Kn_StoreDAO dao2 = new Kn_StoreDAO();
+			dao2.setStore(vo2);
+			
+			request.setAttribute("msg", "회원가입을 성공했습니다.\\n매장 관리창을 완성해주시면 관리자가 승인을 해드립니다!");
 			request.setAttribute("url", request.getContextPath() + "/Login.kn_mem");
 		}
 		else {

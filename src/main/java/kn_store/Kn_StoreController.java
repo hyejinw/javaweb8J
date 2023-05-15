@@ -1,4 +1,4 @@
-package kn_location;
+package kn_store;
 
 import java.io.IOException;
 
@@ -10,19 +10,19 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 @SuppressWarnings("serial")
-@WebServlet("*.kn_lo")
-public class Kn_LoController extends HttpServlet {
+@WebServlet("*.kn_st")
+public class Kn_StoreController extends HttpServlet {
 	@Override
 	protected void service(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		LocationInterface command = null;
-		String viewPage = "/WEB-INF/kn_location";
+		StoreInterface command = null;
+		String viewPage = "/WEB-INF/kn_store";
 		
 		String uri = request.getRequestURI();
 		String com = uri.substring(uri.lastIndexOf("/"), uri.lastIndexOf("."));
 		
 		
-		if(com.equals("/Location")) {
-			viewPage += "/location.jsp";
+		if(com.equals("/Store")) {
+			viewPage += "/store.jsp";
 		}
 		
 		RequestDispatcher dispatcher = request.getRequestDispatcher(viewPage);

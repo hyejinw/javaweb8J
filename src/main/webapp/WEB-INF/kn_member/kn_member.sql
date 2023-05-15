@@ -12,7 +12,9 @@ create table kn_member (
 	address varchar(100),                 /* 주소(다음 API 우편번호 활용) */
 	gender varchar(5) default '미선택',     /* 회원 성별 */
 
-	level int default 1 not null,                        /* 0:관리자, 1:옐로우, 2:핑크, 3:민트, 4:퍼플 */
+	memType varchar(5) default '개인',        /* 매장 or 개인 회원 */
+	
+	level int default 2 not null,                        /* 0:관리자, 1:매장, 2:옐로우, 3:민트, 4:퍼플 */
 	levelStartDate datetime default now() not null,      /* 멤버십 시작날짜 */
 	levelExpireDate datetime,                            /* 멤버십 시작날짜 */
 	
@@ -36,6 +38,8 @@ create table kn_coupon (
 	couponExpireDate datetime not null,              /* 만료 날짜 */ 
 	
 	couponDel char(2) default 'NO',                  /* 사용 유무 */
+	couponUsed varchar(5) default '미사용',           /* 사용 내역(만료, 사용) */
+	couponUsedDate datetime default now(),           /* 사용 날짜 */
 	
 	primary key(idx),
 	foreign key(memIdx) references kn_member(idx)    /* 외래키 설정: 반드시 고유한 키여야만 한다. */

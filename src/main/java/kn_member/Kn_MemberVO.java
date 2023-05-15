@@ -11,6 +11,7 @@ public class Kn_MemberVO {
 	private String birthday;
 	private String address;
 	private String gender;
+	private String memType;
 	private int level;
 	private String levelStartDate;
 	private String levelExpireDate;
@@ -80,6 +81,12 @@ public class Kn_MemberVO {
 	public void setGender(String gender) {
 		this.gender = gender;
 	}
+	public String getMemType() {
+		return memType;
+	}
+	public void setMemType(String memType) {
+		this.memType = memType;
+	}
 	public int getLevel() {
 		return level;
 	}
@@ -132,8 +139,8 @@ public class Kn_MemberVO {
 	public String toString() {
 		return "Kn_MemberVO [idx=" + idx + ", mid=" + mid + ", pwd=" + pwd + ", salt=" + salt + ", name=" + name
 				+ ", email=" + email + ", tel=" + tel + ", birthday=" + birthday + ", address=" + address + ", gender=" + gender
-				+ ", level=" + level + ", levelStartDate=" + levelStartDate + ", levelExpireDate=" + levelExpireDate
-				+ ", totCnt=" + totCnt + ", todayCnt=" + todayCnt + ", firstVisit=" + firstVisit + ", lastVisit=" + lastVisit
-				+ ", memberDel=" + memberDel + "]";
+				+ ", memType=" + memType + ", level=" + level + ", levelStartDate=" + levelStartDate + ", levelExpireDate="
+				+ levelExpireDate + ", totCnt=" + totCnt + ", todayCnt=" + todayCnt + ", firstVisit=" + firstVisit
+				+ ", lastVisit=" + lastVisit + ", memberDel=" + memberDel + "]";
 	}
 }
