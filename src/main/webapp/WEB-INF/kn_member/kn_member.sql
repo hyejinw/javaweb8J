@@ -24,15 +24,17 @@ create table kn_member (
 	lastVisit datetime default now(),                    /* 마지막 방문일 */
 	memberDel char(2) default 'NO',               /* 회원 탈퇴신청여부(NO:현재 활동 중, OK: 탈퇴 신청 중) */
 	            
-	primary key(idx)
+	primary key(idx),
+	unique key(mid)
 );
 
 desc kn_member;
 drop table kn_member;
 
+	
 create table kn_coupon (
 	idx int not null auto_increment,         /* 쿠폰 고유번호 */
-	memIdx int not null,
+	memMid varchar(20) not null,             /* 회원 고유번호(외래키) */
 	coupon int not null,                     /* 쿠폰 종류 (1:도넛, 2:커피, 3:음료, 4:생일축하케이크, 5:베이커리) */ 
 	couponStartDate datetime default now() not null, /* 시작 날짜 */ 
 	couponExpireDate datetime not null,              /* 만료 날짜 */ 
@@ -42,10 +44,11 @@ create table kn_coupon (
 	couponUsedDate datetime default now(),           /* 사용 날짜 */
 	
 	primary key(idx),
-	foreign key(memIdx) references kn_member(idx)    /* 외래키 설정: 반드시 고유한 키여야만 한다. */
+	foreign key(memMid) references kn_member(mid)    /* 외래키 설정: 반드시 고유한 키여야만 한다. */
 	on update cascade															 /* 원본의 변경을 따라간다. */
 	on delete cascade	
 );
+
 
 insert into kn_coupon values (default,1,1,default,now(),default);
 

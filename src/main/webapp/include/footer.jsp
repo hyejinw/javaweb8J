@@ -5,48 +5,48 @@
 	  padding: 0px;
 	  list-style: none;
 	}
-ul li a {
-  color: #282828;
-}
-ul li a:hover {
-  color: #ffa0c5;
-  text-decoration: none;
-}
-footer {
-  width: 100%;
-  height: 126px;
-  margin: 0px 0px 100px;
-  padding: 0px 0px 30px;
-}
-footer .inner {
-  width: 80%;
-  height: 75px;
-  padding-top: 40px;
-  margin: 0px auto;
-}
-#f_board, #f_info {
-  width: 80%;
-  height: 20px;
-  margin: 0px 0px 10px;
-}
-#f_board li a {
-  float: left;
-  font-size: 0.8em;
-  margin: 3px 8px;
-}
-#f_info li {
-  float: left;
-  font-size: 0.8em;
-  margin: 3px 8px;
-  color:#ffa0c5;
-}
-#rights {
-  clear: both;
-  font-size: 0.8em;
-  padding: 20px 8px 100px;
-  color:#ffa0c5;
-}
-hr {margin:0px}
+	ul li a {
+	  color: #282828;
+	}
+	ul li a:hover {
+	  color: #ffa0c5;
+	  text-decoration: none;
+	}
+	footer {
+	  width: 100%;
+	  height: 126px;
+	  margin: 0px 0px 100px;
+	  padding: 0px 0px 30px;
+	}
+	footer .inner {
+	  width: 80%;
+	  height: 75px;
+	  padding-top: 40px;
+	  margin: 0px auto;
+	}
+	#f_board, #f_info {
+	  width: 80%;
+	  height: 20px;
+	  margin: 0px 0px 10px;
+	}
+	#f_board li a {
+	  float: left;
+	  font-size: 0.9em;
+	  margin: 3px 8px;
+	}
+	#f_info li {
+	  float: left;
+	  font-size: 0.9em;
+	  margin: 3px 8px;
+	  color:#ffa0c5;
+	}
+	#rights {
+	  clear: both;
+	  font-size: 1em;
+	  padding: 20px 8px 100px;
+	  color: #282828;
+	}
+	hr {margin:0px}
 </style>
 <div>
   <strong><hr /></strong>

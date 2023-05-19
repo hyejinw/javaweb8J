@@ -8,13 +8,21 @@
 	<meta name="viewport" content="width=device-width, initial-scale=1">
 	<title>reservation</title>
 	<jsp:include page="/include/bs4.jsp" />
+	<style>
+		@font-face {
+	    font-family: 'TheJamsil5Bold';
+	    src: url('https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_2302_01@1.0/TheJamsil5Bold.woff2') format('woff2');
+	    font-weight: 100;
+	    font-style: normal;
+		}
+	</style>
 </head>
 <body>
 <jsp:include page="/include/nav.jsp" />
 	<div style="padding:0px 0px 200px">
 		<div class="container text-center">
 		<div  style="padding:100px 0px">
-		  <h2><b style="color: #ffa0c5;">RESERVATION</b></h2>
+		  <h2><b style="color: #ffa0c5; font-family: 'TheJamsil5Bold';">RESERVATION</b></h2>
 		</div>
 		  <div  style="margin:10px 220px">
 			  <div class="card-deck"  style="width:700px">

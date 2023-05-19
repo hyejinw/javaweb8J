@@ -6,19 +6,13 @@
 <head>
 	<meta charset="UTF-8">
 	<meta name="viewport" content="width=device-width, initial-scale=1">
-	<title>brand</title>
+	<title>franPage.jsp</title>
 	<jsp:include page="/include/bs4.jsp" />
-	<script>
-		function here() {
-			Swal.fire('Any fool can use a computer');
-		}
-	</script>
 </head>
 <body>
 <jsp:include page="/include/nav.jsp" />
-<div class="container">
-	<button onclick="here()">클릭</button>
-</div>
+	<h2>프랜차이즈</h2>
+
 	<footer>
 		<jsp:include page="/include/footer.jsp" />
 	</footer>

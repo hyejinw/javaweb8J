@@ -10,39 +10,47 @@
   <title>index.jsp</title>
   <jsp:include page="/include/bs4.jsp" />
 	<style>
-	/* Make the image fully responsive */
-	.carousel-inner img {
-	  width: 100%;
-	  height: 100%;
-	}
-	.carousel-inner img:hover {
-	  opacity: 50%;
-	}
-	.img {
-	  width: 32%;
-	}
-	#donut:hover {
-	  color: #ffa0c5;
-	  text-decoration: none;
-	}
-	.carousel-inner img:hover, .img:hover, .img2:hover, .img3:hover {
-	  opacity: 50%;
-	}
-	.img2 {
-		width:80%;
-		border-radius: 10px;
-	}
-	.img3 {
-	  float: left;
-	  width: 223.5px;
-	  height: 223.5px;
-	  margin: 5px;
-	  border-radius: 10px;
-	}
+		@font-face {
+	    font-family: 'TheJamsil5Bold';
+	    src: url('https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_2302_01@1.0/TheJamsil5Bold.woff2') format('woff2');
+	    font-weight: 100;
+	    font-style: normal;
+		}
+		#container {font-family: 'TheJamsil5Bold';}
+		/* Make the image fully responsive */
+		.carousel-inner img {
+		  width: 100%;
+		  height: 100%;
+		}
+		.carousel-inner img:hover {
+		  opacity: 50%;
+		}
+		.img {
+		  width: 32%;
+		}
+		#donut:hover {
+		  color: #ffa0c5;
+		  text-decoration: none;
+		}
+		.carousel-inner img:hover, .img:hover, .img2:hover, .img3:hover {
+		  opacity: 50%;
+		}
+		.img2 {
+			width:80%;
+			border-radius: 10px;
+		}
+		.img3 {
+		  float: left;
+		  width: 223.5px;
+		  height: 223.5px;
+		  margin: 5px;
+		  border-radius: 10px;
+		}
 	</style>
 </head>
 <body>
 <jsp:include page="/include/nav.jsp" />
+	<div id="container">
 	<div id="demo" class="carousel slide" data-ride="carousel">
 		    <!-- Indicators -->
 		<ul class="carousel-indicators">
@@ -75,7 +83,7 @@
 		<div class="container">
 			<div class="row" style="margin-top:50px">
 				<div class="col-xl-4">
-			    <h1 class="mb-15" style="color: #ffa0c5; margin-top:40px; font-size:1.3em;">OUR BEST MENU</h1>
+			    <h1 class="mb-15" style="color: #ffa0c5; margin-top:40px; font-size:1.1em; font-weight:50">OUR BEST MENU</h1>
 			    <h3>Milk Cream Dount</h3>
 			    <a href="#" id="donut" style="color: #282828">우유 생크림 도넛</a>
 			    <p style="font-size: 2em; color: #c3c3c3;">3,900</p>
@@ -118,6 +126,7 @@
 				<a href="#"><img src="https://img-app.knotted-order.com/instagrams/17867090885865079" class="img3" /></a>
 			</div>
 		</div>
+	</div>
 	</div>
 	<footer>
 		<jsp:include page="/include/footer.jsp" />

@@ -408,6 +408,7 @@
 	</script>
 	<style>
 		html {scroll-behavior:smooth;}
+		#container {font-size: 1.1em;}
 		
 		.text-primary {
 			font-size: 0.8em;
@@ -439,6 +440,7 @@
 </head>
 <body>
 <jsp:include page="/include/nav.jsp" />
+<div id="container">
 <div class="container-xl p-5 my-5"  id="top">	
 	<form name="myform" method="post" action="${ctp}/FranJoinOk.kn_mem" style="width:80%; margin:0px auto">
     <h2 class="text-center" style="margin-bottom:50px">매장 회원가입</h2>
@@ -524,7 +526,7 @@
       </div>
       <div class="form-check-inline">
         <label class="form-check-label">
-          <input type="radio" class="form-check-input" name="gender" value="미 선택" checked>미선택
+          <input type="radio" class="form-check-input" name="gender" value="미선택" checked>미선택
         </label>
       </div>
     </div>
@@ -583,6 +585,7 @@
       <input type="hidden" name="memType" value="매장"/>
   	</div>
   </form>
+</div>
 </div>
 <footer>
 	<jsp:include page="/include/footer.jsp" />

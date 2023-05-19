@@ -6,11 +6,13 @@ public class Kn_StoreVO {
 	private String storeName;
 	private String storeTel;
 	private String storeAddress;
+	private String storePhoto;
 	private String location;
 	private String opHour;
 	private String storeMenu;
 	private String storeOpen;
 	private String storeDel;
+	
 	public int getIdx() {
 		return idx;
 	}
@@ -40,6 +42,12 @@ public class Kn_StoreVO {
 	}
 	public void setStoreAddress(String storeAddress) {
 		this.storeAddress = storeAddress;
+	}
+	public String getStorePhoto() {
+		return storePhoto;
+	}
+	public void setStorePhoto(String storePhoto) {
+		this.storePhoto = storePhoto;
 	}
 	public String getLocation() {
 		return location;
@@ -74,7 +82,7 @@ public class Kn_StoreVO {
 	@Override
 	public String toString() {
 		return "Kn_StoreVO [idx=" + idx + ", memIdx=" + memIdx + ", storeName=" + storeName + ", storeTel=" + storeTel
-				+ ", storeAddress=" + storeAddress + ", location=" + location + ", opHour=" + opHour + ", storeMenu="
-				+ storeMenu + ", storeOpen=" + storeOpen + ", storeDel=" + storeDel + "]";
+				+ ", storeAddress=" + storeAddress + ", storePhoto=" + storePhoto + ", location=" + location + ", opHour="
+				+ opHour + ", storeMenu=" + storeMenu + ", storeOpen=" + storeOpen + ", storeDel=" + storeDel + "]";
 	}
 }

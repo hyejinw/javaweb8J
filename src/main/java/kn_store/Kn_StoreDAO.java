@@ -36,6 +36,7 @@ public class Kn_StoreDAO {
 				vo.setStoreName(rs.getString("storeName"));
 				vo.setStoreTel(rs.getString("storeTel"));
 				vo.setStoreAddress(rs.getString("storeAddress"));
+				vo.setStorePhoto(rs.getString("storePhoto"));
 				vo.setLocation(rs.getString("location"));
 				vo.setOpHour(rs.getString("opHour"));
 				vo.setStoreMenu(rs.getString("storeMenu"));
@@ -54,7 +55,7 @@ public class Kn_StoreDAO {
 	// store 생성 (FranJoinOkCommand)
 	public void setStore(Kn_StoreVO vo) {
 		try {
-			sql = "insert into kn_store values (default,?,?,?,?,default,default,default,default,default)";
+			sql = "insert into kn_store values (default,?,?,?,?,default,default,default,default,default,default)";
 			pstmt = conn.prepareStatement(sql);
 	  	pstmt.setInt(1, vo.getMemIdx());
 	  	pstmt.setString(2, vo.getStoreName());

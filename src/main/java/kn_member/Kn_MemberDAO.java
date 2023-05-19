@@ -4,6 +4,7 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.ArrayList;
 
 import conn.GetConn;
 
@@ -96,12 +97,12 @@ public class Kn_MemberDAO {
 		return res;
 	}
 	
-	// 쿠폰 증정 (LoginOkCommand)
-	public void setCoupon(int memIdx, int coupon, String date) {
+	// 쿠폰 증정 (1.LoginOkCommand)
+	public void setCoupon(String memMid, int coupon, String date) {
 		try {
 			sql = "insert into kn_coupon values (default,?,?,default,?,default,default,default)";
 			pstmt = conn.prepareStatement(sql);
-			pstmt.setInt(1, memIdx);
+			pstmt.setString(1, memMid);
 			pstmt.setInt(2, coupon);
 			pstmt.setString(3, date);
 			
@@ -143,7 +144,8 @@ public class Kn_MemberDAO {
 		} finally {
 			getConn.pstmtClose();
 		}
-	}	
+	}
+
 
 
 

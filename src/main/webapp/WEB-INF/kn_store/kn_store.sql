@@ -6,7 +6,8 @@ create table kn_store (
 	storeName varchar(10) not null,            /* 매장명 */
 	storeTel varchar(15) not null,             /* 매장 전화번호(010-1234-5678)*/
 	storeAddress varchar(50) not null,         /* 주소 */  
-	location varchar(70) default '입력 전',      /* 지도 */  
+	storePhoto varchar(250) default '입력 전',  /* 매장 사진 */  
+	location varchar(70) default '입력 전',     /* 지도 */  
 	opHour varchar(15) default '09:00 ~ 21:00',/* 영업시간 */  
 	storeMenu varchar(500) default '입력 전',   /* 가능 메뉴 */  
 	storeOpen char(2) default 'NO',            /* 공개 유무 */  

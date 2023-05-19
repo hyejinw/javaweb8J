@@ -24,7 +24,6 @@ public class LoginOkCommand implements MemInterface {
 		Kn_MemberDAO dao = new Kn_MemberDAO();
 		Kn_MemberVO vo = dao.getMidCheck(mid);
 		
-		System.out.println("pwd : " + pwd);
 		// salt 가져오기
 		pwd = vo.getSalt() + pwd;
 		
@@ -32,9 +31,8 @@ public class LoginOkCommand implements MemInterface {
 		SecurityUtil security = new SecurityUtil();
 		pwd = security.encryptSHA256(pwd);
 		
-		System.out.println("vo.getSalt() : " +vo.getSalt());
-		System.out.println("pwd : " + pwd);
-
+		System.out.println("로그인 pwd : " + pwd);
+		
 		
 		// 진짜 아이디가 없거나, 1개월 전에 탈퇴한 회원일 때
 		if (vo.getMid() == null || vo.getMemberDel().equals("OK")) {
@@ -55,6 +53,7 @@ public class LoginOkCommand implements MemInterface {
 		session.setAttribute("sFail", fail);
 
 		session.setAttribute("sMid", mid);
+		session.setAttribute("sName", vo.getName());
 		session.setAttribute("sLevel", vo.getLevel());
 		session.setAttribute("sLastVisit", vo.getLastVisit());
 		
@@ -69,7 +68,7 @@ public class LoginOkCommand implements MemInterface {
 			couponExpired.add(couponExpired.MONTH, +3);
 			String date = sdf.format(couponExpired.getTime());
 			
-			dao.setCoupon(vo.getIdx(), 1, date);
+			dao.setCoupon(vo.getMid(), 1, date);
 		}
 
 		// 2 각종 업데이트

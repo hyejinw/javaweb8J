@@ -9,26 +9,6 @@
 	<title>menu</title>
 	<jsp:include page="/include/bs4.jsp" />
 	<style>
-		.pill-nav a {
-		  display: inline-block;
-		  color: black;
-		  text-align: center;
-		  padding: 8px 20px;
-		  text-decoration: none;
-		  font-size: 17px;
-		  border-radius: 5px;
-		}
-		
-		.pill-nav a:hover {
-		  background-color: #ddd;
-		  color: black;
-		}
-		
-		.pill-nav a.active {
-		  background-color: #ffa0c5;
-		  color: white;
-		}
-		
 		.img4 {
 		  float: left;
 		  width: 90%;
@@ -57,18 +37,16 @@
 		<nav class="navbar navbar-expand-md navbar-dark">
 		  <div class="collapse navbar-collapse" id="navbarSupportedContent">
 		    <div class="navbar-nav mr-auto">
-		    
-					<div class="pill-nav" style="margin-left:100px">
-					  <a class="active mr-2" href="#home">전체</a>
-					  <a class="active mr-2" href="#news">도넛</a>
-					  <a class="active mr-2" href="#contact">케이크</a>
-					  <a class="active" href="#about">베이크</a>
+		      <div class="btn-group">
+	 				 <button type="button" class="btn">전체</button>
+					 <button type="button" class="btn">도넛</button>
+				   <button type="button" class="btn">케이크</button>
+				   <button type="button" class="btn">베이크</button>
 					</div>
-					
 		    </div>
 		    <form class="form-inline my-2 my-lg-0">
 		      <input class="form-control mr-sm-2" type="search" autofocus aria-label="Search" />
-		      <button class="btn btn-outline-success my-2 my-sm-0" type="submit" style="margin-right:100px">검색</button>
+		      <button class="btn btn-outline-success my-2 my-sm-0" type="submit">검색</button>
 		    </form>
 		  </div>
 		</nav>
