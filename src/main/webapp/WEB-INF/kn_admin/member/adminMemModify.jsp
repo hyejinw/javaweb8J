@@ -24,9 +24,6 @@
 	</style>
 	
 	<script>
-		// 값 수정용
-		let clickCellInputId;
-	
 		/* $(document).ready(function() { 이렇게 적어도 된다!! */
 		jQuery(function($){
 			
@@ -166,7 +163,7 @@
 	    
 		});
 
-		function memberUpdate(){
+		function memberModify(){
 			let ans = confirm('수정하시겠습니까?');
 			if(!ans) return false;
 			
@@ -225,10 +222,10 @@
     		  lastVisit : lastVisit,
     		  memberDel : memberDel
       } 
-				
+      
       $.ajax({
           type: "post",
-          url: "${ctp}/AdminMemberUpdateOk.kn_ad",
+          url: "${ctp}/AdminMemModifyOK.kn_ad",
           data: query,
           success: function(res){
               if(res == 1){
@@ -307,7 +304,7 @@
 		      	<div class="row mb-2">
 		      		<div class="col-sm text-left">주소: <input type="text" name="address" id="address" class="form-control"/></div>
 		      	</div>
-		      	<div class="row mb-4">
+		      	<div class="row mb-2">
 		      		<div class="col">
 				        성별 : 
 				         <select name="gender" id="gender" class="form-control mb-2">
@@ -317,7 +314,7 @@
 				        </select>
 		      		</div>
 		      	</div>
-		      	<div class="row mb-2">
+		      	<div class="row">
 		      		<div class="col-sm-6">
 				        회원 종류 : 
 				        <select name="memType" id="memType" class="form-control mb-2">
@@ -350,7 +347,7 @@
 		      	</div>      
 		      	<div class="row mb-2">
 		      		<div class="col-sm-6">탈퇴 신청 여부: <input type="text" name="memberDel" id="memberDel" readonly style="background-color:#ECF2FF" class="form-control"/></div>
-		      		<div class="col-sm-6">&nbsp;&nbsp;<input type="button" value="수정" onclick="memberUpdate()" class="btn btn-success form-control"/></div>
+		      		<div class="col-sm-6">&nbsp;&nbsp;<input type="button" value="수정" onclick="memberModify()" class="btn btn-success form-control"/></div>
 		      	</div>
       		</form>      
     	  </div>

@@ -66,7 +66,8 @@
       </div>
       <div id="collapseThree" class="collapse" data-parent="#accordion">
         <div class="card-body">
-          <a href="${ctp}/AdminMenuList.kn_ad" target="adminContent">메뉴 조회</a>
+          <a href="${ctp}/AdminMenuList.kn_ad" target="adminContent">메뉴 조회 및 수정</a><hr/>
+          <a href="${ctp}/AdminMenuInsert.kn_ad" target="adminContent">메뉴 등록</a>
         </div>
       </div>
     </div>

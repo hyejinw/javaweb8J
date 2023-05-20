@@ -6,7 +6,7 @@
 <head>
 	<meta charset="UTF-8">
 	<meta name="viewport" content="width=device-width, initial-scale=1">
-	<title>.jsp</title>
+	<title>adminMemList.jsp</title>
 	<jsp:include page="/include/bs4.jsp" />
 	
 <!-- 관리자 페이지 용 -->
@@ -26,11 +26,38 @@
 	<script>
 		/* $(document).ready(function() { 이렇게 적어도 된다!! */
 		jQuery(function($){
-			$('#memberTable').DataTable({
+			
+			let table = $('#memberTable').DataTable({
 				responsive: true,
-		     "ajax": {
-		        "url" : '${ctp}/AdminMemListOK.kn_ad'
+	   	  "ajax": {
+		        "url" : '${ctp}/AdminMemListOK.kn_ad',
+	    		
+		    		complete: function(data) {
+		    			$('#memberTable tbody').on('click', 'tr', function (e) {
+		    				const rowData = table.row(this).data()
+		    				console.log('클릭한 행 데이터', rowData);
+		    				$('#idx').val(rowData.idx);
+		    				$('#mid').val(rowData.mid);
+		    				$('#name').val(rowData.name);
+		    				$('#email').val(rowData.email);
+		    				$('#tel').val(rowData.tel);
+		    				$('#birthday').val(rowData.birthday);
+		    				$('#address').val(rowData.address);
+		    				$('#gender').val(rowData.gender);
+		    				$('#memType').val(rowData.memType);
+		    				$('#level').val(rowData.level);
+		    				$('#levelStartDate').val(rowData.levelStartDate);
+		    				$('#levelExpireDate').val(rowData.levelExpireDate);
+		    				$('#totCnt').val(rowData.totCnt);
+		    				$('#todayCnt').val(rowData.todayCnt);
+		    				$('#firstVisit').val(rowData.firstVisit);
+		    				$('#lastVisit').val(rowData.lastVisit);
+		    				$('#memberDel').val(rowData.memberDel);
+		    				
+		    			})
+		    		}
 		     },
+
 		    columns: [
   				{data: "idx"},
   				{data: "mid"},
@@ -113,17 +140,17 @@
 	            "next": "다음",
 	            "previous": "이전"
 	        }
-		    },
+		    }/* ,
 		    createdRow: function (row, data, dataIndex, full) {
 					// <tr>에 접근하여 속성값 부여하기
 		        $(row).attr('id', data.name);
 		        $(row).attr('name', data.todayCnt);
 		        
 		        // <tr>의 <td>에 접근하여 조작하기
-/* 		        $(row).children('td:nth-child(17)').attr('class', 'badge badge-success'); */
+ 		        $(row).children('td:nth-child(17)').attr('class', 'badge badge-success'); 
 		        $(row).children('td').css('background-color', 'white');
 		        $(row).children('td:nth-child(17)').text();
-				 },
+				 }, */
 		    
 			});
 			
@@ -144,6 +171,38 @@
 		
 		function falseClick() {
 			alert('해당 회원은 삭제처리 불가능합니다.');
+		}
+		
+		function memberDel() {
+			let adminPwd = memberDelForm.pwd.value;
+			let idx = memberDelForm.idx.value;
+			
+			if(adminPwd != '1234') {
+				alert('관리자 비밀번호 오류입니다.');
+				return false;				
+			}
+			let ans = confirm('삭제하시겠습니까?');
+			if(!ans) return false;
+			
+			else {
+	      $.ajax({
+	          type: "post",
+	          url: "${ctp}/AdminMemberDelOK.kn_ad",
+	          data: {idx : idx},
+	          success: function(res){
+	              if(res == 1){
+	                  alert("탈퇴 완료");
+	                  location.reload();
+	              }
+	              else{
+	                  alert("탈퇴 실패");
+	              }
+	          },
+	          error:function(){
+	              alert("전송 오류");
+	          }
+	      });
+			}
 		}
 	</script>
 </head>
@@ -186,17 +245,26 @@
       
         <!-- Modal Header -->
         <div class="modal-header">
-          <h4 class="modal-title">Modal Heading</h4>
+          <h4 class="modal-title text-center">회원 탈퇴 승인창</h4>
           <button type="button" class="close" data-dismiss="modal">&times;</button>
         </div>
         
         <!-- Modal body -->
         <div class="modal-body">
-          Modal body..
+        	<form name="memberDelForm">
+		      	<div class="row mb-4">
+		      		<div class="col-sm text-danger">해당 회원을 탈퇴 처리하시려면 관리자 비밀번호를 입력해주세요.</div>
+		      	</div>
+		      	<div class="row mb-2">
+		      		<div class="col-sm">관리자 비밀번호: <input type="password" name="pwd" id="pwd" class="form-control"/></div>
+		      		<input type="hidden" name="idx" id="idx"/>
+		      	</div>
+	        </form>
         </div>
         
         <!-- Modal footer -->
         <div class="modal-footer">
+          <button type="button" class="btn btn-secondary" onclick="javascript:memberDel()">탈퇴 승인</button>
           <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
         </div>
         

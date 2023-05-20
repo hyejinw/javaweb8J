@@ -17,13 +17,10 @@
 		body {
 			font-family: 'SUITE-Regular';
 		}
-		.c { 
+		#c { 
       font-size: 15px;
       margin: 100px 60px 0px 40px;
 	  }
-	  div.dataTables_wrapper {
-        margin-bottom: 3em;
-    }
 	</style>
 	
 	<script>
@@ -115,81 +112,49 @@
 	        }
 	      }
 	    });
-			
-			$('#menuTable2').DataTable({
-				responsive: true,
-	   	  "ajax": {
-          "url" : '${ctp}/AdminMenuListOK.kn_ad'
-        },
-	      columns: [
-	      	{data: "idx"},
-	        {data: "category"},
-	        {data: "menuName"},
-	        {data: "menuOpen"},
-	        {data: "menuDel" }
-	      ],
-			    
-	      columnDefs: [
-	        {targets:0, width:5},
-	        /* {"sClass": "badge badge-success", "aTargets":[4]} */
-	      ],		    
-			  
-	      scrollX: 200,
-	      scrollY: 800,
-			  
-	      "language": {
-	        "emptyTable": "데이터가 없어요.",
-	        "lengthMenu": "페이지당 _MENU_ 개씩 보기",
-	        "info": "현재 _START_ - _END_ / _TOTAL_건",
-	        "infoEmpty": "데이터 없음",
-	        "infoFiltered": "( _MAX_건의 데이터에서 필터링됨 )",
-	        "search": "에서 검색: ",
-	        "zeroRecords": "일치하는 데이터가 없어요.",
-	        "loadingRecords": "로딩 중...",
-	        "processing":     "잠시만 기다려 주세요...",
-	        "paginate": {
-	            "next": "다음",
-	            "previous": "이전"
-	        }
-	      }
-	    });
 		});
 			
-	    
+    $('#memuTable_filter').prepend('<select id="select"></select>');
+    $('#memuTable > thead > tr').children().each(function (indexInArray, valueOfElement) { 
+        $('#select').append('<option>'+valueOfElement.innerHTML+'</option>');
+    });
+    $('#memuTable_filter').prepend('<input type="text" id="toDate" placeholder="yyyy-MM-dd" style="width:150px; border-radius: 20px;">');
+    $('#memuTable_filter').prepend('<input type="text" id="fromDate" placeholder="yyyy-MM-dd" style="width:150px; border-radius: 20px;"> ~ ');
+    
 
-			function menuClose() {
-				
-				let adminPwd = menuCloseForm.pwd.value;
-				let idx = menuCloseForm.idx.value;
-				let sw = menuCloseForm.sw.value;
-				
-				if(adminPwd != '1234') {
-					alert('관리자 비밀번호 오류입니다.');
-					return false;			
-				}
-				let ans = confirm('비공개하시겠습니까?');
-				if(!ans) return false;			
-				
-				else {
-		      $.ajax({
-		          type: "post",
-		          url: "${ctp}/AdminMenuCloseOK.kn_ad",
-		          data: {idx : idx, sw : sw},
-		          success: function(res) {
-		              if(res == 1){
-		                  alert("비공개 처리 완료");
-		                  location.reload();
-		              }
-		              else{
-		                  alert("비공개 처리 실패");
-		              }
-		          },
-		          error:function(){
-		              alert("전송 오류");
-		          }
-		      });
-				}
-			} 	 
+		function menuClose() {
+			
+			let adminPwd = menuCloseForm.pwd.value;
+			let idx = menuCloseForm.idx.value;
+			let sw = menuCloseForm.sw.value;
+			
+			if(adminPwd != '1234') {
+				alert('관리자 비밀번호 오류입니다.');
+				return false;			
+			}
+			let ans = confirm('비공개하시겠습니까?');
+			if(!ans) return false;			
+			
+			else {
+	      $.ajax({
+	          type: "post",
+	          url: "${ctp}/AdminMenuCloseOK.kn_ad",
+	          data: {idx : idx, sw : sw},
+	          success: function(res) {
+	              if(res == 1){
+	                  alert("비공개 처리 완료");
+	                  location.reload();
+	              }
+	              else{
+	                  alert("비공개 처리 실패");
+	              }
+	          },
+	          error:function(){
+	              alert("전송 오류");
+	          }
+	      });
+			}
+		} 	 
 			
 			
 		function menuOpen() {
@@ -225,6 +190,7 @@
 	      });
 			}
 		} 
+		
 		function menuDel() {
 			
 			let adminPwd = menuDelForm.pwd.value;
@@ -262,7 +228,7 @@
 	</script>
 </head>
 <body>
-  <div class="c">
+  <div id="c">
 		<div style="text-align:center"><span class="text-center" style="font-size:40px; text-align:center; font-weight:500">메뉴 조회</span></div>
 		<div style="text-align:center"><span class="text-center" style="font-size:15px; text-align:center; font-weight:300; color:blue">메뉴 공개/삭제 처리 가능창</span></div>
 		<button class="btn btn-success text-left mb-4" onclick="location.href='${ctp}/AdminMenuModify.kn_ad';">메뉴 수정창</button>
@@ -286,24 +252,8 @@
 			<tbody class="text-center">
 			</tbody>
     </table>
-    
 	</div>
-  <div class="c">  
-    <table id="menuTable2" class="table table-hover table-bordered">
-			<thead>
-				<tr style="background-color:#ECF2FF">
-					<th class="text-center">No</th>
-					<th class="text-center">카테고리</th>
-					<th class="text-center">메뉴명</th>
-					<th class="text-center">공개 유무</th>
-					<th class="text-center">삭제 여부</th>
-				</tr>
-			</thead>
-			<tbody class="text-center">
-			</tbody>
-    </table>
-	</div>
-	
+
   <!-- The Modal -->
   <div class="modal fade" id="openClick">
     <div class="modal-dialog modal-dialog-centered">
