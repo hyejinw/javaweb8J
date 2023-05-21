@@ -22,7 +22,8 @@
 			color: blue;
 		}
 		.card-header {
-			background-color:#E5D1FA;
+			background-color:#FFEEB3;
+/* 			background-color:#E5D1FA; */
 			font-weight: 500;
 			font-size: 20px
 		}
@@ -66,8 +67,10 @@
       </div>
       <div id="collapseThree" class="collapse" data-parent="#accordion">
         <div class="card-body">
-          <a href="${ctp}/AdminMenuList.kn_ad" target="adminContent">메뉴 조회 및 수정</a><hr/>
-          <a href="${ctp}/AdminMenuInsert.kn_ad" target="adminContent">메뉴 등록</a>
+          <a href="${ctp}/AdminMenuList.kn_ad" target="adminContent">메뉴 조회</a><hr/>
+          <a href="${ctp}/AdminMenuModify.kn_ad" target="adminContent">메뉴 수정</a><hr/>
+          <a href="${ctp}/AdminMenuInsert.kn_ad" target="adminContent">메뉴 등록</a><hr/>
+          <a href="${ctp}/" target="adminContent">메뉴 댓글 관리</a>
         </div>
       </div>
     </div>

@@ -8,6 +8,7 @@ import java.util.ArrayList;
 
 import conn.GetConn;
 import kn_member.Kn_MemberVO;
+import kn_menu.Kn_MenuVO;
 
 public class Kn_AdminDAO {
 
@@ -128,7 +129,7 @@ public class Kn_AdminDAO {
 		int res = 0;
 		
 		try {
-			sql = "insert into kn_menu values(default,?,?,?,?,?,?,?,?,default,default,default)";
+			sql = "insert into kn_menu values(default,?,?,?,?,?,?,?,?,default,default,default,default)";
 			pstmt = conn.prepareStatement(sql);
 			
 			pstmt.setString(1, vo.getCategory());
@@ -156,7 +157,9 @@ public class Kn_AdminDAO {
 		ArrayList<Kn_MenuVO> vos = new ArrayList<>();
 		
 		try {
-			sql = "select * from kn_menu";
+			sql = "select *, "
+					+ "(select count(*) from kn_menuReply where menuIdx = m.idx) as replyCount"
+					+ " from kn_menu m";
 			pstmt = conn.prepareStatement(sql);
 			rs = pstmt.executeQuery();
 			
@@ -171,10 +174,13 @@ public class Kn_AdminDAO {
 				vo.setAllergy(rs.getString("allergy"));
 				vo.setOrigin(rs.getString("origin"));
 				vo.setMenuPhoto(rs.getString("menuPhoto"));
+				vo.setMenuRate(rs.getInt("menuRate"));
 				vo.setMenuStartDate(rs.getString("menuStartDate"));
 				vo.setMenuOpen(rs.getString("menuOpen"));
 				vo.setMenuDel(rs.getString("menuDel"));
 				
+				// 댓글 개수 확인용
+				vo.setReplyCount(rs.getInt("replyCount"));
 				vos.add(vo);
 			}
 		} catch (SQLException e) {
@@ -210,7 +216,7 @@ public class Kn_AdminDAO {
 		String res = "0";
 		
 		try {
-			sql = "update kn_menu set menuOpen=? where idx = ?";
+			sql = "update kn_menu set menuOpen=?, menuStartDate=now() where idx = ?";
 			pstmt = conn.prepareStatement(sql);
 			pstmt.setString(1, sw);
 			pstmt.setInt(2, idx);
@@ -228,8 +234,8 @@ public class Kn_AdminDAO {
 	// 메뉴 수정 (AdminMenuModifyCommand)
 	public String setMenuModify(Kn_MenuVO vo) {
 		String res = "0";
-		System.out.println("왔니");
 		
+		// 총 평점은 수정이 불가능합니다. 
 		try {
 			sql = "update kn_menu set category=?, menuName=?, menuEngName=?, price=?, explanation=?,"
 					+ "allergy=?, origin=?, menuPhoto=?, menuStartDate=? where idx = ?";
@@ -245,7 +251,6 @@ public class Kn_AdminDAO {
 			pstmt.setString(9, vo.getMenuStartDate());
 			pstmt.setInt(10, vo.getIdx());
 			pstmt.executeUpdate();
-			System.out.println("왔다");
 			res= "1";
 			
 		} catch (SQLException e) {

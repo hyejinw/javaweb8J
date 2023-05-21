@@ -22,6 +22,8 @@ public class Kn_MenuController extends HttpServlet {
 		
 		
 		if(com.equals("/Menu")) {
+			command = new MenuListCommand();
+			command.execute(request, response);
 			viewPage += "/menu.jsp";
 		}
 		

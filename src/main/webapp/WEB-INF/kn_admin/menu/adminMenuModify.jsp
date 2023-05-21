@@ -64,10 +64,31 @@
 					},	        	
 	        {data: "menuEngName"},
 	        {data: "price"},
-	        {data: "explanation"},
-	        {data: "allergy"},    					
-	        {data: "origin"},
-	        {data: "menuPhoto"},
+	        {
+	        	data: "explanation",
+	          render: function(data) {
+              return '<span style="font-size:12px">'+data+'</span>'
+	          } 
+	        },
+	        {
+	        	data: "allergy",
+	          render: function(data) {
+              return '<span style="font-size:13px">'+data+'</span>'
+	          } 
+	        },
+	        	   					
+	        {
+	        	data: "origin",
+	          render: function(data) {
+              return '<span style="font-size:10px">'+data+'</span>'
+	          } 
+	        },
+	        {
+	        	data: "menuPhoto",
+	          render: function(data) {
+              return '<span style="font-size:12px">'+data+'</span>'
+	          } 
+	        },
 	        {data: "menuStartDate"},
 	        {
 	          data: "menuOpen",
@@ -130,38 +151,17 @@
     function menuModify() {
 			let ans = confirm('수정하시겠습니까?');
 			if(!ans) return false;
-			
-		  let idx =	menuForm.idx.value
-			let category =	menuForm.category.value;
-			let menuName =	menuForm.menuName.value;
-			let menuEngName =	menuForm.menuEngName.value;
-			let price =	menuForm.price.value;
-			let explanation =	menuForm.explanation.value;
-			let allergy =	menuForm.allergy.value;
-			let origin =	menuForm.origin.value;
-			let menuPhotoModified =	menuForm.menuPhotoModified.value;
-			let menuPhoto =	menuForm.menuPhoto.value;
-			let menuStartDate =	menuForm.menuStartDate.value;
-		
-      let query = {
-    		  idx : idx,
-    		  category : category,
-    		  menuName : menuName,
-    		  menuEngName : menuEngName,
-    		  price : price,
-    		  explanation : explanation,
-    		  allergy : allergy,
-    		  origin : origin,
-    		  menuPhotoModified : menuPhotoModified,
-    		  menuPhoto : menuPhoto,
-    		  menuStartDate : menuStartDate
-      } 
+      
+      var formData = new FormData($('#menuForm')[0]);
       
       $.ajax({
           type: "post",
           enctype: "multipart/form-data",
           url: "${ctp}/AdminMenuModifyOK.kn_ad",
-          data: query,
+          data: formData,
+          cache: false,
+          contentType: false,
+          processData: false,
           success: function(res){
               if(res == 1){
                   alert("수정 완료");
@@ -233,7 +233,7 @@
         
        <!--  Modal body -->
         <div class="modal-body">
-        	<form name="menuForm" enctype="multipart/form-data">
+        	<form name="menuForm" id="menuForm" method="post" enctype="multipart/form-data">
 		      	<div class="row mb-2">
 		      		<div class="col-sm-6">고유번호: <input type="text" name="idx" id="idx" readonly class="form-control" style="background-color:#ECF2FF"/></div>
 		      		<div class="col-sm-6">

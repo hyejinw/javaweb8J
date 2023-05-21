@@ -92,7 +92,7 @@
       <c:if test="${level == 0}">  <!-- 관리자창 -->
 	      <li class="nav-item mr-3 text-center">
 	        <a class="nav-link hover" style="color: #282828" href="${ctp}/AdminMain.kn_ad">
-	        	<i class="fa-solid fa-face-laugh-wink" style="color: #FFD36B; font-size:28px"></i><br/>
+	        	<i class="fa-solid fa-screwdriver-wrench" style="color: #FFD36B; font-size:28px"></i><br/>
 	        	<font size="2" style="font-weight:500">관리자 창</font>
 	        </a>
 	      </li>

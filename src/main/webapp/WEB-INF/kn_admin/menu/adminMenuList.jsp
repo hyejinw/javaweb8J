@@ -50,6 +50,7 @@
               $('#allergy').val(rowData.allergy);
               $('#origin').val(rowData.origin);
               $('#menuPhoto').val(rowData.menuPhoto);
+              $('#menuRate').val(rowData.menuRate);
               $('#menuStartDate').val(rowData.menuStartDate);
               $('#menuOpen').val(rowData.menuOpen);
               $('#menuDel').val(rowData.menuDel);
@@ -62,10 +63,38 @@
 	        {data: "menuName"},
 	        {data: "menuEngName"},
 	        {data: "price"},
-	        {data: "explanation"},
-	        {data: "allergy"},    					
-	        {data: "origin"},
-	        {data: "menuPhoto"},
+	        {
+	        	data: "explanation",
+	          render: function(data) {
+              return '<span style="font-size:12px">'+data+'</span>'
+	          } 
+	        },
+	        {
+	        	data: "allergy",
+	          render: function(data) {
+              return '<span style="font-size:13px">'+data+'</span>'
+	          } 
+	        },
+	        	   					
+	        {
+	        	data: "origin",
+	          render: function(data) {
+              return '<span style="font-size:10px">'+data+'</span>'
+	          } 
+	        },
+	        {
+	        	data: "menuPhoto",
+	          render: function(data) {
+              return '<span style="font-size:12px">'+data+'</span>'
+	          } 
+	        },
+	        {data: "menuRate"},
+	        {
+	        	data: "replyCount",
+	          render: function(data) {
+              return '<button class="btn btn-secondary btn-sm" onclick="location.href="#";">'+data+'</a>'
+	          } 
+	        },
 	        {data: "menuStartDate"},
 	        {
 	          data: "menuOpen",
@@ -264,7 +293,12 @@
 <body>
   <div class="c">
 		<div style="text-align:center"><span class="text-center" style="font-size:40px; text-align:center; font-weight:500">메뉴 조회</span></div>
-		<div style="text-align:center"><span class="text-center" style="font-size:15px; text-align:center; font-weight:300; color:blue">메뉴 공개/삭제 처리 가능창</span></div>
+		<div style="text-align:center">
+			<span class="text-center" style="font-size:15px; text-align:center; font-weight:300; color:blue">
+				메뉴 공개/삭제 처리 가능창<br/>
+			  댓글 수를 클릭하면 댓글 관리창으로 이동합니다.
+			</span>
+		</div>
 		<button class="btn btn-success text-left mb-4" onclick="location.href='${ctp}/AdminMenuModify.kn_ad';">메뉴 수정창</button>
     <table id="menuTable" class="table table-hover table-bordered">
 			<thead>
@@ -278,6 +312,8 @@
 					<th class="text-center">알레르기 유발 요인</th>
 					<th class="text-center">원산지 정보</th>
 					<th class="text-center">메뉴 사진</th>
+					<th class="text-center">총 평점</th>
+					<th class="text-center">댓글 수</th>
 					<th class="text-center">시작 날짜</th>
 					<th class="text-center">공개 유무</th>
 					<th class="text-center">삭제 여부</th>

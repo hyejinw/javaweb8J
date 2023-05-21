@@ -39,7 +39,7 @@
 			opacity:50%;
 		}
 		h6 {
-			font-size:0.8em;
+			font-size:1em;
 			color:#999999;
 		}
 		h5 {
@@ -75,6 +75,8 @@
 		<hr/>
 		<div style="background-color:#fdfaf7; padding-bottom:100px">
 		<div class="container" style="padding:50px 0px">
+		
+		
 			<div class="d-flex flex-row text-center" style="padding:20px 0px">
 				<div class="d-flex flex-column">
 					<a href="#"><img src="https://img-app.knotted-order.com/products/2/2.thumb?1680578550" class="img4" /></a>
@@ -97,94 +99,8 @@
 					<h6>3,900</h6>
 				</div>
 			</div>
-			<div class="d-flex flex-row text-center" style="padding:20px 0px">
-				<div class="d-flex flex-column">
-					<a href="#"><img src="https://img-app.knotted-order.com/products/6/6.thumb?1680578640" class="img4" /></a>
-					<h5>카야버터 도넛</h5>
-					<h6>3,900</h6>
-				</div>
-				<div class="d-flex flex-column">
-					<a href="#"><img src="https://img-app.knotted-order.com/products/7/7.thumb?1681865893" class="img4" /></a>
-					<h5>옐로우 스마일</h5>
-					<h6>22,000</h6>
-				</div>
-				<div class="d-flex flex-column">
-					<a href="#"><img src="https://img-app.knotted-order.com/products/8/8.thumb?1681865902" class="img4" /></a>
-					<h5>망고 스마일</h5>
-					<h6>22,000</h6>
-				</div>
-				<div class="d-flex flex-column">
-					<a href="#"><img src="https://img-app.knotted-order.com/products/9/9.thumb?1681865912" class="img4" /></a>
-					<h5>클로버 스마일</h5>
-					<h6>22,000</h6>
-				</div>
-			</div>
-			<div class="d-flex flex-row text-center" style="padding:20px 0px">
-				<div class="d-flex flex-column">
-					<a href="#"><img src="https://img-app.knotted-order.com/products/5/5.thumb?1680578607" class="img4" /></a>
-					<h5>라즈베리 도넛</h5>
-					<h6>3,500</h6>
-				</div>
-				<div class="d-flex flex-column">
-					<a href="#"><img src="https://img-app.knotted-order.com/products/14/14.thumb?1680578658" class="img4" /></a>
-					<h5>민트초코 도넛</h5>
-					<h6>3,900</h6>
-				</div>
-				<div class="d-flex flex-column">
-					<a href="#"><img src="https://img-app.knotted-order.com/products/17/17.thumb?1677679426" class="img4" /></a>
-					<h5>제주 청귤 도넛</h5>
-					<h6>3,900</h6>
-				</div>
-				<div class="d-flex flex-column">
-					<a href="#"><img src="https://img-app.knotted-order.com/products/18/18.thumb?1677679438" class="img4" /></a>
-					<h5>녹차 도넛</h5>
-					<h6>3,900</h6>
-				</div>
-			</div>
-			<div class="d-flex flex-row text-center" style="padding:20px 0px">
-				<div class="d-flex flex-column">
-					<a href="#"><img src="https://img-app.knotted-order.com/products/24/24.thumb?1677679515" class="img4" /></a>
-					<h5>바또피치 도넛</h5>
-					<h6>3,900</h6>
-				</div>
-				<div class="d-flex flex-column">
-					<a href="#"><img src="https://img-app.knotted-order.com/products/12/12.thumb?1680578633" class="img4" /></a>
-					<h5>라즈베리 도넛</h5>
-					<h6>3,500</h6>
-				</div>
-				<div class="d-flex flex-column">
-					<a href="#"><img src="	https://img-app.knotted-order.com/products/25/25.thumb?1677679467" class="img4" /></a>
-					<h5>초코 타이어 도넛</h5>
-					<h6>4,800</h6>
-				</div>
-				<div class="d-flex flex-column">
-					<a href="#"><img src="https://img-app.knotted-order.com/products/26/26.thumb?1679443847" class="img4" /></a>
-					<h5>퓨어 스트로베리 주니어</h5>
-					<h6>21,000</h6>
-				</div>
-			</div>
-			<div class="d-flex flex-row text-center" style="padding:20px 0px">
-				<div class="d-flex flex-column">
-					<a href="#"><img src="https://img-app.knotted-order.com/products/27/27.thumb?1681865931" class="img4" /></a>
-					<h5>크러쉬드 초코</h5>
-					<h6>21,000</h6>
-				</div>
-				<div class="d-flex flex-column">
-					<a href="#"><img src="https://img-app.knotted-order.com/products/28/28.thumb?1681179278" class="img4" /></a>
-					<h5>스마일 고스트</h5>
-					<h6>21,000</h6>
-				</div>
-				<div class="d-flex flex-column">
-					<a href="#"><img src="https://img-app.knotted-order.com/products/29/29.thumb?1677680733" class="img4" /></a>
-					<h5>브라운베어</h5>
-					<h6>19,000</h6>
-				</div>
-				<div class="d-flex flex-column">
-					<a href="#"><img src="https://img-app.knotted-order.com/products/30/30.thumb?1677680763" class="img4" /></a>
-					<h5>그랑 몽블랑</h5>
-					<h6>21,000</h6>
-				</div>
-			</div>
+			
+			
 		</div>
 	</div>
 	<footer>

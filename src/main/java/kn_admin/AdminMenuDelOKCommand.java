@@ -13,7 +13,6 @@ public class AdminMenuDelOKCommand implements AdminInterface {
 	public void execute(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		int idx = request.getParameter("idx")==null ? 0 : Integer.parseInt(request.getParameter("idx"));
 		String menuPhoto = request.getParameter("menuPhoto")==null ? "" : request.getParameter("menuPhoto");
-		System.out.println("menuPhoto : " + menuPhoto);
 		
 		String realPath = request.getServletContext().getRealPath("/images/kn_menu/");
 	

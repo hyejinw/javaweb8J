@@ -95,7 +95,6 @@ public class Kn_AdminController extends HttpServlet {
 		}		
 		// 메뉴 비공개
 		else if(com.equals("/AdminMenuCloseOK")) {
-			System.out.println("비공개처리하러 들어옴");
 			command = new AdminMenuCloseOKCommand();  
 			command.execute(request, response);
 			return;

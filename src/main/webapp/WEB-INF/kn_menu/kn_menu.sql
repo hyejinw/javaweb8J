@@ -10,6 +10,7 @@ create table kn_menu (
 	allergy varchar(50) not null,
 	origin varchar(500) not null,
 	menuPhoto varchar(250) not null,
+	menuRate int default 0 not null,
   menuStartDate datetime default now() not null,
   menuOpen char(2) default 'NO',
   menuDel char(2) default 'NO',

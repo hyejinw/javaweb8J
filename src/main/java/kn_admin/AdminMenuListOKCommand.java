@@ -10,6 +10,8 @@ import javax.servlet.http.HttpServletResponse;
 import org.json.simple.JSONArray;
 import org.json.simple.JSONObject;
 
+import kn_menu.Kn_MenuVO;
+
 public class AdminMenuListOKCommand implements AdminInterface {
 
 	@SuppressWarnings("unchecked")
@@ -34,9 +36,11 @@ public class AdminMenuListOKCommand implements AdminInterface {
 	  	menu.put("allergy", vos.get(i).getAllergy());
 	  	menu.put("origin", vos.get(i).getOrigin());
 	  	menu.put("menuPhoto", vos.get(i).getMenuPhoto());
+	  	menu.put("menuRate", vos.get(i).getMenuRate() + "");
 	  	menu.put("menuStartDate", vos.get(i).getMenuStartDate());
 	  	menu.put("menuOpen", vos.get(i).getMenuOpen());
 	  	menu.put("menuDel", vos.get(i).getMenuDel());
+	  	menu.put("replyCount", vos.get(i).getReplyCount() + "");
 	  	
 	  	menuArray.add(menu);
 	  }
