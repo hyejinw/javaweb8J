@@ -22,3 +22,4 @@ create table kn_menu (
 desc kn_menu;
 
 ALTER TABLE kn_menu AUTO_INCREMENT = 1;
+ALTER TABLE kn_menu AUTO_INCREMENT = 35;

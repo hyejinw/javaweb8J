@@ -115,7 +115,7 @@
 			<c:set var="cnt" 	value="${0}"/>
 			<c:forEach var="vo" items="${vos}" varStatus="st">
 				<div class="col-sm-3">
-					<a href="${ctp}/MenuContent.kn_menu?idx=${vo.idx}&pageSize=${pageSize}&pag=${pag}&part=${part}" class="menuHover"><div class="d-flex flex-column">
+					<a href="${ctp}/MenuContent.kn_menu?idx=${vo.idx}" class="menuHover"><div class="d-flex flex-column">
 						<img src="${ctp}/images/kn_menu/${vo.menuPhoto}" class="img4" />
 						<h5 class="mt-3">
 							<c:if test="${vo.day_diff < 31}"><span class="badge badge-pill badge-warning badge-sm" style="font-size:10px">NEW</span></c:if> 
@@ -152,14 +152,14 @@
   <!-- 첫페이지 / 이전블록 / 1(4) 2(5) 3 / 다음블록 / 마지막페이지 -->
   <div class="text-center">
   	<ul class="pagination justify-content-center">
-	    <c:if test="${pag > 1}"><li class="page-item"><a class="page-link text-secondary" href="${ctp}/Menu.kn_menu?pageSize=${pageSize}&pag=1&part=${part}">◁◁</a></li></c:if>
-	    <c:if test="${curBlock > 0}"><li class="page-item"><a class="page-link text-secondary" href="${ctp}/Menu.kn_menu?pageSize=${pageSize}&pag=${(curBlock-1)*blockSize + 1}&part=${part}">◀</a></li></c:if>
+	    <c:if test="${pag > 1}"><li class="page-item"><a class="page-link text-secondary" href="${ctp}/MenuSearch.kn_menu?pageSize=${pageSize}&pag=1&part=${part}">◁◁</a></li></c:if>
+	    <c:if test="${curBlock > 0}"><li class="page-item"><a class="page-link text-secondary" href="${ctp}/MenuSearch.kn_menu?pageSize=${pageSize}&pag=${(curBlock-1)*blockSize + 1}&part=${part}">◀</a></li></c:if>
 	    <c:forEach var="i" begin="${curBlock*blockSize + 1}" end="${curBlock*blockSize + blockSize}" varStatus="st">
-	      <c:if test="${i <= totPage && i == pag}"><li class="page-item active"><a class="page-link text-white bg-secondary border-secondary" href="${ctp}/Menu.kn_menu?pageSize=${pageSize}&pag=${i}&part=${part}">${i}</a></li></c:if>
-	      <c:if test="${i <= totPage && i != pag}"><li class="page-item"><a class="page-link text-secondary" href="${ctp}/Menu.kn_menu?pageSize=${pageSize}&pag=${i}&part=${part}">${i}</a></li></c:if>
+	      <c:if test="${i <= totPage && i == pag}"><li class="page-item active"><a class="page-link text-white bg-secondary border-secondary" href="${ctp}/MenuSearch.kn_menu?pageSize=${pageSize}&pag=${i}&part=${part}">${i}</a></li></c:if>
+	      <c:if test="${i <= totPage && i != pag}"><li class="page-item"><a class="page-link text-secondary" href="${ctp}/MenuSearch.kn_menu?pageSize=${pageSize}&pag=${i}&part=${part}">${i}</a></li></c:if>
 	    </c:forEach>
-	    <c:if test="${curBlock < lastBlock}"><li class="page-item"><a class="page-link text-secondary" href="${ctp}/Menu.kn_menu?pageSize=${pageSize}&pag=${(curBlock+1)*blockSize + 1}&part=${part}">▶</a></li></c:if>
-	    <c:if test="${pag < totPage}"><li class="page-item"><a class="page-link text-secondary" href="${ctp}/Menu.kn_menu?pageSize=${pageSize}&pag=${totPage}&part=${part}">▷▷</a></li></c:if>
+	    <c:if test="${curBlock < lastBlock}"><li class="page-item"><a class="page-link text-secondary" href="${ctp}/MenuSearch.kn_menu?pageSize=${pageSize}&pag=${(curBlock+1)*blockSize + 1}&part=${part}">▶</a></li></c:if>
+	    <c:if test="${pag < totPage}"><li class="page-item"><a class="page-link text-secondary" href="${ctp}/MenuSearch.kn_menu?pageSize=${pageSize}&pag=${totPage}&part=${part}">▷▷</a></li></c:if>
  		</ul>
   </div>
 	</div>

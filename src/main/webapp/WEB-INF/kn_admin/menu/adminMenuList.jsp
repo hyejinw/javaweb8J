@@ -19,7 +19,7 @@
 		}
 		.c { 
       font-size: 15px;
-      margin: 100px 60px 0px 40px;
+      margin: 100px 60px 200px 40px;
 	  }
 	  div.dataTables_wrapper {
         margin-bottom: 3em;
@@ -139,8 +139,8 @@
 	        "loadingRecords": "로딩 중...",
 	        "processing":     "잠시만 기다려 주세요...",
 	        "paginate": {
-	            "next": "다음",
-	            "previous": "이전"
+	            "next": "▶",
+	            "previous": "◀"
 	        }
 	      }
 	    });

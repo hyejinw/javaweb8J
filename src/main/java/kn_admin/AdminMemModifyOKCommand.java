@@ -54,7 +54,6 @@ public class AdminMemModifyOKCommand implements AdminInterface {
 		vo.setMemberDel(memberDel);
 		
 		String res = dao.setMemModify(vo);
-		
 		response.getWriter().write(res);
 		
 	}

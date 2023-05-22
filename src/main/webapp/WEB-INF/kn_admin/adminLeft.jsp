@@ -42,7 +42,8 @@
       </div>
       <div id="collapseOne" class="collapse" data-parent="#accordion">
         <div class="card-body">
-          <a href="${ctp}/AdminMemList.kn_ad" target="adminContent">회원 조회 및 수정</a><hr/>
+          <a href="${ctp}/AdminMemList.kn_ad" target="adminContent">회원 조회</a><hr/>
+          <a href="${ctp}/AdminMemModify.kn_ad" target="adminContent">회원 수정</a><hr/>
           <a href="${ctp}/" target="adminContent">쿠폰 관리</a>
         </div>
       </div>
