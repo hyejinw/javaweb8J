@@ -54,7 +54,7 @@ public class AdminMenuInsertOkCommand implements AdminInterface {
 			msg = "메뉴 등록 실패";
 		}
 		request.setAttribute("msg", msg);
-		request.setAttribute("url", "${ctp}/AdminMenuInsert.kn_ad");
+		request.setAttribute("url", request.getContextPath()+"/AdminMenuInsert.kn_ad");
 
 	}
 

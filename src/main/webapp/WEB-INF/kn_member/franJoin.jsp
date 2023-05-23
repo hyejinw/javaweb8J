@@ -93,23 +93,22 @@
     	let email2 = myform.email2.value;
     	let email = email1 + "@" + email2;
     	
-		  let birthday = myform.birthday.value;
+			let birthday = myform.birthday.value;
 		  
 		  let tel1 = myform.tel1.value;
 		  let tel2 = myform.tel2.value;
 		  let tel3 = myform.tel3.value;
 		  let tel = tel1 + "-" + tel2 + "-" + tel3;
 		  
-		  let storeTel1 = myform.storeTel1.value;
-		  let storeTel2 = myform.storeTel2.value;
-		  let storeTel3 = myform.storeTel3.value;
-		  let storeTel = storeTel1 + "-" + storeTel2 + "-" + storeTel3;
+		  //let storeTel1 = myform.storeTel1.value;
+		  //let storeTel2 = myform.storeTel2.value;
+		  //let storeTel3 = myform.storeTel3.value;
+		  //let storeTel = storeTel1 + "-" + storeTel2 + "-" + storeTel3;
 		  
 		  let postcode = myform.postcode.value + " ";
 		  let roadAddress = myform.roadAddress.value + " ";
 		  let detailAddress = myform.detailAddress.value + " ";
 		  let extraAddress = myform.extraAddress.value + " ";
-		  let address = postcode + "/" + roadAddress + "/" + detailAddress + "/" + extraAddress + "/";
 		  
 		  let regex1 = /^[a-zA-Z0-9]{4,20}$/; //(아이디) 영문자 또는 숫자 4~20자 
 		  let regex2 = /^(?=.*[0-9])(?=.*[a-zA-Z])[a-zA-Z0-9!@#$%^&*()._-]{4,20}$/g; //(비밀번호)4자 이상 20자 이하, 영어/숫자 1개 이상 필수, 특수문자 허용
@@ -117,7 +116,7 @@
 			/* let regex4 = /^[a-zA-Z0-9]+@[a-zA-Z0-9]$/; // 이메일 */
 	 		let regex4 = /^[0-9a-zA-Z]+$/g; // 이메일 
 	 		let regex5 = /\d{2,3}-\d{3,4}-\d{4}$/g; //(전화번호)
-			let regex6 = /^[가-힣\s]+$/; //(매장명) 한글, 공백 허용
+			let regex6 = /^[가-힣\s]+$/; //(매장명) 한글, 영문, 공백 허용
 		  	
 		  // 아이디 확인
 		  if(!regex1.test(mid)) {
@@ -185,15 +184,17 @@
 		    document.getElementById("telError").innerHTML="";
 		    check = true;
 		  }
+		  
 		  // 생년월일 확인
 		  if(birthday==""){
-		    document.getElementById("birthError").innerHTML="생일에 맞춰 특별 쿠폰을 보내드립니다. 생년월일을 입력해주세요.";
+		    document.getElementById("birthdayError").innerHTML="생일에 맞춰 특별 쿠폰을 보내드립니다. 생년월일을 입력해주세요.";
 		    check = false;
 		  }
 		  else {
-		    document.getElementById("birthError").innerHTML="";
+		    document.getElementById("birthdayError").innerHTML="";
 		    check = true;
 		  }		  
+		  
 		  
 		  // 매장명 확인
 		  if(!regex6.test(storeName)){
@@ -205,13 +206,22 @@
 			  check = true;
 		  }
 		  
+		  
+			let regex10 = /\d{2,3}-\d{3,4}-\d{4}$/g; //(전화번호)
+		  let storeTel1 = myform.storeTel1.value;
+		  let storeTel2 = myform.storeTel2.value;
+		  let storeTel3 = myform.storeTel3.value;
+		  let storeTel = storeTel1 + "-" + storeTel2 + "-" + storeTel3;
+		  
 		  // 매장 전화번호 확인
 		  if(storeTel2==="" || storeTel3===""){
-		    document.getElementById("storeTelError").innerHTML="매장 전화번호를 입력해주세요.";
+		    document.getElementById("storeTelError").innerHTML="전화번호를 입력해주세요.";
 		    check = false;
 		  }
-		  else if(!regex5.test(storeTel)){
-		    document.getElementById("storeTelError").innerHTML="매장 전화번호를 완성해주세요.";
+		  else if(!regex10.test(storeTel)){
+			  console.log("storeTel : " + storeTel);
+			  console.log("regex5 : " + regex5);
+		    document.getElementById("storeTelError").innerHTML="전화번호를 완성해주세요.";
 		    check = false;
 		  }
 		  else {
@@ -219,9 +229,10 @@
 		    check = true;
 		  }
 		  
+		  
 		  // 매장 주소 확인
-		  if(address == ""){
-		    document.getElementById("addressError").innerHTML="매장 주소를 입력해주세요.";
+		  if(postcode.trim() == ""){
+			  document.getElementById("addressError").innerHTML="매장 주소를 입력해주세요.";
 		    check = false;
 		  }
 		  else {
@@ -243,7 +254,7 @@
 				else {
 			    myform.tel.value = tel;
 			    myform.storeTel.value = storeTel;
-			    myform.address.value = address;
+			    myform.address.value = postcode + "/" + roadAddress + "/" + detailAddress + "/" + extraAddress + "/";
 			    myform.email.value = email;
 			   	myform.submit();
 				}
@@ -355,15 +366,15 @@
 		
 		function birthdayCheck() {
 			let birthday = myform.birthday.value;
-			document.getElementById("birthError").innerHTML="";
+			document.getElementById("birthdayError").innerHTML="";
 			
 		  // 생년월일 확인
 		  if(birthday==""){
-		    document.getElementById("birthError").innerHTML="생일에 맞춰 특별 쿠폰을 보내드립니다. 생년월일을 입력해주세요.";
+		    document.getElementById("birthdayError").innerHTML="생일에 맞춰 특별 쿠폰을 보내드립니다. 생년월일을 입력해주세요.";
 		    check = false;
 		  }
 		  else {
-		    document.getElementById("birthError").innerHTML="";
+		    document.getElementById("birthdayError").innerHTML="";
 		    check = true;
 		  }			
 		}
@@ -384,12 +395,13 @@
 		  }
 		}
 		
+		// 아래 두 개 제대로 작동 안 된다.
 		function storeTelCheck() {
 			let regex5 = /\d{2,3}-\d{3,4}-\d{4}$/g; //(전화번호)
-		  let storeTel1 = myform.storeTel1.value;
-		  let storeTel2 = myform.storeTel2.value;
-		  let storeTel3 = myform.storeTel3.value;
-		  let storeTel = tel1 + "-" + tel2 + "-" + tel3;
+			  let storeTel1 = myform.storeTel1.value;
+			  let storeTel2 = myform.storeTel2.value;
+			  let storeTel3 = myform.storeTel3.value;
+			  let storeTel = storeTel1 + "-" + storeTel2 + "-" + storeTel3;
 		  
 		  // 매장 전화번호 확인
 		  if(storeTel2==="" || storeTel3===""){
@@ -403,6 +415,20 @@
 		  else {
 		    document.getElementById("storeTelError").innerHTML="";
 		    check = true;
+		  }
+		}
+		
+		function addressCheck() {
+		  let postcode = myform.postcode.value + " ";
+
+		  // 매장 주소 확인
+		  if(postcode.trim() == ""){
+			  document.getElementById("addressError").innerHTML="매장 주소를 입력해주세요.222";
+		    check = false;
+		  }
+		  else {
+			  document.getElementById("addressError").innerHTML="";
+			  check = true;
 		  }
 		}
 	</script>
@@ -446,7 +472,7 @@
     <h2 class="text-center" style="margin-bottom:50px">매장 회원가입</h2>
     <br/>
     <div class="form-group">
-      <label for="mid">아이디 <span class="must">*</span> &nbsp; &nbsp;<input type="button" value="아이디 중복체크" class="btn btn-sm" onclick="idCheck()"/></label>
+      <label for="mid">아이디 <span class="must">*</span> &nbsp; &nbsp;<input type="button" id="midBtn" value="아이디 중복체크" class="btn btn-sm" onclick="idCheck()"/></label>
       <input type="text" class="form-control" name="mid" id="mid" onchange="midCheck()" placeholder="아이디를 입력하세요." required autofocus/>
     	<div id="midError" class="text-primary"></div>
     </div>
@@ -510,7 +536,7 @@
     <div class="form-group">
       <label for="birthday">생년월일 <span class="must">*</span></label>
 			<input type="date" name="birthday" id="birthday" onchange="birthdayCheck()" class="form-control"/>
-			<div id="birthError" class="text-primary"></div>
+			<div id="birthdayError" class="text-primary"></div>
     </div>    
     <div class="form-group">
       <div class="form-check-inline">
@@ -540,8 +566,8 @@
         <div class="input-group-prepend">
           <span class="input-group-text">매장 전화번호 <span class="must">*</span></span> &nbsp;&nbsp;
             <select name="storeTel1" id="storeTel1" class="custom-select">
-              <option value="010" selected>010</option>
-              <option value="070">070</option>
+              <option value="010">010</option>
+              <option value="070" selected>070</option>
               <option value="02">서울</option>
               <option value="031">경기</option>
               <option value="032">인천</option>
@@ -569,7 +595,7 @@
           <input type="button" onclick="sample6_execDaumPostcode()" value="우편번호 찾기" class="btn btn-sm">
         </div>
       </div>
-      <input type="text" name="roadAddress" id="sample6_address" size="50" placeholder="주소" class="form-control mb-1">
+      <input type="text" name="roadAddress" id="sample6_address" size="50" placeholder="주소" class="form-control mb-1" onchange="addressCheck()">
       <div class="input-group mb-1">
         <input type="text" name="detailAddress" id="sample6_detailAddress" placeholder="상세주소" class="form-control"> &nbsp;&nbsp;
         <div class="input-group-append">

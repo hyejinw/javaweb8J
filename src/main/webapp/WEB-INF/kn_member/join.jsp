@@ -164,11 +164,11 @@
 		  
 		  // 생년월일 확인
 		  if(birthday==""){
-		    document.getElementById("birthError").innerHTML="생일에 맞춰 특별 쿠폰을 보내드립니다. 생년월일을 입력해주세요.";
+		    document.getElementById("birthdayError").innerHTML="생일에 맞춰 특별 쿠폰을 보내드립니다. 생년월일을 입력해주세요.";
 		    check = false;
 		  }
 		  else {
-		    document.getElementById("birthError").innerHTML="";
+		    document.getElementById("birthdayError").innerHTML="";
 		    check = true;
 		  }		  
 		  
@@ -414,7 +414,7 @@
     <div class="form-group">
       <label for="birthday">생년월일 <span class="must">*</span></label>
 			<input type="date" name="birthday" id="birthday" onchange="birthdayCheck()" class="form-control"/>
-			<div id="birthError" class="text-primary"></div>
+			<div id="birthdayError" class="text-primary"></div>
     </div>    
 <%--    	  <!-- 생일을 null로 보내면 자꾸 오류가 생겨서 기본값을 줘버렸다. -->
     	<c:set var="ymd" value="<%=new java.util.Date()%>" />

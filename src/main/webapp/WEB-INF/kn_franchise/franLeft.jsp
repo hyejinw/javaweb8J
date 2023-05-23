@@ -6,7 +6,7 @@
 <head>
 	<meta charset="UTF-8">
 	<meta name="viewport" content="width=device-width, initial-scale=1">
-	<title>adminLeft.jsp</title>
+	<title>franLeft.jsp</title>
 	<jsp:include page="/include/bs4.jsp"/> 
 	<style>
 		body {
@@ -37,14 +37,14 @@
     <div class="card">
       <div class="card-header">
         <a class="card-link" data-toggle="collapse" href="#collapseOne">
-          회원 관리
+          매장 관리
         </a>
       </div>
       <div id="collapseOne" class="collapse" data-parent="#accordion">
         <div class="card-body">
-          <a href="${ctp}/AdminMemList.kn_ad" target="adminContent">회원 조회</a><hr/>
-          <a href="${ctp}/AdminMemModify.kn_ad" target="adminContent">회원 수정</a><hr/>
-          <a href="${ctp}/" target="adminContent">쿠폰 관리</a>
+          <a href="${ctp}/FranInfoModify.kn_fr" target="franContent">매장 정보 수정</a><hr/>
+          <a href="${ctp}/FranStore.kn_fr" target="franContent">매장 관리</a><hr/>
+          <a href="${ctp}/" target="franContent">쿠폰 관리</a>
         </div>
       </div>
     </div>
@@ -56,34 +56,7 @@
       </div>
       <div id="collapseTwo" class="collapse" data-parent="#accordion">
         <div class="card-body">
-          <a href="${ctp}/AdminMemList.kn_ad" target="adminContent">예약 조회</a>
-        </div>
-      </div>
-    </div>
-    <div class="card">
-      <div class="card-header">
-      	<a class="collapsed card-link" data-toggle="collapse" href="#collapseThree">
-        	메뉴 관리
-     		</a>
-      </div>
-      <div id="collapseThree" class="collapse" data-parent="#accordion">
-        <div class="card-body">
-          <a href="${ctp}/AdminMenuList.kn_ad" target="adminContent">메뉴 조회</a><hr/>
-          <a href="${ctp}/AdminMenuModify.kn_ad" target="adminContent">메뉴 수정</a><hr/>
-          <a href="${ctp}/AdminMenuInsert.kn_ad" target="adminContent">메뉴 등록</a><hr/>
-          <a href="${ctp}/" target="adminContent">메뉴 댓글 관리</a>
-        </div>
-      </div>
-    </div>
-    <div class="card">
-      <div class="card-header">
-      	<a class="collapsed card-link" data-toggle="collapse" href="#collapseFour">
-        	매장 관리
-     		</a>
-      </div>
-      <div id="collapseFour" class="collapse" data-parent="#accordion">
-        <div class="card-body">
-          <a href="${ctp}/AdminStoreList.kn_ad" target="adminContent">매장 조회</a>
+          <a href="${ctp}/" target="franContent">예약 조회</a>
         </div>
       </div>
     </div>
@@ -95,7 +68,7 @@
       </div>
       <div id="collapseFive" class="collapse" data-parent="#accordion">
         <div class="card-body">
-          <a href="${ctp}/" target="adminContent">회원 조회</a>
+          <a href="${ctp}/" target="franContent">회원 조회</a>
         </div>
       </div>
     </div>

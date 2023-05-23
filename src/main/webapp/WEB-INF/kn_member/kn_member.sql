@@ -30,7 +30,7 @@ create table kn_member (
 
 desc kn_member;
 drop table kn_member;
-
+ALTER TABLE kn_member AUTO_INCREMENT = 23;
 	
 create table kn_coupon (
 	idx int not null auto_increment,         /* 쿠폰 고유번호 */

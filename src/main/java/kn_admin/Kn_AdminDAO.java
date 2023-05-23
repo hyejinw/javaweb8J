@@ -9,6 +9,7 @@ import java.util.ArrayList;
 import conn.GetConn;
 import kn_member.Kn_MemberVO;
 import kn_menu.Kn_MenuVO;
+import kn_store.Kn_StoreVO;
 
 public class Kn_AdminDAO {
 
@@ -255,6 +256,86 @@ public class Kn_AdminDAO {
 			
 		} catch (SQLException e) {
 			System.out.println("SQL오류(setMenuModify) : " + e.getMessage());
+		} finally {
+			getConn.pstmtClose();
+		}
+		return res;
+	}
+
+	// 매장 리스트 가져오기 (AdminStoreListOkCommand)
+	public ArrayList<Kn_StoreVO> getStoreList() {
+		ArrayList<Kn_StoreVO> vos = new ArrayList<>();
+		
+		try {
+			sql = "select *, "
+					+ "(select count(*) from kn_storeReply where storeIdx = s.idx) as replyCount"
+					+ " from kn_store s";
+			pstmt = conn.prepareStatement(sql);
+			rs = pstmt.executeQuery();
+			
+			while(rs.next()) {
+				Kn_StoreVO vo = new Kn_StoreVO();
+				vo.setIdx(rs.getInt("idx"));
+				vo.setMemIdx(rs.getInt("memIdx"));
+				vo.setStoreName(rs.getString("storeName"));
+				vo.setStoreTel(rs.getString("storeTel"));
+				vo.setStoreAddress(rs.getString("storeAddress"));
+				vo.setStorePhoto(rs.getString("storePhoto"));
+				vo.setLocation(rs.getString("location"));
+				vo.setOpHour(rs.getString("opHour"));
+				vo.setStoreMenu(rs.getString("storeMenu"));
+				vo.setStoreRate(rs.getString("storeRate"));
+				vo.setStoreModify(rs.getString("storeModify"));
+				vo.setStoreOpen(rs.getString("storeOpen"));
+				vo.setStoreDel(rs.getString("storeDel"));
+				
+				// 댓글 개수 확인용
+				vo.setReplyCount(rs.getInt("replyCount"));
+				vos.add(vo);
+			}
+		} catch (SQLException e) {
+			System.out.println("SQL 에러(getStoreList) : " + e.getMessage());
+		} finally {
+			getConn.rsClose();
+		}
+		return vos;
+	}
+
+	// 매장 삭제 승인 (AdminStoreDelOKCommand)
+	public String setStoreDelOk(int idx) {
+		String res = "0";
+		
+		try {
+			sql = "delete from kn_store where idx = ?";
+			pstmt = conn.prepareStatement(sql);
+			pstmt.setInt(1, idx);
+			pstmt.executeUpdate();
+			res= "1";
+			
+		} catch (SQLException e) {
+			System.out.println("SQL오류(setStoreDelOk) : " + e.getMessage());
+		} finally {
+			getConn.pstmtClose();
+		}
+		
+		return res;
+	}
+
+	// 매장 공개/비공개 (AdminStoreOpenCloseOKCommand)
+	public String setStoreOpenClose(int idx, String sw, String location) {
+		String res = "0";
+		
+		try {
+			sql = "update kn_store set storeOpen=?, location=? where idx = ?";
+			pstmt = conn.prepareStatement(sql);
+			pstmt.setString(1, sw);
+			pstmt.setString(2, location);
+			pstmt.setInt(3, idx);
+			pstmt.executeUpdate();
+			res= "1";
+			
+		} catch (SQLException e) {
+			System.out.println("SQL오류(setStoreOpenClose) : " + e.getMessage());
 		} finally {
 			getConn.pstmtClose();
 		}

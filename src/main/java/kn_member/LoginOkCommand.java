@@ -52,6 +52,7 @@ public class LoginOkCommand implements MemInterface {
 		int fail = session.getAttribute("sFail") == null ? 0 : (int) session.getAttribute("sFail"); // 로그인 실패했을 때 쓸 거여!
 		session.setAttribute("sFail", fail);
 
+		session.setAttribute("sIdx", vo.getIdx());
 		session.setAttribute("sMid", mid);
 		session.setAttribute("sName", vo.getName());
 		session.setAttribute("sLevel", vo.getLevel());

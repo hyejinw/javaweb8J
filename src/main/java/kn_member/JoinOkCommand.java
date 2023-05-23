@@ -48,8 +48,6 @@ public class JoinOkCommand implements MemInterface {
     SecurityUtil security = new SecurityUtil();
     pwd = security.encryptSHA256(pwd);
 
-    System.out.println("salt 비밀번호 :"+pwd);
-    
     
     // 멤버십 만료 날짜 계산 (1년 후)
     Calendar cal = Calendar.getInstance();

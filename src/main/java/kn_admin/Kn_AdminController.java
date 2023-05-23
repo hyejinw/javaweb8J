@@ -128,6 +128,29 @@ public class Kn_AdminController extends HttpServlet {
 		
 	
 		// 4. 매장 관리
+		// 매장 조회창
+		else if(com.equals("/AdminStoreList")) {   
+			viewPage += "/store/adminStoreList.jsp";
+		}
+		// 매장 조회
+		else if(com.equals("/AdminStoreListOk")) {
+			command = new AdminStoreListOkCommand();
+			command.execute(request, response);
+			return;
+		}
+		// 매장 삭제 승인
+		else if(com.equals("/AdminStoreDelOK")) {
+			command = new AdminStoreDelOKCommand();
+			command.execute(request, response);
+			return;
+		}
+		// 매장 공개/비공개
+		else if(com.equals("/AdminStoreOpenCloseOK")) {
+			command = new AdminStoreOpenCloseOKCommand();
+			command.execute(request, response);
+			return;
+		}
+		
 		
 		RequestDispatcher dispatcher = request.getRequestDispatcher(viewPage);
 		dispatcher.forward(request, response);

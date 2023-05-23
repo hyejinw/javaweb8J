@@ -31,8 +31,42 @@ public class Kn_FranController extends HttpServlet {
 			dispatcher.forward(request, response);
 		}	
 		
-		else if(com.equals("/FranPage")) {
-			viewPage += "/franPage.jsp";
+		else if(com.equals("/FranMain")) {
+			viewPage += "/franMain.jsp";
+		}
+		else if(com.equals("/FranLeft")) {
+			viewPage += "/franLeft.jsp";
+		}
+		else if(com.equals("/FranContent")) {
+			viewPage += "/franContent.jsp";
+		}
+		// 매장 정보 수정창
+		else if(com.equals("/FranInfoModify")) {
+			command = new FranInfoModifyCommand();
+			command.execute(request, response);
+			viewPage += "/store/franInfoModify.jsp";
+		}
+		// 매장 정보 수정
+		else if(com.equals("/FranStoreInfoModifyOk")) {
+			command = new FranStoreInfoModifyOkCommand();
+			command.execute(request, response);
+			viewPage = "/include/message.jsp";
+		}
+		// 매장 관리창
+		else if(com.equals("/FranStore")) {
+			viewPage += "/store/franStore.jsp";
+		}
+		// 매장 관리 정보 가져오기
+		else if(com.equals("/FranStoreOk")) {
+			command = new FranStoreOkCommand();
+			command.execute(request, response);
+			return;
+		}
+		// 매장 삭제 + 매장회원 삭제
+		else if(com.equals("/FranStoreDel")) {
+			command = new FranStoreDelCommand();
+			command.execute(request, response);
+			viewPage = "/include/message.jsp";
 		}
 		
 		RequestDispatcher dispatcher = request.getRequestDispatcher(viewPage);

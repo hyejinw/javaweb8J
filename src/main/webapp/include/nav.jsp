@@ -99,11 +99,11 @@
       </c:if>
       <c:if test="${level == 1}">  <!-- 매장회원창 -->
 	      <li class="nav-item mr-3 text-center">
-	        <a class="nav-link hover" style="color: #282828" href="${ctp}/FranPage.kn_fr">
-	        	<i class="fa-solid fa-face-laugh-wink" style="color: #FFD36B; font-size:28px"></i><br/>
+	        <a class="nav-link hover" style="color: #282828" href="${ctp}/FranMain.kn_fr">
+	        	<i class="fa-solid fa-kitchen-set" style="color: #FFD36B; font-size:28px"></i><br/>
 	        	<font size="2" style="font-weight:500">매장관리 창</font>
 	        </a>
-	      </li>
+	      </li>   
 	    </c:if>  
       <c:if test="${level > 1}">  <!-- 회원창 -->
 	      <li class="nav-item mr-3 text-center">

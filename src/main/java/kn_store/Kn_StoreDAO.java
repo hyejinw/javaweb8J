@@ -40,11 +40,13 @@ public class Kn_StoreDAO {
 				vo.setLocation(rs.getString("location"));
 				vo.setOpHour(rs.getString("opHour"));
 				vo.setStoreMenu(rs.getString("storeMenu"));
+				vo.setStoreRate(rs.getString("storeRate"));
+				vo.setStoreMenu(rs.getString("storeModify"));
 				vo.setStoreOpen(rs.getString("storeOpen"));
 				vo.setStoreDel(rs.getString("storeDel"));
 			}
 		} catch (SQLException e) {
-			System.out.println("SQL 에러 : " + e.getMessage());
+			System.out.println("SQL 에러(getStoreCheck) : " + e.getMessage());
 		} finally {
 			getConn.rsClose();
 		}
@@ -55,7 +57,7 @@ public class Kn_StoreDAO {
 	// store 생성 (FranJoinOkCommand)
 	public void setStore(Kn_StoreVO vo) {
 		try {
-			sql = "insert into kn_store values (default,?,?,?,?,default,default,default,default,default,default)";
+			sql = "insert into kn_store values (default,?,?,?,?,default,default,default,default,default,default,default,default)";
 			pstmt = conn.prepareStatement(sql);
 	  	pstmt.setInt(1, vo.getMemIdx());
 	  	pstmt.setString(2, vo.getStoreName());
@@ -65,7 +67,7 @@ public class Kn_StoreDAO {
  	  	pstmt.executeUpdate();
 						
 		} catch (SQLException e) {
-			System.out.println("SQL 에러 : " + e.getMessage());
+			System.out.println("SQL 에러(setStore) : " + e.getMessage());
 		} finally {
 			getConn.pstmtClose();
 		}

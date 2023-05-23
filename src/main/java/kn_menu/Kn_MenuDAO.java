@@ -23,11 +23,18 @@ public class Kn_MenuDAO {
 
 
 	// 총 메뉴 개수 구하기 (MenuListCommand)
-	public int getTotMenuCnt() {
+	public int getTotMenuCnt(String part) {
 		int totRecCnt = 0;
 		try {
-			sql = "select count(*) as cnt from kn_menu where menuOpen='OK'";
-			pstmt = conn.prepareStatement(sql);
+			if(part.equals("전체")) {
+				sql = "select count(*) as cnt from kn_menu where menuOpen='OK'";
+				pstmt = conn.prepareStatement(sql);
+			}
+			else {
+				sql = "select count(*) as cnt from kn_menu where category=? and menuOpen='OK'";
+				pstmt = conn.prepareStatement(sql);
+				pstmt.setString(1, part);
+			}
 			rs = pstmt.executeQuery();
 			rs.next();
 			totRecCnt = rs.getInt("cnt");
@@ -59,7 +66,7 @@ public class Kn_MenuDAO {
 			else {
 				sql = "select *, timestampdiff(hour, menuStartDate, now()) as hour_diff, datediff(now(), menuStartDate) as day_diff, "
 						+ "(select count(*) from kn_menuReply where menuIdx = m.idx) as replyCount "
-						+ "from kn_menu m where menuOpen='OK' and category=? order by idx asc limit ?,?";
+						+ "from kn_menu m where category=? and menuOpen='OK' order by idx asc limit ?,?";
 				
 				pstmt = conn.prepareStatement(sql);
 				pstmt.setString(1, part);

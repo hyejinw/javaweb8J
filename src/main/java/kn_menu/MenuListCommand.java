@@ -13,6 +13,10 @@ public class MenuListCommand implements MenuInterface {
 	public void execute(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		Kn_MenuDAO dao = new Kn_MenuDAO();
 
+		// 어느 부분을 볼 지 sort해주기
+		String part = request.getParameter("part")== null ? "전체" : request.getParameter("part");
+		request.setAttribute("part", part);
+
 		// 페이징 처리 여기서!!!
 		// 1. 현재 페이지번호를 구한다.
 		int pag = request.getParameter("pag")==null ? 1 : Integer.parseInt(request.getParameter("pag"));
@@ -21,7 +25,7 @@ public class MenuListCommand implements MenuInterface {
 		int pageSize = request.getParameter("pageSize")==null ? 24 : Integer.parseInt(request.getParameter("pageSize"));
 		
 		// 3. 총 메뉴 개수를 구한다.
-		int totRecCnt = dao.getTotMenuCnt();
+		int totRecCnt = dao.getTotMenuCnt(part);
 		
 		// 4. 총 페이지 건수를 구한다.
 		int totPage = (totRecCnt % pageSize)==0 ? (totRecCnt / pageSize) : (totRecCnt / pageSize) + 1 ;
@@ -45,9 +49,6 @@ public class MenuListCommand implements MenuInterface {
 		
 
 		
-		// 어느 부분을 볼 지 sort해주기
-		String part = request.getParameter("part")== null ? "전체" : request.getParameter("part");
-		request.setAttribute("part", part);
 
 		// 지정된 페이지의 자료를 요청한 한페이지 분량만큼 가져온다.
 		ArrayList<Kn_MenuVO> vos = dao.getMenuList(startIndexNo, pageSize, part);

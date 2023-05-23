@@ -29,7 +29,7 @@ public class FranJoinOkCommand implements MemInterface {
 		String storeName = request.getParameter("storeName")==null ? "":request.getParameter("storeName");
 		String storeTel = request.getParameter("storeTel")==null ? "":request.getParameter("storeTel");
 		String storeAddress = request.getParameter("address")==null ? "":request.getParameter("address");
-		
+		System.out.println("storeAddress : " + storeAddress);
 		// 1. BackEnd 체크(null값, 길이, 중복여부 확인)
 		
 		// 아이디와 닉네임 중복체크
@@ -79,7 +79,7 @@ public class FranJoinOkCommand implements MemInterface {
 			Kn_StoreDAO dao2 = new Kn_StoreDAO();
 			dao2.setStore(vo2);
 			
-			request.setAttribute("msg", "회원가입을 성공했습니다.\\n매장 관리창을 완성해주시면 관리자가 승인을 해드립니다!");
+			request.setAttribute("msg", "회원가입을 성공했습니다.\\n매장 관리창을 완성하시면 관리자가 승인해드립니다!");
 			request.setAttribute("url", request.getContextPath() + "/Login.kn_mem");
 		}
 		else {
