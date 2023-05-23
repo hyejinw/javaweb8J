@@ -29,7 +29,8 @@ public class Kn_FranDAO {
 	public Kn_StoreVO getFranInfo(int memIdx) {
 		Kn_StoreVO vo = new Kn_StoreVO();
 		try {
-			sql = "select * from kn_store where memIdx = ?";
+			sql = "select *, (select count(*) from kn_storeReply where storeIdx = s.idx) as replyCount "
+					+ "from kn_store s where memIdx = ?";
 			pstmt = conn.prepareStatement(sql);
 			pstmt.setInt(1, memIdx);
 			rs = pstmt.executeQuery();
@@ -48,6 +49,9 @@ public class Kn_FranDAO {
 				vo.setStoreModify(rs.getString("storeModify"));
 				vo.setStoreOpen(rs.getString("storeOpen"));
 				vo.setStoreDel(rs.getString("storeDel"));
+				
+				// 댓글 개수 확인용
+				vo.setReplyCount(rs.getInt("replyCount"));
 			}
 		} catch (SQLException e) {
 			System.out.println("SQL 에러(getFranInfo) : " + e.getMessage());

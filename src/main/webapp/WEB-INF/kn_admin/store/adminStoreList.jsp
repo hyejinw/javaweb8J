@@ -167,7 +167,7 @@
 			let idx = storeOpenForm.idx.value;
 			let sw = storeOpenForm.sw.value;
 			let storeModify = storeOpenForm.storeModify.value;
-			let location = storeOpenForm.location.value;
+			let location1 = storeOpenForm.location.value;
 			
 			if(adminPwd != '1234') {
 				alert('관리자 비밀번호 오류입니다.');
@@ -185,7 +185,7 @@
 	      $.ajax({
 	          type: "post",
 	          url: "${ctp}/AdminStoreOpenCloseOK.kn_ad",
-	          data: {idx : idx, sw : sw, location : location},
+	          data: {idx : idx, sw : sw, location : location1},
 	          success: function(res) {
 	              if(res == 1){
 	                  alert("공개 처리 완료");

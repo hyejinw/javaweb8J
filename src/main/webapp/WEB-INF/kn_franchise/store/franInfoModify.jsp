@@ -63,29 +63,29 @@
 		}
 		
 		function selectAll1(selectAll)  {
-			  const checkboxes 
-			       = document.getElementsByName('donut');
-			  
-			  checkboxes.forEach((checkbox) => {
-			    checkbox.checked = selectAll.checked;
-			  })
-			}
+		  const checkboxes 
+		       = document.getElementsByName('donut');
+		  
+		  checkboxes.forEach((checkbox) => {
+		    checkbox.checked = selectAll.checked;
+		  })
+		}
 		function selectAll2(selectAll)  {
-			  const checkboxes 
-			       = document.getElementsByName('cake');
-			  
-			  checkboxes.forEach((checkbox) => {
-			    checkbox.checked = selectAll.checked;
-			  })
-			}
+		  const checkboxes 
+		       = document.getElementsByName('cake');
+		  
+		  checkboxes.forEach((checkbox) => {
+		    checkbox.checked = selectAll.checked;
+		  })
+		}
 		function selectAll3(selectAll)  {
-			  const checkboxes 
-			       = document.getElementsByName('bakery');
-			  
-			  checkboxes.forEach((checkbox) => {
-			    checkbox.checked = selectAll.checked;
-			  })
-			}
+		  const checkboxes 
+		       = document.getElementsByName('bakery');
+		  
+		  checkboxes.forEach((checkbox) => {
+		    checkbox.checked = selectAll.checked;
+		  })
+		}
 		
 	</script>
 </head>
@@ -127,6 +127,7 @@
 									<c:if test="${cnt % 6 ==0}"><br/></c:if>
 								</c:if>
 								</c:forEach>
+								<!-- <input type="hidden" name="donut"/> -->
 							</td>
 						</tr>
 						<tr>

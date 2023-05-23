@@ -6,7 +6,7 @@
 <head>
 	<meta charset="UTF-8">
 	<meta name="viewport" content="width=device-width, initial-scale=1">
-	<title>menu</title>
+	<title>menu.jsp</title>
 	<jsp:include page="/include/bs4.jsp" />
 	<link rel="icon" type="image/png" href="http://example.com/myicon.png"> 
 	<style>
@@ -100,7 +100,7 @@
 		    </div>
 		    <form name="searchForm" method="post" action="${ctp}/MenuSearch.kn_menu" class="form-inline my-2 my-lg-0">
 		      <input type="text" name="searchString" id="searchString" class="form-control mr-sm-2" autofocus aria-label="Search" />
-		      <button class="btn btn-outline-success my-2 my-sm-0" onclick="searchCheck()" style="margin-right:100px">검색</button>
+		      <button class="btn btn-outline-success my-2 my-sm-0" onclick="searchCheck()" style="margin-right:100px"><i class="fa-solid fa-magnifying-glass" style="color: #0cc621;"></i></button>
 		    	<input type="hidden" name="pag" value="${pag}"/>   <!-- 값을 넘겨줄 때 hidden으로 페이지 위치와 크기를 함께 보내야 한다.  -->
   				<input type="hidden" name="pageSize" value="${pageSize}"/>
   				<input type="hidden" name="part" value="${part}"/>

@@ -324,7 +324,7 @@ public class Kn_MenuDAO {
 		} catch (SQLException e) {
 			System.out.println("SQL 오류(setMenuRate) : " + e.getMessage());
 		} finally {
-			getConn.rsClose();
+			getConn.pstmtClose();
 		}
 	}
 

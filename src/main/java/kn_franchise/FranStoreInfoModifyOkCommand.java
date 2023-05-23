@@ -9,8 +9,6 @@ import javax.servlet.http.HttpServletResponse;
 import com.oreilly.servlet.MultipartRequest;
 import com.oreilly.servlet.multipart.DefaultFileRenamePolicy;
 
-import kn_admin.Kn_AdminDAO;
-import kn_menu.Kn_MenuVO;
 import kn_store.Kn_StoreVO;
 
 public class FranStoreInfoModifyOkCommand implements FranInterface {
@@ -32,33 +30,37 @@ public class FranStoreInfoModifyOkCommand implements FranInterface {
 
 		// donut, cake, bakery는 배열로 오기 때문에 따로 추가 처리가 필요
 		String[] donuts = multi.getParameterValues("donut");
-		String donut = "";
-		if(donuts.length != 0) {
-			for(String strDonut : donuts) {
-				donut += strDonut + "/";
-			}
-		}
 		String[] bakeries = multi.getParameterValues("bakery");
-		String bakery = "";
-		if(bakeries.length != 0) {
-			for(String strBakery : bakeries) {
-				bakery += strBakery + "/";
-			}
-		}
 		String[] cakes = multi.getParameterValues("cake");
-		String cake = "";
-		if(cakes.length != 0) {
-			for(String strCake : cakes) {
-				cake += strCake + "/";
+		
+		String donut = "";
+		if(donuts != null) {
+			if(donuts.length != 0) {
+				for(String strDonut : donuts) {
+					donut += strDonut + "/";
+				}
 			}
 		}
-		cake = cake.substring(0, cake.lastIndexOf("/"));
-		String menu = donut + bakery + cake;
 		
-		System.out.println("donut : " + donut);
-		System.out.println("bakery : " + bakery);
-		System.out.println("cake : " + cake);
-		System.out.println("menu : " + menu);
+		String bakery = "";
+		if(bakeries != null) {
+			if(bakeries.length != 0) {
+				for(String strBakery : bakeries) {
+					bakery += strBakery + "/";
+				}
+			}
+		}
+		
+		String cake = "";
+		if(cakes != null) {
+			if(cakes.length != 0) {
+				for(String strCake : cakes) {
+					cake += strCake + "/";
+				}
+			}	
+		}
+		//cake = cake.substring(0, cake.lastIndexOf("/"));  cake가 null로 왔을 때, 오류 발생!
+		String menu = donut + bakery + cake;
 		
 		Kn_StoreVO vo = new Kn_StoreVO();
 		vo.setStoreName(storeName);

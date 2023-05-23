@@ -48,6 +48,7 @@
               $('#opHour').val(rowData.opHour);
               $('#storeMenu').val(rowData.storeMenu);
               $('#storeRate').val(rowData.menuRate);
+              $('#replyCount').val(rowData.replyCount);
               $('#storeModify').val(rowData.storeModify);
               $('#storeOpen').val(rowData.storeOpen);
               $('#storeDel').val(rowData.storeDel);
@@ -64,11 +65,17 @@
 	        {data: "opHour"},
 	        {data: "storeMenu" },
 	        {data: "storeRate"},
+	        {data: "replyCount"},
 	        {data: "storeModify"},
 	        {
 	        	data: "storeOpen",
 	        	render: function(data) {
-	        		return '<button class="btn btn-primary btn-sm" onclick="javascript:falseOpen();" >'+data+'</a>'
+	        		if(data == "NO") {
+	        			return '<button class="btn btn-primary btn-sm" onclick="javascript:falseOpen();" >'+data+'</a>'
+	        		}
+	        		else {
+	        			return '<span class="text-danger">'+data+'</span>'
+	        		}
 	        	}
 	        },
 	        {
@@ -85,7 +92,7 @@
 		});
 		
 		function falseOpen() {
-			alert('초기 세팅 완료 후, 관리자가 공개처리 해드립니다.');
+			alert('초기 세팅 완료하시면, 관리자가 공개처리 해드립니다.');
 		}
 		
 		function storeDel() {
@@ -109,11 +116,11 @@
 </head>
 <body>
   <div class="c">
-		<div style="text-align:center"><span class="text-center" style="font-size:40px; text-align:center; font-weight:500">메뉴 조회</span></div>
+		<div style="text-align:center"><span class="text-center" style="font-size:40px; text-align:center; font-weight:500">매장 조회</span></div>
 		<div style="text-align:center">
 			<span class="text-center" style="font-size:15px; text-align:center; font-weight:300; color:blue">
-				메뉴 공개/삭제 처리 가능창<br/>
-			  댓글 수를 클릭하면 댓글 관리창으로 이동합니다.
+				매장 삭제 처리 가능창<br/>
+				매장을 비공개처리 하려면 관리자에게 문의해주세요.
 			</span>
 		</div>
 		<button class="btn btn-success text-left mb-4" onclick="location.href='${ctp}/FranInfoModify.kn_fr';">정보 수정창</button>
@@ -129,6 +136,7 @@
 					<th class="text-center">영업시간</th>
 					<th class="text-center">가능 메뉴</th>
 					<th class="text-center">총 평점</th>
+					<th class="text-center">댓글 수</th>
 					<th class="text-center">수정 중 유무</th>
 					<th class="text-center">공개 유무</th>
 					<th class="text-center">삭제 여부</th>

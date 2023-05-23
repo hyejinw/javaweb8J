@@ -41,6 +41,7 @@ public class FranStoreOkCommand implements FranInterface {
 	  	store.put("storeModify", vo.getStoreModify());
 	  	store.put("storeOpen", vo.getStoreOpen());
 	  	store.put("storeDel", vo.getStoreDel());
+	  	store.put("replyCount", vo.getReplyCount());
 	  	
 	  	storeArray.add(store);
 	  }

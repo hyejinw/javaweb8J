@@ -90,12 +90,12 @@
     <div class="card">
       <div class="card-header">
         <a class="collapsed card-link" data-toggle="collapse" href="#collapseFive">
-         maybe more
+         문의
         </a>
       </div>
       <div id="collapseFive" class="collapse" data-parent="#accordion">
         <div class="card-body">
-          <a href="${ctp}/" target="adminContent">회원 조회</a>
+          <a href="${ctp}/" target="adminContent">문의 조회</a>
         </div>
       </div>
     </div>

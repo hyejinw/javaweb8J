@@ -11,7 +11,6 @@ import com.oreilly.servlet.multipart.DefaultFileRenamePolicy;
 
 public class MenuReplyInputCommand implements MenuInterface {
 
-	@SuppressWarnings("unused")
 	@Override
 	public void execute(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		String realPath = request.getServletContext().getRealPath("/images/kn_menuReply");

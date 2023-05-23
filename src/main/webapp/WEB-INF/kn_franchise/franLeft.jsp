@@ -43,7 +43,8 @@
       <div id="collapseOne" class="collapse" data-parent="#accordion">
         <div class="card-body">
           <a href="${ctp}/FranInfoModify.kn_fr" target="franContent">매장 정보 수정</a><hr/>
-          <a href="${ctp}/FranStore.kn_fr" target="franContent">매장 관리</a><hr/>
+          <a href="${ctp}/FranStore.kn_fr" target="franContent">매장 조회</a><hr/>
+          <a href="${ctp}/" target="franContent">댓글 조회</a><hr/>
           <a href="${ctp}/" target="franContent">쿠폰 관리</a>
         </div>
       </div>
@@ -63,12 +64,12 @@
     <div class="card">
       <div class="card-header">
         <a class="collapsed card-link" data-toggle="collapse" href="#collapseFive">
-         maybe more
+         문의
         </a>
       </div>
       <div id="collapseFive" class="collapse" data-parent="#accordion">
         <div class="card-body">
-          <a href="${ctp}/" target="franContent">회원 조회</a>
+          <a href="${ctp}/" target="franContent">문의 남기기</a>
         </div>
       </div>
     </div>
