@@ -1,6 +1,10 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 <c:set var="ctp" value="${pageContext.request.contextPath}"/>
+<%
+	int level = session.getAttribute("sLevel")==null ? 99: (int)session.getAttribute("sLevel");
+	pageContext.setAttribute("level", level);
+%>
 <!DOCTYPE html>
 <html>
 <head>
@@ -16,6 +20,24 @@
 	    font-style: normal;
 		}
 	</style>
+	<script>
+		'use strict';
+		
+		function memberCheck(level) {
+			if(level > 4) {   /* 회원이 아님 */
+				
+				Swal.fire({
+					titleText: '로그인이 필요합니다.',
+
+					}).then((result) => {
+						location.href = '${ctp}/Login.kn_mem'; 
+					})
+			}
+			else {
+				location.href = '${ctp}/ResvContent.kn_re';
+			}
+		}
+	</script>
 </head>
 <body>
 <jsp:include page="/include/nav.jsp" />
@@ -29,7 +51,7 @@
 			    <div class="card">
 			    	 <img class="card-img-top" src="${ctp}/images/reservation1.png" alt="Card image" style="width:100%" class="text-center">
 			       <div class="card-body text-center">
-			     	 <a href="#" class="btn btn-outline-danger">날짜 선택 예약(클릭!)</a>
+			     	 <a href="javascript:memberCheck(${level})" class="btn btn-outline-danger">날짜 선택 예약(클릭!)</a>
 			       <p class="card-text"><br/>예약 원하시는 날짜가 있다면<br/>날짜를 먼저 선택해주세요</p>
 			       <p class="card-text"><a href="#" class="text-secondary" style="text-decoration:underline">날짜 선택 예약이란?</a></p>
 			      </div>

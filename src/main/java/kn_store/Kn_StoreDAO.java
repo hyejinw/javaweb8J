@@ -77,7 +77,7 @@ public class Kn_StoreDAO {
 		
 	}
 
-	// 매장 리스트 가져오기 (StoreListCommand)
+	// 매장 리스트 가져오기 (StoreListCommand, ResvContentCommand) 
 	public ArrayList<Kn_StoreVO> getStoreList() {
 		ArrayList<Kn_StoreVO> vos = new ArrayList<>();
 		

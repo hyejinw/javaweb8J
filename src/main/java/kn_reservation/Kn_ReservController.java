@@ -24,8 +24,53 @@ public class Kn_ReservController extends HttpServlet {
 		if(com.equals("/Reservation")) {
 			viewPage += "/reservation.jsp";
 		}
+		// 예약창(매장 선택)
+		if(com.equals("/ResvContent")) {
+			command = new ResvContentCommand();
+			command.execute(request, response);
+			viewPage += "/resvContent.jsp";
+		}
+		// 예약창(날짜 선택)
+		if(com.equals("/ResvDate")) {
+			command = new ResvDateCommand();
+			command.execute(request, response);
+			viewPage += "/resvDate.jsp";
+		}
+		// 예약창(메뉴 선택)
+		if(com.equals("/ResvMenu")) {
+			command = new ResvMenuCommand();
+			command.execute(request, response);
+			viewPage += "/resvMenu.jsp";
+		}
+		// 예약창(메뉴 검색)
+		if(com.equals("/ResvMenuSearch")) {
+			command = new ResvMenuSearchCommand();
+			command.execute(request, response);
+			viewPage += "/resvMenuSearch.jsp";
+		}
+		// 예약창(메뉴 개수 결정)
+		if(com.equals("/ResvMenuContent")) {
+			command = new ResvMenuContentCommand();
+			command.execute(request, response);
+			viewPage += "/resvMenuContent.jsp";
+		}
+		// 장바구니에 넣기
+		if(com.equals("/ResvCartInput")) {
+			command = new ResvCartInputCommand();
+			command.execute(request, response);
+			return;
+		}
+		// 장바구니창
 		else if(com.equals("/Cart")) {
+			command = new CartCommand();
+			command.execute(request, response);
 			viewPage += "/cart.jsp";
+		}
+		// 장바구니 내용 전체 삭제
+		else if(com.equals("/CartDel")) {
+			command = new CartDelCommand();
+			command.execute(request, response);
+			return;
 		}
 		
 		RequestDispatcher dispatcher = request.getRequestDispatcher(viewPage);

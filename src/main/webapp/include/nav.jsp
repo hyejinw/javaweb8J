@@ -10,7 +10,7 @@
 <script>
 	'use strict';
 	
-	function memCheck(level) {
+	function memCheck1(level) {
 		if(level > 4) {   /* 회원이 아님 */
 			
 			Swal.fire({
@@ -22,6 +22,20 @@
 		}
 		else {
 			location.href = '${ctp}/MyPage.kn_mem';
+		}
+	}
+	function memCheck2(level) {
+		if(level > 4) {   /* 회원이 아님 */
+			
+			Swal.fire({
+				titleText: '로그인이 필요합니다.',
+
+				}).then((result) => {
+					location.href = '${ctp}/Login.kn_mem'; 
+				})
+		}
+		else {
+			location.href = '${ctp}/Cart.kn_re';
 		}
 	}
 </script>
@@ -107,14 +121,14 @@
 	    </c:if>  
       <c:if test="${level > 1}">  <!-- 회원창 -->
 	      <li class="nav-item mr-3 text-center">
-	        <a class="nav-link hover" style="color: #282828" href="javascript:memCheck(${level})">
+	        <a class="nav-link hover" style="color: #282828" href="javascript:memCheck1(${level})">
 	        	<i class="fa-solid fa-face-laugh-wink" style="color: #FFD36B; font-size:28px"></i><br/>
 	        	<font size="2" style="font-weight:500">My Page</font>
 	        </a>
 	      </li>
 	    </c:if>  
       <li class="nav-item text-center">
-	      <a class="nav-link hover" style="color: #282828" href="${ctp}/Cart.kn_re">
+	      <a class="nav-link hover" style="color: #282828" href="javascript:memCheck2(${level})">
 	     	 <i class="fas fa-shopping-bag" style="color: #FFA6D5; font-size:28px"></i><br/>
     	   <font size="2" style="font-weight:500">Cart</font>
 	      </a>
