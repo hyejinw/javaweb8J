@@ -77,12 +77,10 @@
 			<div class="row">
 				<div class="col-sm-7">
 				
-					<button type="button" onclick="location.href='${ctp}/ResvDate.kn_re?yy=${yy-1}&mm=${mm}&idx=${idx}';" class="btn btn-secondary btn-sm" title="이전 년도">◁◁</button>
-					<button type="button" onclick="location.href='${ctp}/ResvDate.kn_re?yy=${yy}&mm=${mm-1}&idx=${idx}';" class="btn btn-secondary btn-sm" title="이전 월">◀</button>
-					<font size="5">${yy}년 ${mm+1}월</font>
+					<a href='${ctp}/ResvDate.kn_re?yy=${yy}&mm=${mm-1}&idx=${idx}' title="이전 월"><i class="fa-solid fa-chevron-left" style="font-size:25px; color: #491f51"></i></a>
+					&nbsp;&nbsp;&nbsp;&nbsp;<font size="5">${yy}년 ${mm+1}월</font>&nbsp;&nbsp;&nbsp;&nbsp;
 					
-					<button type="button" onclick="location.href='${ctp}/ResvDate.kn_re?yy=${yy}&mm=${mm+1}&idx=${idx}';" class="btn btn-secondary btn-sm" title="다음 월">▶</button>
-					<button type="button" onclick="location.href='${ctp}/ResvDate.kn_re?yy=${yy+1}&mm=${mm}&idx=${idx}';" class="btn btn-secondary btn-sm" title="다음 년도">▷▷</button>
+					<a href='${ctp}/ResvDate.kn_re?yy=${yy}&mm=${mm+1}&idx=${idx}' title="다음 월"><i class="fa-solid fa-chevron-right" style="font-size:25px; color: #491f51"></i></a>
 					&nbsp;&nbsp;
 					<br/><br/>
 					<div class="text-center">

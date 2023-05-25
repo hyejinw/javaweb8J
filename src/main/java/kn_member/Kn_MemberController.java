@@ -79,7 +79,15 @@ public class Kn_MemberController extends HttpServlet {
 		// 이 부분 선생님이랑 같이 한 내용이랑 비교하면서 추가해야 한다. 
 		
 		else if(com.equals("/MyPage")) {
+			command = new MyPageCommand();    
+			command.execute(request, response);
 			viewPage += "/myPage.jsp";
+		}
+		// 회원 정보 수정
+		else if(com.equals("/MemModifyOk")) {
+			command = new MemModifyOkCommand();    
+			command.execute(request, response);
+			viewPage = "/include/message.jsp";
 		}
 	
 		

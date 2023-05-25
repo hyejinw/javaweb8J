@@ -325,6 +325,62 @@ public class Kn_ResvDAO {
 		
 	}
 
+	// 예약 내역 가져오기 (MyPageCommand)
+	public ArrayList<Kn_ResvVO> getResvList(String mid) {
+		ArrayList<Kn_ResvVO> vos = new ArrayList<>();
+		
+		try {
+			sql = "select *, "
+		      + " (select storeName from kn_store s where s.idx = r.storeIdx) as storeName, "
+				  + " (select menuName from kn_menu m where m.idx = r.menuIdx) as menuName " 
+		      + " from kn_reservation r where memMid = ?";
+			pstmt = conn.prepareStatement(sql);
+			pstmt.setString(1, mid);
+			rs = pstmt.executeQuery();
+			
+			while(rs.next()) {
+				Kn_ResvVO vo = new Kn_ResvVO();
+				vo.setIdx(rs.getInt("idx"));
+				vo.setMemMid(rs.getString("memMid"));
+				vo.setStoreIdx(rs.getInt("storeIdx"));
+				vo.setMenuIdx(rs.getInt("menuIdx"));
+				vo.setCouponIdx(rs.getInt("couponIdx"));
+				vo.setMenuCnt(rs.getInt("menuCnt"));
+				vo.setMenuPrice(rs.getInt("menuPrice"));
+				vo.setPickupDate(rs.getString("pickupDate"));
+				vo.setPickupOk(rs.getString("pickupOk"));
+				
+				vo.setStoreName(rs.getString("storeName"));
+				vo.setMenuName(rs.getString("menuName"));
+				
+				vos.add(vo);
+				
+			}
+		} catch (SQLException e) {
+			System.out.println("SQL 오류(getResvList) :" + e.getMessage());
+		} finally {
+			getConn.rsClose();
+		}
+		
+		return vos;
+	}
+
+	// 쿠폰 사용했으면 사용으로 업데이트
+	public void setCouponUseUpdate(String memMid, int coupon) {
+		try {
+			sql = "update kn_coupon set couponUsed = '사용', couponUsedDate=now() where memMid=? and coupon=?";
+			pstmt = conn.prepareStatement(sql);
+			pstmt.setString(1, memMid);
+			pstmt.setInt(2, coupon);
+			pstmt.executeUpdate();
+			
+		} catch (SQLException e) {
+			System.out.println("SQL 오류(setCouponUseUpdate) :" + e.getMessage());
+		} finally {
+			getConn.pstmtClose();
+		}
+	}
+
 	
 	
 	

@@ -110,6 +110,21 @@
 			  }
 			})
 		}
+		function cartChange() {
+			Swal.fire({
+				  title: '모든 예약이 재설정됩니다.\n변경하시겠습니까?',
+				  icon: 'info',
+				  showCancelButton: true,
+				  confirmButtonColor: '#ffa0c5',
+				  cancelButtonColor: '#FFDB7E',
+				  confirmButtonText: '변경',
+				  cancelButtonText: '취소'
+				}).then((result) => {
+				  if (result.value) {
+	              location.href="${ctp}/CartChange.kn_re";
+			  }
+			})
+		}
 	</script>
 </head>
 <body>

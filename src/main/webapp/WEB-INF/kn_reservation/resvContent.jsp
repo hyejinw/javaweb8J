@@ -49,7 +49,7 @@
 							<div style="font-size:1em; ">${vo.storeTel}</div><br/>
 							<div style="font-size:1em; ">
 								${fn:split(vo.storeAddress,'/')[1]}
-								<span onclick="location.href='${vo.location}';" class="location">
+								<span onclick="location.href='${vo.location}';" class="location" style="cursor: pointer">
 									&nbsp;&nbsp;&nbsp;&nbsp;[<i class="fa-solid fa-map-location-dot" style="color: #52c931;"></i>지도보기]
 								</span>
 							</div><br/>

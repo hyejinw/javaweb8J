@@ -52,7 +52,7 @@ public class Kn_MemberDAO {
 			}
 			
 		} catch (SQLException e) {
-			System.out.println("SQL 에러 : " + e.getMessage());
+			System.out.println("SQL 에러(getMidCheck) : " + e.getMessage());
 		} finally {
 			getConn.rsClose();
 		}
@@ -90,7 +90,7 @@ public class Kn_MemberDAO {
 			res = 1;
 		
 		} catch (SQLException e) {
-			System.out.println("SQL 에러 : " + e.getMessage());
+			System.out.println("SQL 에러(setJoin) : " + e.getMessage());
 		} finally {
 			getConn.pstmtClose();
 		}
@@ -109,7 +109,7 @@ public class Kn_MemberDAO {
 			pstmt.executeUpdate();
 			
 		} catch (SQLException e) {
-			System.out.println("SQL 에러asaa : " + e.getMessage());
+			System.out.println("SQL 에러(setCoupon) : " + e.getMessage());
 		} finally {
 			getConn.pstmtClose();
 		}
@@ -125,7 +125,7 @@ public class Kn_MemberDAO {
 			pstmt.executeUpdate();
 			
 		} catch (SQLException e) {
-			System.out.println("SQL 에러saa : " + e.getMessage());
+			System.out.println("SQL 에러(setTodayCntUpdate) : " + e.getMessage());
 		} finally {
 			getConn.pstmtClose();
 		}
@@ -140,11 +140,103 @@ public class Kn_MemberDAO {
  	  	pstmt.executeUpdate();
 			
 		} catch (SQLException e) {
-			System.out.println("SQL 에러sa : " + e.getMessage());
+			System.out.println("SQL 에러(setMemberTotalUpdate) : " + e.getMessage());
 		} finally {
 			getConn.pstmtClose();
 		}
 	}
+
+
+	// 총 예약 금액 구하기
+	public int getTotResvPrice(String mid) {
+		int totResvPrice = 0;
+		
+		try {
+			sql = "select sum(menuPrice) from kn_reservation where memMid = ?";
+      pstmt = conn.prepareStatement(sql);
+	  	pstmt.setString(1, mid);
+ 	  	rs = pstmt.executeQuery();
+ 	  	
+ 	  	if(rs.next()) {
+ 	  		totResvPrice = rs.getInt(1);
+ 	  	}
+			
+		} catch (SQLException e) {
+			System.out.println("SQL 에러(getTotResvPrice) : " + e.getMessage());
+		} finally {
+			getConn.rsClose();
+		}
+		return totResvPrice;
+	}
+
+
+	// 현재 쿠폰 유무 확인
+	public int getCouponCheck(String mid, int i) {
+		int res = 0;
+		
+		try {
+			sql = "select idx from kn_coupon where memMid = ? and coupon = ?";
+			pstmt = conn.prepareStatement(sql);
+			pstmt.setString(1, mid);
+			pstmt.setInt(2, i);
+			rs = pstmt.executeQuery();
+			
+			if(rs.next()) {
+				res = 1;
+			}
+			
+		} catch (SQLException e) {
+			System.out.println("SQL 에러(getCouponCheck) : " + e.getMessage());
+		} finally {
+			getConn.rsClose();
+		}
+		return res;
+	}
+
+
+	// 멤버십 업데이트
+	public void setLevelUpdate(String mid, int i) {
+		
+		try {
+			sql = "update kn_member set level=? where mid=?";
+			pstmt = conn.prepareStatement(sql);
+			pstmt.setInt(1, i);
+			pstmt.setString(2, mid);
+			pstmt.executeUpdate();
+			
+		} catch (SQLException e) {
+			System.out.println("SQL 에러(setLevelUpdate) : " + e.getMessage());
+		} finally {
+			getConn.pstmtClose();
+		}
+		
+	}
+
+
+	public int setMemModify(Kn_MemberVO vo) {
+		int res = 0;
+		
+		try {
+			sql = "update kn_member set name=?, email=?, tel=?, birthday=?, address=?, gender=? where mid=?";
+			pstmt = conn.prepareStatement(sql);
+			pstmt.setString(1, vo.getName());
+			pstmt.setString(2, vo.getEmail());
+			pstmt.setString(3, vo.getTel());
+			pstmt.setString(4, vo.getBirthday());
+			pstmt.setString(5, vo.getAddress());
+			pstmt.setString(6, vo.getGender());
+			pstmt.setString(7, vo.getMid());
+			pstmt.executeUpdate();
+			res = 1;
+			
+		} catch (SQLException e) {
+			System.out.println("SQL 에러(setMemModify) : " + e.getMessage());
+		} finally {
+			getConn.pstmtClose();
+		}
+		return res;
+	}
+
 
 
 

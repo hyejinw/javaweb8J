@@ -8,6 +8,7 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
 @SuppressWarnings("serial")
 @WebServlet("*.kn_re")
@@ -21,41 +22,53 @@ public class Kn_ReservController extends HttpServlet {
 		String com = uri.substring(uri.lastIndexOf("/"), uri.lastIndexOf("."));
 		
 		
+		// 세션이 끊겼다면 작업의 진행을 중단, 그리고 홈으로 전송!
+		HttpSession session = request.getSession();
+		int level = session.getAttribute("sLevel")==null ? 99 : (int)session.getAttribute("sLevel");
+
+		
 		if(com.equals("/Reservation")) {
 			viewPage += "/reservation.jsp";
 		}
+		
+		// 세션 끊기면 자동 홈으로 아웃
+		else if(level > 4) {
+			RequestDispatcher dispatcher = request.getRequestDispatcher("/");
+			dispatcher.forward(request, response);
+		}	
+		
 		// 예약창(매장 선택)
-		if(com.equals("/ResvContent")) {
+		else if(com.equals("/ResvContent")) {
 			command = new ResvContentCommand();
 			command.execute(request, response);
 			viewPage += "/resvContent.jsp";
 		}
 		// 예약창(날짜 선택)
-		if(com.equals("/ResvDate")) {
+		else if(com.equals("/ResvDate")) {
 			command = new ResvDateCommand();
 			command.execute(request, response);
 			viewPage += "/resvDate.jsp";
 		}
 		// 예약창(메뉴 선택)
-		if(com.equals("/ResvMenu")) {
+		else if(com.equals("/ResvMenu")) {
 			command = new ResvMenuCommand();
 			command.execute(request, response);
 			viewPage += "/resvMenu.jsp";
 		}
 		// 예약창(메뉴 검색)
-		if(com.equals("/ResvMenuSearch")) {
+		else if(com.equals("/ResvMenuSearch")) {
 			command = new ResvMenuSearchCommand();
 			command.execute(request, response);
 			viewPage += "/resvMenuSearch.jsp";
 		}
 		// 예약창(메뉴 개수 결정)
-		if(com.equals("/ResvMenuContent")) {
+		else if(com.equals("/ResvMenuContent")) {
 			command = new ResvMenuContentCommand();
 			command.execute(request, response);
 			viewPage += "/resvMenuContent.jsp";
 		}
 		// 장바구니에 넣기
-		if(com.equals("/ResvCartInput")) {
+		else if(com.equals("/ResvCartInput")) {
 			command = new ResvCartInputCommand();
 			command.execute(request, response);
 			return;
@@ -89,6 +102,12 @@ public class Kn_ReservController extends HttpServlet {
 			command = new OrderCheckCommand();
 			command.execute(request, response);
 			return;
+		}
+		// 매장 변경
+		else if(com.equals("/CartChange")) {
+			command = new CartChangeCommand();
+			command.execute(request, response);
+			viewPage = "/include/message.jsp";
 		}
 		
 		RequestDispatcher dispatcher = request.getRequestDispatcher(viewPage);

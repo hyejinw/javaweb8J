@@ -8,6 +8,7 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
 @SuppressWarnings("serial")
 @WebServlet("*.kn_menu")
@@ -20,6 +21,11 @@ public class Kn_MenuController extends HttpServlet {
 		String uri = request.getRequestURI();
 		String com = uri.substring(uri.lastIndexOf("/"), uri.lastIndexOf("."));
 		
+		// 세션이 끊겼다면 작업의 진행을 중단, 그리고 홈으로 전송!
+		HttpSession session = request.getSession();
+		int level = session.getAttribute("sLevel")==null ? 99 : (int)session.getAttribute("sLevel");
+
+		
 		// 메뉴창
 		if(com.equals("/Menu")) {
 			command = new MenuListCommand();
@@ -27,7 +33,7 @@ public class Kn_MenuController extends HttpServlet {
 			viewPage += "/menu.jsp";
 		}
 		// 메뉴 검색
-		if(com.equals("/MenuSearch")) {
+		else if(com.equals("/MenuSearch")) {
 			command = new MenuSearchCommand();
 			command.execute(request, response);
 			viewPage += "/menuSearch.jsp";
@@ -38,6 +44,12 @@ public class Kn_MenuController extends HttpServlet {
 			command.execute(request, response);
 			viewPage += "/menuContent.jsp";
 		}
+		
+		else if(level > 4) {
+			RequestDispatcher dispatcher = request.getRequestDispatcher("/");
+			dispatcher.forward(request, response);
+		}	
+		
 		
 		// 댓글 입력
 		if(com.equals("/MenuReplyInput")) {

@@ -30,6 +30,8 @@ public class OrderCheckCommand implements ReservInterface {
 		if(coupon != 0) {
 			int couponIdx = dao.getCouponIdx(memMid, coupon);
 			dao.setResvCoupon(couponIdx, storeIdx, pickupDate, menuIdx);
+			// 쿠폰 사용으로 업데이트
+			dao.setCouponUseUpdate(memMid, coupon);
 		}
 		
 		// 장바구니 비우기

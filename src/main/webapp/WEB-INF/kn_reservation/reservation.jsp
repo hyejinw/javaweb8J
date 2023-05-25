@@ -46,7 +46,7 @@
 		<div  style="padding:100px 0px">
 		  <h2><b style="color: #ffa0c5; font-family: 'TheJamsil5Bold';">RESERVATION</b></h2>
 		</div>
-		  <div  style="margin:10px 220px">
+		  <div style="margin:10px 220px">
 			  <div class="card-deck"  style="width:700px">
 			    <div class="card">
 			    	 <img class="card-img-top" src="${ctp}/images/reservation1.png" alt="Card image" style="width:100%" class="text-center">
