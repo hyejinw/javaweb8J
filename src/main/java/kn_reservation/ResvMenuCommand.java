@@ -29,7 +29,8 @@ public class ResvMenuCommand implements ReservInterface {
 		else {
 			ym = yy + "-" + mm + "-" + dd;
 		}
-		String date = ym + " " + time;
+		String date = request.getParameter("date")==null ? ym + " " + time : request.getParameter("date");
+//		String date = ym + " " + time;
 		request.setAttribute("pickupDate", date); // 예약한 날짜& 시간
 		request.setAttribute("storeIdx", idx); // 매장 고유번호
 		

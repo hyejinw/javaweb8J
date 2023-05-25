@@ -102,10 +102,10 @@
 			    <div class="navbar-nav mr-auto">
 			    
 						<div class="pill-nav" style="margin-left:50px">
-						  <a class="<c:if test="${part=='전체'}">active</c:if> mr-2" href="${ctp}/ResvMenu.kn_re?pageSize=${pageSize}&pag=1&part=전체">전체</a>
-						  <a class="<c:if test="${part=='도넛'}">active</c:if> mr-2" href="${ctp}/ResvMenu.kn_re?pageSize=${pageSize}&pag=1&part=도넛">도넛</a>
-						  <a class="<c:if test="${part=='케이크'}">active</c:if> mr-2" href="${ctp}/ResvMenu.kn_re?pageSize=${pageSize}&pag=1&part=케이크">케이크</a>
-						  <a class="<c:if test="${part=='베이커리'}">active</c:if>" href="${ctp}/ResvMenu.kn_re?pageSize=${pageSize}&pag=1&part=베이커리">베이커리</a>
+						  <a class="<c:if test="${part=='전체'}">active</c:if> mr-2" href="${ctp}/ResvMenu.kn_re?pageSize=${pageSize}&pag=1&part=전체&date=${pickupDate}&idx=${storeIdx}">전체</a>
+						  <a class="<c:if test="${part=='도넛'}">active</c:if> mr-2" href="${ctp}/ResvMenu.kn_re?pageSize=${pageSize}&pag=1&part=도넛&date=${pickupDate}&idx=${storeIdx}">도넛</a>
+						  <a class="<c:if test="${part=='케이크'}">active</c:if> mr-2" href="${ctp}/ResvMenu.kn_re?pageSize=${pageSize}&pag=1&part=케이크&date=${pickupDate}&idx=${storeIdx}">케이크</a>
+						  <a class="<c:if test="${part=='베이커리'}">active</c:if>" href="${ctp}/ResvMenu.kn_re?pageSize=${pageSize}&pag=1&part=베이커리&date=${pickupDate}&idx=${storeIdx}">베이커리</a>
 						</div>
 						
 			    </div>

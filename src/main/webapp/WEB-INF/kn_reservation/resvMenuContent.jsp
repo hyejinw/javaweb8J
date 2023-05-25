@@ -17,7 +17,7 @@
 	<style>
 		.settingBtn {
 			width:100%;
-		  max-width: 350px;
+		  max-width: 200px;
 	    padding: 15px;
 	    border-radius:500px; 
 		}
@@ -127,7 +127,8 @@
 				</div>
 			</div>
 			
-  		<button class="settingBtn mt-5" onclick="javascript:cartInputCheck('${pickupDate}','${storeIdx}','${menuIdx}', '${vo.price}')" style="background-color:#FFDB7E; font-size:1em;">주문하기</button>		
+  		<button class="settingBtn mt-5 mr-2" onclick="location.href='${ctp}/ResvMenu.kn_re?date=${pickupDate}&idx=${storeIdx}';" style="background-color:#ffa0c5; font-size:1em;">계속 담기</button>		
+  		<button class="settingBtn mt-5 ml-2" onclick="javascript:cartInputCheck('${pickupDate}','${storeIdx}','${menuIdx}', '${vo.price}')" style="background-color:#FFDB7E; font-size:1em;">주문하기</button>		
 			
 		</div>
 		

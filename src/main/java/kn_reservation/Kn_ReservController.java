@@ -72,6 +72,24 @@ public class Kn_ReservController extends HttpServlet {
 			command.execute(request, response);
 			return;
 		}
+		// 장바구니 메뉴 한 개 삭제
+		else if(com.equals("/CartMenuDel")) {
+			command = new CartMenuDelCommand();
+			command.execute(request, response);
+			return;
+		}
+		// 주문
+		else if(com.equals("/Order")) {
+			command = new OrderCommand();
+			command.execute(request, response);
+			viewPage += "/order.jsp";
+		}
+		// 결제
+		else if(com.equals("/OrderCheck")) {
+			command = new OrderCheckCommand();
+			command.execute(request, response);
+			return;
+		}
 		
 		RequestDispatcher dispatcher = request.getRequestDispatcher(viewPage);
 		dispatcher.forward(request, response);

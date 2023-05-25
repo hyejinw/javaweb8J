@@ -11,6 +11,12 @@ public class Kn_ResvVO {
 	private String pickupDate;
 	private String pickupOk;
 	
+	// 매장명
+	private String storeName;   // 이건 안 필요할 것 같다!
+	// 메뉴명
+	private String menuName;
+	
+	
 	public int getIdx() {
 		return idx;
 	}
@@ -65,10 +71,22 @@ public class Kn_ResvVO {
 	public void setPickupOk(String pickupOk) {
 		this.pickupOk = pickupOk;
 	}
+	public String getStoreName() {
+		return storeName;
+	}
+	public void setStoreName(String storeName) {
+		this.storeName = storeName;
+	}
+	public String getMenuName() {
+		return menuName;
+	}
+	public void setMenuName(String menuName) {
+		this.menuName = menuName;
+	}
 	@Override
 	public String toString() {
 		return "Kn_ResvVO [idx=" + idx + ", memMid=" + memMid + ", storeIdx=" + storeIdx + ", menuIdx=" + menuIdx
 				+ ", couponIdx=" + couponIdx + ", menuCnt=" + menuCnt + ", menuPrice=" + menuPrice + ", pickupDate="
-				+ pickupDate + ", pickupOk=" + pickupOk + "]";
+				+ pickupDate + ", pickupOk=" + pickupOk + ", storeName=" + storeName + ", menuName=" + menuName + "]";
 	}
 }

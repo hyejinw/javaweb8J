@@ -12,7 +12,6 @@
     
     if("${msg}"!="NO") {
     	alert("${msg}");
-    	/* Swal.fire('Any fool can use a computer'); */
     }
     location.href = '${url}';
   </script>

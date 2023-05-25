@@ -1,5 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/fmt" prefix="fmt" %>
 <c:set var="ctp" value="${pageContext.request.contextPath}"/>
 <!DOCTYPE html>
 <html>
@@ -36,7 +37,7 @@
 		
 		function cartDelCheck(storeName) {
 			if(storeName == "") {
-				Swal.fire('장바구니가 비었습니다.');
+				Swal.fire('장바구니가 비어있습니다.');
 				return false;
 			}
 			Swal.fire({
@@ -54,7 +55,9 @@
 	            	  url : "${ctp}/CartDel.kn_re",
 	            	  success : function(res) {
 	            		  if(res == 1) {
-	            			  Swal.fire('삭제 완료');    
+	            			  Swal.fire('삭제 완료').then(function(){
+	            				  location.reload();
+	            			  })   
 	            		  }
 	            		  else {
 	            			  Swal.fire('삭제 실패');
@@ -66,7 +69,47 @@
 			  }
 			})
 		}
+		function order(memMid) {
+			if(memMid == "") {
+				Swal.fire('장바구니가 비어있습니다.');
+				return false;
+			}
+			location.href = "${ctp}/Order.kn_re";
+		}
 			
+		function cartMenuDel(idx) {
+			Swal.fire({
+				  title: '해당 메뉴를 삭제하시겠습니까?',
+				  icon: 'info',
+				  showCancelButton: true,
+				  confirmButtonColor: '#ffa0c5',
+				  cancelButtonColor: '#FFDB7E',
+				  confirmButtonText: '삭제',
+				  cancelButtonText: '취소'
+				}).then((result) => {
+				  if (result.value) {
+	              //"삭제" 버튼을 눌렀을 때 작업할 내용을 이곳에 넣어주면 된다. 
+	              $.ajax({
+	            	  url : "${ctp}/CartMenuDel.kn_re?idx="+idx,
+	            	  success : function(res) {
+	            		  if(res == 1) {
+	            			  Swal.fire('삭제 완료').then(function(){
+	            				  location.reload(); 
+	            			  });
+	            		  }
+	            		  else {
+	            			  Swal.fire('삭제 실패').then(function(){
+	            				  location.reload(); 
+	            			  });
+
+	            		  }
+	            	  }, error : function() {
+	            		  Swal.fire('전송 실패');
+	            	  }
+	              });
+			  }
+			})
+		}
 	</script>
 </head>
 <body>
@@ -80,22 +123,35 @@
 				<span style="margin-left:40px">${vos[0].storeName}&nbsp;&nbsp;&nbsp;${vos[0].pickupDate}&nbsp;&nbsp;&nbsp;</span>
 				<c:if test="${vos[0].storeName != null}"><button class="btn btn-success" onclick="javascript:cartChange()">변경</button></c:if>
 			</div>
-			<hr style="border: solid 1px #282828; margin:10px 0px"/>
+			<c:if test="${vos[0].storeName != null}"><hr style="border: solid 1px #282828; margin:10px 0px"/></c:if>
+			<br/>
+			<c:if test="${vos[0].storeName != null}">
+				<div class="row text-center" style="margin-bottom:7px">
+					<div class="col-sm-4">메뉴명</div>
+					<div class="col-sm-3">수량</div>
+					<div class="col-sm-3">금액</div>
+					<div class="col-sm-2"></div>
+				</div>
+			</c:if>
 			<div class="row text-center" style="margin-bottom:10px">
 				<c:forEach var="vo" items="${vos}" varStatus="st">
-					<div class="row">
-						<div class="col-sm-4">${vo.menuName}</div>
-						<div class="col-sm-4">${vo.menuCnt}</div>
-						<div class="col-sm-4">${vo.menuPrice}</div>
+					<div class="col-sm-4">${vo.menuName}</div>
+					<div class="col-sm-3">${vo.menuCnt}</div>
+					<div class="col-sm-3"><fmt:formatNumber value="${vo.menuPrice}" pattern="#,###" /></div>
+					<div class="col-sm-2">
+						<a href="javascript:cartMenuDel(${vo.idx})"><i class="fa-solid fa-xmark" style="color: #008bf5; font-size:30px"></i></a>
 					</div>
 					<br/>
 				</c:forEach>
-			<hr/>
-			<c:if test="${vos[0].storeName != null}">${totMenuPrice}</c:if>
+			<br/>
 			</div>
+			<c:if test="${vos[0].storeName != null}"><hr style="border: solid 1px #282828; margin:10px 0px"/></c:if>
+			<c:if test="${vos[0].storeName != null}">
+				<div class="text-right mb-5 mr-5">결제 금액&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<fmt:formatNumber value="${totMenuPrice}" pattern="#,###" />원</div>
+			</c:if>
 			<div class="row text-center" style="margin-bottom:10px">
 				<div class="col pr-1 text-right"><button type="button" onclick="javascript:cartDelCheck('${vos[0].storeName}')" class="btn2" style="background-color:#ffa0c5; font-size: 1em; border-color:#ffa0c5; color:black">장바구니 비우기</button></div>
-				<div class="col pl-1 text-left"><button type="button" onclick="location.href='${ctp}/';" class="btn2" style="background-color:#FFDB7E; font-size: 1em; color:black">결제하기</button></div>
+				<div class="col pl-1 text-left"><button type="button" onclick="javascript:order('${vos[0].memMid}')" class="btn2" style="background-color:#FFDB7E; font-size: 1em; color:black">결제하기</button></div>
 			</div>
 		</div>
 	</div>

@@ -35,8 +35,8 @@
 			<div class="media border p-3">
 	    	<img src="${ctp}/images/kn_store/${vo.storePhoto}" alt="매장 대표 이미지" class="mr-3 mt-3 rounded-circle" style="width:50px; height:50px">
 	   		<div class="media-body">
-	   			<a href="#demo${st.count}" class="btn form-control text-left" data-toggle="collapse" style="font-size:1.2em">
-	   				<h6>${vo.storeName}&nbsp;&nbsp;&nbsp;<i class="fa-solid fa-chevron-down"></i></h6>
+	   			<a href="#demo${st.count}" class="btn form-control text-left" data-toggle="collapse" >
+	   				<span style="font-size:1.3em">${vo.storeName}&nbsp;&nbsp;&nbsp;<i class="fa-solid fa-chevron-down"></i></span>
    				</a>
 	   		</div>
 		  </div>
