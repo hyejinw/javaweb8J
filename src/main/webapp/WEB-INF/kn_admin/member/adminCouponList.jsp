@@ -63,8 +63,14 @@
   						else if(data == "3") {
 	  						return '<span>레벨2) 민트 스마일</span>'
   						}
-  						else {
+  						else if(data == "4") {
 	  						return '<span>레벨3) 퍼플 스마일</span>'
+  						}
+  						else if(data == "1") {
+	  						return '<span>매장 회원</span>'
+  						}
+  						else {
+	  						return '<span>관리자</span>'
   						}
   					}
   				},

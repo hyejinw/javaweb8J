@@ -95,7 +95,7 @@
 		    	{targets:6, width:5}
 		    ],
 		    
-		    scrollX: 100,
+/* 		    scrollX: 100, */
 		    scrollY: 500,
 		    
 		    "language": {
