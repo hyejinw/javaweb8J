@@ -34,13 +34,15 @@ public class Kn_AdminController extends HttpServlet {
 		}	
 		
 		// 관리자 창
-		else if(com.equals("/AdminMain")) {      // 보완 필요 
+		else if(com.equals("/AdminMain")) {      
 			viewPage += "/adminMain.jsp";
 		}
-		else if(com.equals("/AdminLeft")) {      // 보완 필요 
+		else if(com.equals("/AdminLeft")) {     
 			viewPage += "/adminLeft.jsp";
 		}
-		else if(com.equals("/AdminContent")) {      // 보완 필요 
+		else if(com.equals("/AdminContent")) {    
+			command = new AdminContentCommand();  
+			command.execute(request, response);
 			viewPage += "/adminContent.jsp";
 		}
 		
@@ -71,8 +73,40 @@ public class Kn_AdminController extends HttpServlet {
 			command.execute(request, response);
 			return;
 		}
-
+		// 회원 쿠폰창
+		else if(com.equals("/AdminCouponList")) {  
+			viewPage += "/member/adminCouponList.jsp";
+		}
+		// 회원 쿠폰
+		else if(com.equals("/AdminCouponListOK")) {  
+			command = new AdminCouponListOKCommand();
+			command.execute(request, response);
+			return;
+		}
+		// 회원 쿠폰
+		else if(com.equals("/AdminCouponDelOK")) {  
+			command = new AdminCouponDelOKCommand();
+			command.execute(request, response);
+			return;
+		}
+		
 		// 2. 예약 관리
+		// 예약 조회창
+		else if(com.equals("/AdminResvList")) { 
+			viewPage += "/resv/adminResvList.jsp";
+		}
+		// 예약 조회
+		else if(com.equals("/AdminResvListOK")) {   
+			command = new AdminResvListOKCommand();  
+			command.execute(request, response);
+			return;
+		}
+		// 예약 삭제
+		else if(com.equals("/AdminResvDelOK")) {   
+			command = new AdminResvDelOKCommand();  
+			command.execute(request, response);
+			return;
+		}
 		
 		
 		
@@ -125,6 +159,23 @@ public class Kn_AdminController extends HttpServlet {
 			command.execute(request, response);
 			viewPage = "/include/message.jsp";
 		}
+		// 메뉴 댓글창
+		else if(com.equals("/AdminMenuReply")) {  
+			viewPage += "/menu/adminMenuReply.jsp";
+		}
+		// 메뉴 댓글
+		else if(com.equals("/AdminMenuReplyOK")) {
+			command = new AdminMenuReplyOKCommand();  
+			command.execute(request, response);
+			return;
+		}		
+		// 메뉴 삭제
+		else if(com.equals("/AdminMenuReplyDelOK")) {
+			command = new AdminMenuReplyDelOKCommand();  
+			command.execute(request, response);
+			return;
+		}		
+
 		
 	
 		// 4. 매장 관리
@@ -150,6 +201,22 @@ public class Kn_AdminController extends HttpServlet {
 			command.execute(request, response);
 			return;
 		}
+		// 매장 댓글창
+		else if(com.equals("/AdminStoreReply")) {  
+			viewPage += "/store/adminStoreReply.jsp";
+		}
+		// 매장 댓글
+		else if(com.equals("/AdminStoreReplyOK")) {
+			command = new AdminStoreReplyOKCommand();  
+			command.execute(request, response);
+			return;
+		}		
+		// 매장 댓글 삭제
+		else if(com.equals("/AdminStoreReplyDelOK")) {
+			command = new AdminStoreReplyDelOKCommand();  
+			command.execute(request, response);
+			return;
+		}		
 		
 		
 		RequestDispatcher dispatcher = request.getRequestDispatcher(viewPage);

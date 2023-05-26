@@ -10,6 +10,10 @@ public class Kn_CouponVO {
 	private String couponUsed;
 	private String couponUsedDate;
 	
+	// 관리자창에서 사용
+	private int level;
+	private String levelExpireDate;
+	
 	
 	public int getIdx() {
 		return idx;
@@ -59,10 +63,23 @@ public class Kn_CouponVO {
 	public void setCouponUsedDate(String couponUsedDate) {
 		this.couponUsedDate = couponUsedDate;
 	}
+	public int getLevel() {
+		return level;
+	}
+	public void setLevel(int level) {
+		this.level = level;
+	}
+	public String getLevelExpireDate() {
+		return levelExpireDate;
+	}
+	public void setLevelExpireDate(String levelExpireDate) {
+		this.levelExpireDate = levelExpireDate;
+	}
 	@Override
 	public String toString() {
 		return "Kn_CouponVO [idx=" + idx + ", memMid=" + memMid + ", coupon=" + coupon + ", couponStartDate="
 				+ couponStartDate + ", couponExpireDate=" + couponExpireDate + ", couponDel=" + couponDel + ", couponUsed="
-				+ couponUsed + ", couponUsedDate=" + couponUsedDate + "]";
+				+ couponUsed + ", couponUsedDate=" + couponUsedDate + ", level=" + level + ", levelExpireDate="
+				+ levelExpireDate + "]";
 	}
 }

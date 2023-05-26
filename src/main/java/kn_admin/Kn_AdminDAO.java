@@ -8,7 +8,11 @@ import java.util.ArrayList;
 
 import conn.GetConn;
 import kn_member.Kn_MemberVO;
+import kn_menu.Kn_MenuReplyVO;
 import kn_menu.Kn_MenuVO;
+import kn_reservation.Kn_CouponVO;
+import kn_reservation.Kn_ResvVO;
+import kn_store.Kn_StoreReplyVO;
 import kn_store.Kn_StoreVO;
 
 public class Kn_AdminDAO {
@@ -342,5 +346,394 @@ public class Kn_AdminDAO {
 		return res;
 	}
 
+	// 쿠폰 전체 리스트 가져오기 (AdminCouponList)
+	public ArrayList<Kn_CouponVO> getCouponList() {
+ArrayList<Kn_CouponVO> vos = new ArrayList<>();
+		
+		try {
+			sql = "select *, "
+					+ "(select level from kn_member where mid = c.memMid) as level, "
+					+ "(select levelExpireDate from kn_member where mid = c.memMid) as levelExpireDate "
+					+ " from kn_coupon c";
+			
+			pstmt = conn.prepareStatement(sql);
+			rs = pstmt.executeQuery();
+			
+			while(rs.next()) {
+				Kn_CouponVO vo = new Kn_CouponVO();
+				vo.setIdx(rs.getInt("idx"));
+				vo.setMemMid(rs.getString("memMid"));
+				vo.setCoupon(rs.getInt("coupon"));
+				vo.setCouponStartDate(rs.getString("couponStartDate"));
+				vo.setCouponExpireDate(rs.getString("couponExpireDate"));
+				vo.setCouponDel(rs.getString("couponDel"));
+				vo.setCouponUsed(rs.getString("couponUsed"));
+				vo.setCouponUsedDate(rs.getString("couponUsedDate"));
+				
+				// 관리자창 확인용
+				vo.setLevel(rs.getInt("level"));
+				vo.setLevelExpireDate(rs.getString("levelExpireDate"));
+				
+				vos.add(vo);
+			}
+		} catch (SQLException e) {
+			System.out.println("SQL 에러(getCouponList) : " + e.getMessage());
+		} finally {
+			getConn.rsClose();
+		}
+		return vos;
+	}
 
+	// 쿠폰 삭제 처리
+	public String setCouponDelOk(int idx) {
+		String res = "0";
+		
+		try {
+			sql = "delete from kn_coupon where idx = ?";
+			pstmt = conn.prepareStatement(sql);
+			pstmt.setInt(1, idx);
+			pstmt.executeUpdate();
+			res= "1";
+			
+		} catch (SQLException e) {
+			System.out.println("SQL오류(setCouponDelOk) : " + e.getMessage());
+		} finally {
+			getConn.pstmtClose();
+		}
+		
+		return res;
+	}
+
+	// 총 회원 수 구하기 (AdminContentCommand)
+	public int getMemNum() {
+		int getMemNum = 0;
+		
+		try {
+			sql = "select count(*) from kn_member";
+			pstmt = conn.prepareStatement(sql);
+			rs = pstmt.executeQuery();
+			
+			if(rs.next()) {
+				getMemNum = rs.getInt(1);
+			}
+		} catch (SQLException e) {
+			System.out.println("SQL오류(getMemNum) : " + e.getMessage());
+		} finally {
+			getConn.rsClose();
+		}
+		return getMemNum;
+	}
+
+	// 총 예약 수 구하기 (AdminContentCommand)
+	public int getResvNum() {
+		int resvNum = 0;
+		
+		try {
+			sql = "select count(*) from kn_reservation";
+			pstmt = conn.prepareStatement(sql);
+			rs = pstmt.executeQuery();
+			
+			if(rs.next()) {
+				resvNum = rs.getInt(1);
+			}
+		} catch (SQLException e) {
+			System.out.println("SQL오류(getResvNum) : " + e.getMessage());
+		} finally {
+			getConn.rsClose();
+		}
+		return resvNum;
+	}
+
+	// 총 매장 수 구하기 (AdminContentCommand)
+	public int getStoreNum() {
+		int storeNum = 0;
+		
+		try {
+			sql = "select count(*) from kn_store";
+			pstmt = conn.prepareStatement(sql);
+			rs = pstmt.executeQuery();
+			
+			if(rs.next()) {
+				storeNum = rs.getInt(1);
+			}
+		} catch (SQLException e) {
+			System.out.println("SQL오류(getStoreNum) : " + e.getMessage());
+		} finally {
+			getConn.rsClose();
+		}
+		return storeNum;
+	}
+
+	// 총 메뉴 수 구하기 (AdminContentCommand)
+	public int getMenuNum() {
+		int menuNum = 0;
+		
+		try {
+			sql = "select count(*) from kn_menu";
+			pstmt = conn.prepareStatement(sql);
+			rs = pstmt.executeQuery();
+			
+			if(rs.next()) {
+				menuNum = rs.getInt(1);
+			}
+		} catch (SQLException e) {
+			System.out.println("SQL오류(getMenuNum) : " + e.getMessage());
+		} finally {
+			getConn.rsClose();
+		}
+		return menuNum;
+	}
+
+	// 총 메뉴 댓글 수 구하기 (AdminContentCommand)
+	public int getMenuReplyNum() {
+		int menuReplyNum = 0;
+		
+		try {
+			sql = "select count(*) from kn_menuReply";
+			pstmt = conn.prepareStatement(sql);
+			rs = pstmt.executeQuery();
+			
+			if(rs.next()) {
+				menuReplyNum = rs.getInt(1);
+			}
+		} catch (SQLException e) {
+			System.out.println("SQL오류(getMenuReplyNum) : " + e.getMessage());
+		} finally {
+			getConn.rsClose();
+		}
+		return menuReplyNum;
+	}
+
+	// 총 매장 댓글 수 구하기 (AdminContentCommand)
+	public int getStoreReplyNum() {
+		int storeReplyNum = 0;
+		
+		try {
+			sql = "select count(*) from kn_storeReply";
+			pstmt = conn.prepareStatement(sql);
+			rs = pstmt.executeQuery();
+			
+			if(rs.next()) {
+				storeReplyNum = rs.getInt(1);
+			}
+		} catch (SQLException e) {
+			System.out.println("SQL오류(getStoreReplyNum) : " + e.getMessage());
+		} finally {
+			getConn.rsClose();
+		}
+		return storeReplyNum;
+	}
+
+	// 신규 회원
+	public ArrayList<Kn_MemberVO> getStatMemberList() {
+		ArrayList<Kn_MemberVO> vos = new ArrayList<>();
+		
+		try {
+			sql = "select * from kn_member order by idx desc limit 5";
+			pstmt = conn.prepareStatement(sql);
+			rs = pstmt.executeQuery();
+			
+			while(rs.next()) {
+				vo = new Kn_MemberVO();
+				vo.setIdx(rs.getInt("idx"));
+				vo.setMid(rs.getString("mid"));
+				vo.setMemType(rs.getString("memType"));
+				vo.setFirstVisit(rs.getString("firstVisit"));
+				
+				vos.add(vo);
+			}
+		} catch (SQLException e) {
+			System.out.println("SQL 에러(getStatMemberList) : " + e.getMessage());
+		} finally {
+			getConn.rsClose();
+		}
+		return vos;
+	}
+
+	// 신규 예약
+	public ArrayList<Kn_ResvVO> getStatResvList() {
+		ArrayList<Kn_ResvVO> vos = new ArrayList<>();
+		
+		try {
+			sql = "select *, "
+		      + " (select storeName from kn_store s where s.idx = r.storeIdx) as storeName, "
+				  + " (select menuName from kn_menu m where m.idx = r.menuIdx) as menuName " 
+		      + " from kn_reservation r order by idx desc limit 5";
+			pstmt = conn.prepareStatement(sql);
+			rs = pstmt.executeQuery();
+			
+			while(rs.next()) {
+				Kn_ResvVO vo = new Kn_ResvVO();
+				vo.setIdx(rs.getInt("idx"));
+				vo.setMemMid(rs.getString("memMid"));
+				vo.setPickupDate(rs.getString("pickupDate"));
+				vo.setPickupOk(rs.getString("pickupOk"));
+				
+				vo.setStoreName(rs.getString("storeName"));
+				vo.setMenuName(rs.getString("menuName"));
+				
+				vos.add(vo);
+				
+			}
+		} catch (SQLException e) {
+			System.out.println("SQL 오류(getStatResvList) :" + e.getMessage());
+		} finally {
+			getConn.rsClose();
+		}
+		
+		return vos;
+	}
+
+	// 신규 매장
+	public ArrayList<Kn_StoreVO> getStatStoreList() {
+		ArrayList<Kn_StoreVO> vos = new ArrayList<>();
+		
+		try {
+			sql = "select * from kn_store order by idx desc limit 5";
+			pstmt = conn.prepareStatement(sql);
+			rs = pstmt.executeQuery();
+			
+			while(rs.next()) {
+				Kn_StoreVO vo = new Kn_StoreVO();
+				vo.setIdx(rs.getInt("idx"));
+				vo.setStoreName(rs.getString("storeName"));
+				vo.setStoreTel(rs.getString("storeTel"));
+				vo.setStoreRate(rs.getString("storeRate"));
+				
+				vos.add(vo);
+			}
+		} catch (SQLException e) {
+			System.out.println("SQL 에러(getStatStoreList) : " + e.getMessage());
+		} finally {
+			getConn.rsClose();
+		}
+		return vos;
+	}
+
+	// 예약 리스트 (AdminResvListOKCommand)
+	public ArrayList<Kn_ResvVO> getResvList() {
+		ArrayList<Kn_ResvVO> vos = new ArrayList<>();
+		
+		try {
+			sql = "select *, "
+		      + " (select storeName from kn_store s where s.idx = r.storeIdx) as storeName, "
+				  + " (select menuName from kn_menu m where m.idx = r.menuIdx) as menuName " 
+		      + " from kn_reservation r";
+			pstmt = conn.prepareStatement(sql);
+			rs = pstmt.executeQuery();
+			
+			while(rs.next()) {
+				Kn_ResvVO vo = new Kn_ResvVO();
+				vo.setIdx(rs.getInt("idx"));
+				vo.setMemMid(rs.getString("memMid"));
+				vo.setStoreIdx(rs.getInt("storeIdx"));
+				vo.setMenuIdx(rs.getInt("menuIdx"));
+				vo.setCouponIdx(rs.getInt("couponIdx"));
+				vo.setMenuCnt(rs.getInt("menuCnt"));
+				vo.setMenuPrice(rs.getInt("menuPrice"));
+				vo.setPickupDate(rs.getString("pickupDate"));
+				vo.setPickupOk(rs.getString("pickupOk"));
+				
+				vo.setStoreName(rs.getString("storeName"));
+				vo.setMenuName(rs.getString("menuName"));
+				
+				vos.add(vo);
+				
+			}
+		} catch (SQLException e) {
+			System.out.println("SQL 오류(getResvList) :" + e.getMessage());
+		} finally {
+			getConn.rsClose();
+		}
+		
+		return vos;
+	}
+
+	// 예약 삭제 (AdminResvDelOk)
+	public String setResvDelOk(int idx) {
+		String res = "0";
+		
+		try {
+			sql = "delete from kn_reservation where idx = ?";
+			pstmt = conn.prepareStatement(sql);
+			pstmt.setInt(1, idx);
+			pstmt.executeUpdate();
+			res= "1";
+			
+		} catch (SQLException e) {
+			System.out.println("SQL오류(setResvDelOk) : " + e.getMessage());
+		} finally {
+			getConn.pstmtClose();
+		}
+		
+		return res;
+	}
+
+	// 메뉴 댓글 리스트 (AdminMenuReplyOKCommand)
+	public ArrayList<Kn_MenuReplyVO> getMenuReplyList() {
+		ArrayList<Kn_MenuReplyVO> replyVos = new ArrayList<>();
+		 
+		try {
+			sql = "select * from kn_menuReply";
+			pstmt = conn.prepareStatement(sql);
+			rs = pstmt.executeQuery();
+			
+			while(rs.next()) {
+				Kn_MenuReplyVO replyVo = new Kn_MenuReplyVO();
+				replyVo.setIdx(rs.getInt("idx"));
+				replyVo.setMenuIdx(rs.getInt("menuIdx"));
+				replyVo.setMemMid(rs.getString("memMid"));
+				replyVo.setM_ReplyContent(rs.getString("m_ReplyContent"));
+				replyVo.setM_ReplyRate(rs.getInt("m_ReplyRate"));
+				replyVo.setM_ReplyGood(rs.getInt("m_ReplyGood"));
+				replyVo.setM_ReplyPhoto(rs.getString("m_ReplyPhoto"));
+				replyVo.setM_ReplyDate(rs.getString("m_ReplyDate"));
+				replyVo.setM_ReplyHostIp(rs.getString("m_ReplyHostIp"));
+				
+				replyVos.add(replyVo);
+			}
+			
+		} catch (SQLException e) {
+			System.out.println("SQL 오류(getMenuReplyList) : " + e.getMessage());
+		} finally {
+			getConn.rsClose();
+		}
+		return replyVos;
+	}
+
+	// 매장 댓글 리스트 (AdminStoreReplyOKCommand)	
+	public ArrayList<Kn_StoreReplyVO> getStoreReplyList() {
+		ArrayList<Kn_StoreReplyVO> replyVos = new ArrayList<>();
+		
+		try {
+			sql = "select * from kn_storeReply";
+			pstmt = conn.prepareStatement(sql);
+			rs = pstmt.executeQuery();
+			
+			while(rs.next()) {
+				Kn_StoreReplyVO replyVo = new Kn_StoreReplyVO();
+				replyVo.setIdx(rs.getInt("idx"));
+				replyVo.setStoreIdx(rs.getInt("storeIdx"));
+				replyVo.setMemMid(rs.getString("memMid"));
+				replyVo.setS_ReplyContent(rs.getString("s_ReplyContent"));
+				replyVo.setS_ReplyRate(rs.getInt("s_ReplyRate"));
+				replyVo.setS_ReplyGood(rs.getInt("s_ReplyGood"));
+				replyVo.setS_ReplyPhoto(rs.getString("s_ReplyPhoto"));
+				replyVo.setS_ReplyDate(rs.getString("s_ReplyDate"));
+				replyVo.setS_ReplyHostIp(rs.getString("s_ReplyHostIp"));
+				
+				replyVos.add(replyVo);
+			}
+			
+		} catch (SQLException e) {
+			System.out.println("SQL 오류(getStoreReplyList) : " + e.getMessage());
+		} finally {
+			getConn.rsClose();
+		}
+		return replyVos;
+	}
+	
+	
 }
+
+

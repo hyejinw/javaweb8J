@@ -44,7 +44,7 @@
         <div class="card-body">
           <a href="${ctp}/AdminMemList.kn_ad" target="adminContent">회원 조회</a><hr/>
           <a href="${ctp}/AdminMemModify.kn_ad" target="adminContent">회원 수정</a><hr/>
-          <a href="${ctp}/" target="adminContent">쿠폰 관리</a>
+          <a href="${ctp}/AdminCouponList.kn_ad" target="adminContent">쿠폰 관리</a>
         </div>
       </div>
     </div>
@@ -56,7 +56,7 @@
       </div>
       <div id="collapseTwo" class="collapse" data-parent="#accordion">
         <div class="card-body">
-          <a href="${ctp}/AdminMemList.kn_ad" target="adminContent">예약 조회</a>
+          <a href="${ctp}/AdminResvList.kn_ad" target="adminContent">예약 조회</a>
         </div>
       </div>
     </div>
@@ -71,7 +71,7 @@
           <a href="${ctp}/AdminMenuList.kn_ad" target="adminContent">메뉴 조회</a><hr/>
           <a href="${ctp}/AdminMenuModify.kn_ad" target="adminContent">메뉴 수정</a><hr/>
           <a href="${ctp}/AdminMenuInsert.kn_ad" target="adminContent">메뉴 등록</a><hr/>
-          <a href="${ctp}/" target="adminContent">메뉴 댓글 관리</a>
+          <a href="${ctp}/AdminMenuReply.kn_ad" target="adminContent">메뉴 댓글 관리</a>
         </div>
       </div>
     </div>
@@ -83,7 +83,8 @@
       </div>
       <div id="collapseFour" class="collapse" data-parent="#accordion">
         <div class="card-body">
-          <a href="${ctp}/AdminStoreList.kn_ad" target="adminContent">매장 조회</a>
+          <a href="${ctp}/AdminStoreList.kn_ad" target="adminContent">매장 조회</a><hr/>
+          <a href="${ctp}/AdminStoreReply.kn_ad" target="adminContent">매장 댓글 관리</a>
         </div>
       </div>
     </div>

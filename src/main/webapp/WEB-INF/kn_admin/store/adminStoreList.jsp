@@ -61,8 +61,8 @@
 	        {data: "storeTel"},
 	        {data: "storeAddress"},
 	        {data: "storePhoto"},
-	        {data: "location"},
 	        {data: "opHour"},
+	        {data: "location"},
 	        {data: "storeMenu" },
 	        {data: "storeRate"},
 	        {data: "storeModify"},
@@ -92,6 +92,7 @@
 		    
 		    columnDefs: [
 		    	{targets:0, width:5},
+		    	{targets:6, width:5}
 		    ],
 		    
 		    scrollX: 100,
@@ -248,8 +249,8 @@
 					<th class="text-center">전화번호</th>
 					<th class="text-center">주소</th>
 					<th class="text-center">매장 사진</th>
-					<th class="text-center">지도</th>
 					<th class="text-center">영업시간</th>
+					<th class="text-center">지도</th>
 					<th class="text-center">가능 메뉴</th>
 					<th class="text-center">총 평점</th>
 					<th class="text-center">수정 중 유무</th>
