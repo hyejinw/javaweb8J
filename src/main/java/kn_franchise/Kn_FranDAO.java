@@ -7,7 +7,6 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 
 import conn.GetConn;
-import kn_member.Kn_MemberVO;
 import kn_menu.Kn_MenuVO;
 import kn_reservation.Kn_ResvVO;
 import kn_store.Kn_StoreReplyVO;

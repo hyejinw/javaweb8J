@@ -4,7 +4,6 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
-import java.util.ArrayList;
 
 import conn.GetConn;
 
@@ -274,6 +273,27 @@ public class Kn_MemberDAO {
 			getConn.pstmtClose();
 		}
 		return res;
+	}
+
+	// 1개월 전에 탈퇴한 회원 삭제 (LoginOkCommand)
+	public void setDeletedMem() {
+		
+		try {
+			sql = "delete from kn_member where lastVisit <= date_add(now(), interval -1 month) and memberDel = 'OK'";
+			pstmt = conn.prepareStatement(sql);
+			pstmt.executeUpdate();
+			
+		} catch (SQLException e) {
+			System.out.println("SQL 에러(setDeletedMem) : " + e.getMessage());
+		} finally {
+			getConn.pstmtClose();
+		}
+	}
+
+	// 생일 쿠폰 발급
+	public void setBirthdayCoupon() {
+		// TODO Auto-generated method stub
+		
 	}
 
 

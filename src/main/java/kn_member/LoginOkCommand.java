@@ -2,6 +2,7 @@ package kn_member;
 
 import java.io.IOException;
 import java.text.SimpleDateFormat;
+import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Date;
 
@@ -31,8 +32,6 @@ public class LoginOkCommand implements MemInterface {
 		SecurityUtil security = new SecurityUtil();
 		pwd = security.encryptSHA256(pwd);
 		
-		System.out.println("로그인 pwd : " + pwd);
-		
 		
 		// 진짜 아이디가 없거나, 1개월 전에 탈퇴한 회원일 때
 		if (vo.getMid() == null || vo.getMemberDel().equals("OK")) {
@@ -45,6 +44,15 @@ public class LoginOkCommand implements MemInterface {
 			request.setAttribute("url", request.getContextPath() + "/Login.kn_mem");
 			return;
 		}
+		
+		// 1개월 전에 탈퇴한 회원이 있는지 확인 후, 정말 탈퇴 처리
+		dao.setDeletedMem();
+		
+		// 생일인 회원, 생일 쿠폰 발급 
+		int res = 0;
+		
+		// 만료 날짜 지난 쿠폰 삭제처리(? 어떻게 할 건지 결정!!)
+		
 		
 		// 로그인 성공
 		// 1. 세션 처리
@@ -61,9 +69,9 @@ public class LoginOkCommand implements MemInterface {
 		
 
 		Calendar couponExpired = Calendar.getInstance();
-		SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
 		
-		// 쿠폰 만료 날짜 계산 (3개월 후)
+		// 쿠폰 만료 날짜 계산 (3개월 후)  => sql 문으로 처리하는 게 더 좋다.
+		SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
 		couponExpired.add(couponExpired.MONTH, +3);
 		String date = sdf.format(couponExpired.getTime());
 
@@ -76,7 +84,6 @@ public class LoginOkCommand implements MemInterface {
 		// 1-2. 회원 멤버십 업데이트 
 		// 총 예약 금액 구하기
 		int totResvPrice = dao.getTotResvPrice(mid);
-		int res = 0;
 		
 		if(totResvPrice > 100000 && vo.getLevel() == 2) {
 			// 현재 쿠폰 유무 확인  --> 멤버십 유지 기간 동안, 관리자가 쿠폰 삭제하지 못함.
@@ -94,6 +101,10 @@ public class LoginOkCommand implements MemInterface {
 				dao.setLevelUpdate(mid, 4);
 			}
 		}
+		
+
+		
+		
 		
 		
 
