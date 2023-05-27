@@ -44,8 +44,7 @@
         <div class="card-body">
           <a href="${ctp}/FranInfoModify.kn_fr" target="franContent">매장 정보 수정</a><hr/>
           <a href="${ctp}/FranStore.kn_fr" target="franContent">매장 조회</a><hr/>
-          <a href="${ctp}/" target="franContent">댓글 조회</a><hr/>
-          <a href="${ctp}/" target="franContent">쿠폰 관리</a>
+          <a href="${ctp}/FranStoreReply.kn_fr" target="franContent">댓글 조회</a>
         </div>
       </div>
     </div>
@@ -57,7 +56,7 @@
       </div>
       <div id="collapseTwo" class="collapse" data-parent="#accordion">
         <div class="card-body">
-          <a href="${ctp}/" target="franContent">예약 조회</a>
+          <a href="${ctp}/FranResvList.kn_fr" target="franContent">예약 조회</a>
         </div>
       </div>
     </div>

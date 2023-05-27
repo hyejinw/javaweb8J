@@ -154,11 +154,6 @@
 	    $('#couponTable_filter').prepend('<input type="text" id="toDate" placeholder="yyyy-MM-dd" style="width:150px; border-radius: 20px;">');
 	    $('#couponTable_filter').prepend('<input type="text" id="fromDate" placeholder="yyyy-MM-dd" style="width:150px; border-radius: 20px;"> ~ ');
 
-/*      $('.dataTables_filter input').unbind().bind('keyup', function () {
-	        var colIndex = document.querySelector('#select').selectedIndex;
-	        table.column(colIndex).search(this.value).draw();
-	    }); */ 
-	    
 		});
 
 		function couponDel() {

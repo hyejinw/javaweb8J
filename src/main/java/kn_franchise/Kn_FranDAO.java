@@ -9,6 +9,8 @@ import java.util.ArrayList;
 import conn.GetConn;
 import kn_member.Kn_MemberVO;
 import kn_menu.Kn_MenuVO;
+import kn_reservation.Kn_ResvVO;
+import kn_store.Kn_StoreReplyVO;
 import kn_store.Kn_StoreVO;
 
 public class Kn_FranDAO {
@@ -148,7 +150,124 @@ public class Kn_FranDAO {
 		}
 		return res;
 	}
+	
+	
+	// 매장 알아내기 (FranStoreReplyOKCommand)	
+	public int getStoreIdx(int memIdx) {
+		int storeIdx = 0;
+		
+		try {
+			sql = "select idx from kn_store where memIdx = ?";
+			pstmt = conn.prepareStatement(sql);
+			pstmt.setInt(1, memIdx);
+			rs = pstmt.executeQuery();		
+			
+			if(rs.next()) {
+				storeIdx = rs.getInt(1);
+			}
+			
+		} catch (SQLException e) {
+			System.out.println("SQL 오류(getStoreIdx) : " + e.getMessage());
+		} finally {
+			getConn.rsClose();
+		}
+		return storeIdx;
+	}
+	
 
+	// 매장 댓글 리스트 (FranStoreReplyOKCommand)	
+	public ArrayList<Kn_StoreReplyVO> getStoreReplyList(int storeIdx) {
+		ArrayList<Kn_StoreReplyVO> replyVos = new ArrayList<>();
+		
+		try {
+			sql = "select * from kn_storeReply where storeIdx = ?";
+			pstmt = conn.prepareStatement(sql);
+			pstmt.setInt(1, storeIdx);
+			rs = pstmt.executeQuery();
+			
+			while(rs.next()) {
+				Kn_StoreReplyVO replyVo = new Kn_StoreReplyVO();
+				replyVo.setIdx(rs.getInt("idx"));
+				replyVo.setStoreIdx(rs.getInt("storeIdx"));
+				replyVo.setMemMid(rs.getString("memMid"));
+				replyVo.setS_ReplyContent(rs.getString("s_ReplyContent"));
+				replyVo.setS_ReplyRate(rs.getInt("s_ReplyRate"));
+				replyVo.setS_ReplyGood(rs.getInt("s_ReplyGood"));
+				replyVo.setS_ReplyPhoto(rs.getString("s_ReplyPhoto"));
+				replyVo.setS_ReplyDate(rs.getString("s_ReplyDate"));
+				replyVo.setS_ReplyHostIp(rs.getString("s_ReplyHostIp"));
+				
+				replyVos.add(replyVo);
+			}
+			
+		} catch (SQLException e) {
+			System.out.println("SQL 오류(getStoreReplyList) : " + e.getMessage());
+		} finally {
+			getConn.rsClose();
+		}
+		return replyVos;
+	}
+
+	// 매장 예약 리스트 (FranResvListOkCommand)
+	public ArrayList<Kn_ResvVO> getResvList(int storeIdx) {
+		ArrayList<Kn_ResvVO> vos = new ArrayList<>();
+		
+		try {
+			sql = "select *, "
+		      + " (select storeName from kn_store s where s.idx = r.storeIdx) as storeName, "
+				  + " (select menuName from kn_menu m where m.idx = r.menuIdx) as menuName " 
+		      + " from kn_reservation r where storeIdx = ?";
+			pstmt = conn.prepareStatement(sql);
+			pstmt.setInt(1, storeIdx);
+			rs = pstmt.executeQuery();
+			
+			while(rs.next()) {
+				Kn_ResvVO vo = new Kn_ResvVO();
+				vo.setIdx(rs.getInt("idx"));
+				vo.setMemMid(rs.getString("memMid"));
+				vo.setStoreIdx(rs.getInt("storeIdx"));
+				vo.setMenuIdx(rs.getInt("menuIdx"));
+				vo.setCouponIdx(rs.getInt("couponIdx"));
+				vo.setMenuCnt(rs.getInt("menuCnt"));
+				vo.setMenuPrice(rs.getInt("menuPrice"));
+				vo.setPickupDate(rs.getString("pickupDate"));
+				vo.setPickupOk(rs.getString("pickupOk"));
+				
+				vo.setStoreName(rs.getString("storeName"));
+				vo.setMenuName(rs.getString("menuName"));
+				
+				vos.add(vo);
+				
+			}
+		} catch (SQLException e) {
+			System.out.println("SQL 오류(getResvList) :" + e.getMessage());
+		} finally {
+			getConn.rsClose();
+		}
+		
+		return vos;
+	}
+
+	// 매장 픽업 승인
+	public String setResvOk(int idx) {
+		String res = "0";
+		
+		try {
+			sql = "update kn_reservation set pickupOk='OK', pickupDate=now() where idx = ?";
+			pstmt = conn.prepareStatement(sql);
+			pstmt.setInt(1, idx);
+			pstmt.executeUpdate();
+			res= "1";
+			
+		} catch (SQLException e) {
+			System.out.println("SQL오류(setResvOk) : " + e.getMessage());
+		} finally {
+			getConn.pstmtClose();
+		}
+		
+		return res;
+	}
+	
 	
 
 

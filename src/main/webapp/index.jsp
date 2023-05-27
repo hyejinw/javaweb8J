@@ -89,9 +89,9 @@
 			    <p style="font-size: 2em; color: #c3c3c3;">3,900</p>
 				</div>
 				<div class="col-xl-8 float-right" style="margin:40px 0px">
-					<a href="#"><img src="https://img-app.knotted-order.com/products/4/4?1680578597" class="img rounded-circle"/></a>&nbsp;
-					<a href="#"><img src="https://img-app.knotted-order.com/products/5/5?1680578607" class="img rounded-circle"/></a>&nbsp;
-				  <a href="#"><img src="https://img-app.knotted-order.com/products/6/6?1680578640" class="img rounded-circle" /></a>
+					<a href="#"><img src="${ctp}/images/mainDonut1.png" class="img rounded-circle"/></a>&nbsp;
+					<a href="#"><img src="${ctp}/images/mainDonut2.png" class="img rounded-circle"/></a>&nbsp;
+				  <a href="#"><img src="${ctp}/images/mainDonut3.png" class="img rounded-circle" /></a>
 				</div>
 			</div>
 		</div>
@@ -112,18 +112,18 @@
 				<div class="col-xl-12 text-center font-weight-bolder" style="margin:0px 0px 30px; color: #ffa0c5; font-size:1.6em">INSTAGRAM</div>
 			</div>
 			<div class="row text-center">
-				<a href="#"><img src="https://img-app.knotted-order.com/instagrams/17984167462942447" class="img3" /></a>
-				<a href="#"><img src="https://img-app.knotted-order.com/instagrams/18258742723121225" class="img3" /></a>
-				<a href="#"><img src="https://img-app.knotted-order.com/instagrams/18001730059636001" class="img3" /></a>
-				<a href="#"><img src="https://img-app.knotted-order.com/instagrams/18274670851119634" class="img3" /></a>
-				<a href="#"><img src="https://img-app.knotted-order.com/instagrams/17975742904963749" class="img3" /></a>
-				<a href="#"><img src="https://img-app.knotted-order.com/instagrams/17949954848372632" class="img3" /></a>
-				<a href="#"><img src="https://img-app.knotted-order.com/instagrams/17989225315867384" class="img3" /></a>
-				<a href="#"><img src="https://img-app.knotted-order.com/instagrams/17971453247284016" class="img3" /></a>
-				<a href="#"><img src="https://img-app.knotted-order.com/instagrams/17845502108950082" class="img3" /></a>
-				<a href="#"><img src="https://img-app.knotted-order.com/instagrams/17998715176606469" class="img3" /></a>
-				<a href="#"><img src="https://img-app.knotted-order.com/instagrams/17977321552897351" class="img3" /></a>
-				<a href="#"><img src="https://img-app.knotted-order.com/instagrams/17867090885865079" class="img3" /></a>
+				<a href="https://www.instagram.com/cafeknotted/"><img src="${ctp}/images/instagram1.png" class="img3" /></a>
+				<a href="https://www.instagram.com/cafeknotted/"><img src="${ctp}/images/instagram2.png" class="img3" /></a>
+				<a href="https://www.instagram.com/cafeknotted/"><img src="${ctp}/images/instagram3.png" class="img3" /></a>
+				<a href="https://www.instagram.com/cafeknotted/"><img src="${ctp}/images/instagram4.png" class="img3" /></a>
+				<a href="https://www.instagram.com/cafeknotted/"><img src="${ctp}/images/instagram5.png" class="img3" /></a>
+				<a href="https://www.instagram.com/cafeknotted/"><img src="${ctp}/images/instagram6.png" class="img3" /></a>
+				<a href="https://www.instagram.com/cafeknotted/"><img src="${ctp}/images/instagram7.png" class="img3" /></a>
+				<a href="https://www.instagram.com/cafeknotted/"><img src="${ctp}/images/instagram8.png" class="img3" /></a>
+				<a href="https://www.instagram.com/cafeknotted/"><img src="${ctp}/images/instagram9.png" class="img3" /></a>
+				<a href="https://www.instagram.com/cafeknotted/"><img src="${ctp}/images/instagram10.png" class="img3" /></a>
+				<a href="https://www.instagram.com/cafeknotted/"><img src="${ctp}/images/instagram11.png" class="img3" /></a>
+				<a href="https://www.instagram.com/cafeknotted/"><img src="${ctp}/images/instagram12.png" class="img3" /></a>
 			</div>
 		</div>
 	</div>

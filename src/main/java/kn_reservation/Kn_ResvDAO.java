@@ -223,36 +223,40 @@ public class Kn_ResvDAO {
 		}
 		return vos;
 	}
+	
+	
 
-	// 장바구니 상품 중, 가장 비싼 카테고리 제품만 가져오기
-	public ArrayList<Kn_CartMenuVO> getCartMenu(String memMid) {
-		ArrayList<Kn_CartMenuVO> vos = new ArrayList<Kn_CartMenuVO>();
-		
-		try {
-			sql = "select *, (select category from kn_menu m1 where m1.idx = c.menuIdx) as category, " 
-				  + "(select menuName from kn_menu m2 where m2.idx = c.menuIdx) as menuName, " 
-				  + "(select price from kn_menu m3 where m3.idx = c.menuIdx) as price " 
-		      + "from kn_cart c where memMid = ? group by menuIdx";
-			
-			pstmt = conn.prepareStatement(sql);
-			pstmt.setString(1, memMid);
-			rs = pstmt.executeQuery();
-			
-			while(rs.next()) {
-				Kn_CartMenuVO vo = new Kn_CartMenuVO();
-				vo.setCategory(rs.getString("category"));
-				vo.setMenuName(rs.getString("menuName"));
-				vo.setPrice(rs.getInt("price"));
-				vos.add(vo);
-			}
-			
-		} catch (SQLException e) {
-			System.out.println("SQL 오류(getCartMenu) :" + e.getMessage());
-		} finally {
-			getConn.rsClose();
-		}
-		return vos;
-	}
+//	// 장바구니 상품 중, 가장 비싼 카테고리 제품만 가져오기  (미사용) (OrderCommand)
+//	public ArrayList<Kn_CartMenuVO> getCartMenu(String memMid) {
+//		ArrayList<Kn_CartMenuVO> vos = new ArrayList<Kn_CartMenuVO>();
+//		
+//		try {
+//			sql = "select *, (select category from kn_menu m1 where m1.idx = c.menuIdx) as category, " 
+//				  + "(select menuName from kn_menu m2 where m2.idx = c.menuIdx) as menuName, " 
+//				  + "(select price from kn_menu m3 where m3.idx = c.menuIdx) as price " 
+//		      + "from kn_cart c where memMid = ? group by menuIdx";
+//			
+//			pstmt = conn.prepareStatement(sql);
+//			pstmt.setString(1, memMid);
+//			rs = pstmt.executeQuery();
+//			
+//			while(rs.next()) {
+//				Kn_CartMenuVO vo = new Kn_CartMenuVO();
+//				vo.setCategory(rs.getString("category"));
+//				vo.setMenuName(rs.getString("menuName"));
+//				vo.setPrice(rs.getInt("price"));
+//				vos.add(vo);
+//			}
+//			
+//		} catch (SQLException e) {
+//			System.out.println("SQL 오류(getCartMenu) :" + e.getMessage());
+//		} finally {
+//			getConn.rsClose();
+//		}
+//		return vos;
+//	}
+	
+	
 
 	// 쿠폰 고유번호 가져오기 (OrderCheckCommand)
 	public int getCouponIdx(String memMid, int coupon) {

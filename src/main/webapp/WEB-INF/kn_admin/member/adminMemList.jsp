@@ -176,11 +176,35 @@
 		function memberDel() {
 			let adminPwd = memberDelForm.pwd.value;
 			let idx = memberDelForm.idx.value;
+			let lastVisit = memberDelForm.lastVisit.value;
+			
+			// 현재 날짜 시간 구하기
+			var today = new Date();
+			
+			var oneMonthAgo = new Date(today.setMonth(today.getMonth() - 1));	// 한달 전
+
+			var year = oneMonthAgo.getFullYear();
+			var month = ('0' + (oneMonthAgo.getMonth() + 1)).slice(-2);
+			var day = ('0' + oneMonthAgo.getDate()).slice(-2);
+			var dateString = year + '-' + month  + '-' + day;
+
+			var hours = ('0' + today.getHours()).slice(-2); 
+			var minutes = ('0' + today.getMinutes()).slice(-2);
+			var seconds = ('0' + today.getSeconds()).slice(-2); 
+			var timeString = hours + ':' + minutes  + ':' + seconds;
+			
+			let oneMonthAgoDate = dateString + " " + timeString;
 			
 			if(adminPwd != '1234') {
 				alert('관리자 비밀번호 오류입니다.');
 				return false;				
 			}
+			
+ 			if(lastVisit > oneMonthAgoDate) {
+				alert('회원 탈퇴 1달 후부터 삭제 가능합니다.');
+				return false;				
+			}
+			
 			let ans = confirm('삭제하시겠습니까?');
 			if(!ans) return false;
 			
@@ -258,6 +282,7 @@
 		      	<div class="row mb-2">
 		      		<div class="col-sm">관리자 비밀번호: <input type="password" name="pwd" id="pwd" class="form-control"/></div>
 		      		<input type="hidden" name="idx" id="idx"/>
+		      		<input type="hidden" name="lastVisit" id="lastVisit"/>
 		      	</div>
 	        </form>
         </div>

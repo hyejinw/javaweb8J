@@ -12,9 +12,7 @@
 <body>
 <P><br /></P>
 <div class="container">	
-	<p>방명록 신규 업로드 : </p>
-	<p>게시글 신규 업로드 : </p>
-	<p>신규 등록 회원 : </p>
+
 </div>	
 <P><br /></P>
 </body>

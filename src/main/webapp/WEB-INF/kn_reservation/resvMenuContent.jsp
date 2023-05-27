@@ -52,35 +52,22 @@
 		function cartInputCheck(pickupDate, storeIdx, menuIdx, price) {
 			let amount = document.getElementById("amount").value;
 			
-			Swal.fire({
-			  title: '장바구니에 저장하시겠습니까?',
-			  icon: 'info',
-			  showCancelButton: true,
-			  confirmButtonColor: '#ffa0c5',
-			  cancelButtonColor: '#FFDB7E',
-			  confirmButtonText: '저장',
-			  cancelButtonText: '취소'
-			}).then((result) => {
-			  if (result.value) {
-	              //"저장" 버튼을 눌렀을 때 작업할 내용을 이곳에 넣어주면 된다. 
-	              $.ajax({
-	            	  type : "post",
-/* 	            	  url : "${ctp}/ResvCartInput.kn_re?pickupDate=${pickupDate}&storeIdx=${storeIdx}&menuIdx=${menuIdx}&amount="+amount, */
-	            	  url : "${ctp}/ResvCartInput.kn_re",
-	            	  data : {pickupDate : pickupDate, storeIdx : storeIdx, menuIdx : menuIdx, price : price, amount : amount},
-	            	  success : function(res) {
-	            		  if(res == 1) {
-	            			  Swal.fire('저장 완료');    /* 여기도 sweetAlert로 바꿔주기! */
-	            		  }
-	            		  else {
-	            			  Swal.fire('저장 실패');
-	            		  }
-	            	  }, error : function() {
-	            		  Swal.fire('전송 실패');
-	            	  }
-	              });
-			  }
-			})
+      $.ajax({
+	    	type : "post",
+	      url : "${ctp}/ResvCartInput.kn_re",
+	      data : {pickupDate : pickupDate, storeIdx : storeIdx, menuIdx : menuIdx, price : price, amount : amount},
+	      success : function(res) {
+	    	  if(res == 1) {
+	    		  Swal.fire('장바구니에 저장되었습니다.');   
+    		  }
+    		  else {
+    			  Swal.fire('저장 실패');
+    		  }
+    	  }, error : function() {
+	       Swal.fire('전송 실패');
+  	  	}
+      });
+		
 			
 		}
 		

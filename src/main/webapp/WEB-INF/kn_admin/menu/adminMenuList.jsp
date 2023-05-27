@@ -143,7 +143,14 @@
 	            "previous": "◀"
 	        }
 	      }
+			});
+ 	    $('#menuTable_filter').prepend('<select id="select"></select>');
+	    $('#menuTable > thead > tr').children().each(function (indexInArray, valueOfElement) { 
+	        $('#select').append('<option>'+valueOfElement.innerHTML+'</option>');
 	    });
+	    $('#menuTable_filter').prepend('<input type="text" id="toDate" placeholder="yyyy-MM-dd" style="width:150px; border-radius: 20px;">');
+	    $('#menuTable_filter').prepend('<input type="text" id="fromDate" placeholder="yyyy-MM-dd" style="width:150px; border-radius: 20px;"> ~ ');
+
 			
 			$('#menuTable2').DataTable({
 				responsive: true,
@@ -163,8 +170,6 @@
 	        /* {"sClass": "badge badge-success", "aTargets":[4]} */
 	      ],		    
 			  
-	      scrollX: 200,
-	      scrollY: 800,
 			  
 	      "language": {
 	        "emptyTable": "데이터가 없어요.",
@@ -172,7 +177,7 @@
 	        "info": "현재 _START_ - _END_ / _TOTAL_건",
 	        "infoEmpty": "데이터 없음",
 	        "infoFiltered": "( _MAX_건의 데이터에서 필터링됨 )",
-	        "search": "에서 검색: ",
+	        "search": "검색: ",
 	        "zeroRecords": "일치하는 데이터가 없어요.",
 	        "loadingRecords": "로딩 중...",
 	        "processing":     "잠시만 기다려 주세요...",
@@ -182,6 +187,7 @@
 	        }
 	      }
 	    });
+
 		});
 			
 	    

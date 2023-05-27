@@ -43,7 +43,6 @@ public class ResvCartInputCommand implements ReservInterface {
 		}
 		else {
 			res = dao.setCart(vo);
-			System.out.println("storeIdx : " + storeIdx);
 		}
 		
 		response.getWriter().write(res);

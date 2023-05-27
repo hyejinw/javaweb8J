@@ -137,15 +137,14 @@
 	        }
 	      }
 	    });
-		});
 			
-    $('#memuTable_filter').prepend('<select id="select"></select>');
-    $('#memuTable > thead > tr').children().each(function (indexInArray, valueOfElement) { 
+    $('#menuTable_filter').prepend('<select id="select"></select>');
+    $('#menuTable > thead > tr').children().each(function (indexInArray, valueOfElement) { 
         $('#select').append('<option>'+valueOfElement.innerHTML+'</option>');
     });
-    $('#memuTable_filter').prepend('<input type="text" id="toDate" placeholder="yyyy-MM-dd" style="width:150px; border-radius: 20px;">');
-    $('#memuTable_filter').prepend('<input type="text" id="fromDate" placeholder="yyyy-MM-dd" style="width:150px; border-radius: 20px;"> ~ ');
-    
+    $('#menuTable_filter').prepend('<input type="text" id="toDate" placeholder="yyyy-MM-dd" style="width:150px; border-radius: 20px;">');
+    $('#menuTable_filter').prepend('<input type="text" id="fromDate" placeholder="yyyy-MM-dd" style="width:150px; border-radius: 20px;"> ~ ');
+		});
 
     
     function menuModify() {

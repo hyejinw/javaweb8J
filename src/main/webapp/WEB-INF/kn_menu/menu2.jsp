@@ -3,12 +3,12 @@
 <c:set var="ctp" value="${pageContext.request.contextPath}"/>
 <!DOCTYPE html>
 <html>
-<head profile="http://www.w3.org/2005/10/profile">
+<head>
 	<meta charset="UTF-8">
 	<meta name="viewport" content="width=device-width, initial-scale=1">
 	<title>menu.jsp</title>
 	<jsp:include page="/include/bs4.jsp" />
-	<!-- <link rel="icon" href="/favicon.ico" type="image/x-icon"> -->
+	<link rel="icon" type="image/png" href="http://example.com/myicon.png"> 
 	<style>
 		.pill-nav a {
 		  display: inline-block;
@@ -117,7 +117,6 @@
 				<div class="col-sm-3">
 					<a href="${ctp}/MenuContent.kn_menu?idx=${vo.idx}&pageSize=${pageSize}&pag=${pag}&part=${part}" class="menuHover"><div class="d-flex flex-column">
 						<img src="${ctp}/images/kn_menu/${vo.menuPhoto}" class="img4" />
-						
 						<h5 class="mt-3">
 							<c:if test="${vo.day_diff < 31}"><span class="badge badge-pill badge-warning badge-sm" style="font-size:10px">NEW</span></c:if> 
 						

@@ -68,6 +68,32 @@ public class Kn_FranController extends HttpServlet {
 			command.execute(request, response);
 			viewPage = "/include/message.jsp";
 		}
+		// 매장 댓글
+		else if(com.equals("/FranStoreReply")) {
+			viewPage += "/store/franStoreReply.jsp";
+		}
+		// 매장 댓글창
+		else if(com.equals("/FranStoreReplyOK")) {
+			command = new FranStoreReplyOKCommand();
+			command.execute(request, response);
+		  return;
+		}
+		// 매장 예약
+		else if(com.equals("/FranResvList")) {
+			viewPage += "/resv/franResvList.jsp";
+		}
+		// 매장 예약창
+		else if(com.equals("/FranResvListOK")) {
+			command = new FranResvListOKCommand();
+			command.execute(request, response);
+			return;
+		}
+		// 매장 픽업 승인
+		else if(com.equals("/FranResvOK")) {
+			command = new FranResvOKCommand();
+			command.execute(request, response);
+			return;
+		}
 		
 		RequestDispatcher dispatcher = request.getRequestDispatcher(viewPage);
 		dispatcher.forward(request, response);

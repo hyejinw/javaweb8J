@@ -237,8 +237,44 @@ public class Kn_MemberDAO {
 		return res;
 	}
 
+	// 마이페이지에서 예약 취소 (ResvCancelCommand)
+	public String setResvCancelOk(int idx) {
+		String res = "0";
+		
+		try {
+			sql = "update kn_reservation set pickupOk='CANCEL' where idx = ?";
+			pstmt = conn.prepareStatement(sql);
+			pstmt.setInt(1, idx);
+			pstmt.executeUpdate();
+			res= "1";
+			
+		} catch (SQLException e) {
+			System.out.println("SQL오류(setResvDelOk) : " + e.getMessage());
+		} finally {
+			getConn.pstmtClose();
+		}
+		
+		return res;
+	}
 
-
+	// 회원 탈퇴 (MemDelCheckCommand)
+	public int memDel(int idx) {
+		int res = 0;
+		
+		try {
+			sql = "update kn_member set memberDel='OK' where idx = ?";
+			pstmt = conn.prepareStatement(sql);
+			pstmt.setInt(1, idx);
+			pstmt.executeUpdate();
+			res= 1;
+			
+		} catch (SQLException e) {
+			System.out.println("SQL 에러(memDel) : " + e.getMessage());
+		} finally {
+			getConn.pstmtClose();
+		}
+		return res;
+	}
 
 
 

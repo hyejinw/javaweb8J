@@ -89,6 +89,18 @@ public class Kn_MemberController extends HttpServlet {
 			command.execute(request, response);
 			viewPage = "/include/message.jsp";
 		}
+		// 마이페이지에서 예약 취소
+		else if(com.equals("/ResvCancel")) {
+			command = new ResvCancelCommand();    
+			command.execute(request, response);
+			return;
+		}
+		// 마이페이지에서 회원 탈퇴
+		else if(com.equals("/MemDelCheck")) {
+			command = new MemDelCheckCommand();    
+			command.execute(request, response);
+			viewPage = "/include/message.jsp";
+		}
 	
 		
 		RequestDispatcher dispatcher = request.getRequestDispatcher(viewPage);

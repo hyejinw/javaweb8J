@@ -1,6 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/functions" prefix="fn" %>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/fmt" prefix="fmt" %>
 <c:set var="ctp" value="${pageContext.request.contextPath}"/>
 <!DOCTYPE html>
 <html>
@@ -110,6 +111,38 @@
 		    myform.submit();
 			}
 		}
+		
+		function resvDel(idx) {
+			let ans = confirm('예약을 취소하시겠습니까?');
+			if(!ans) return false;
+			
+			else {
+	      $.ajax({
+	          type: "post",
+	          url: "${ctp}/ResvCancel.kn_mem",
+	          data: {idx : idx},
+	          success: function(res){
+	              if(res == 1){
+	                  alert("취소 완료");
+	                  location.reload();
+	              }
+	              else{
+	                  alert("취소 실패");
+	              }
+	          },
+	          error:function(){
+	              alert("전송 오류");
+	          }
+	      });
+			}
+		}
+		
+		function memDelCheck() {
+			let ans = confirm('정말 삭제하시겠습니까? 1달동안 같은 아이디로 재가입 불가능합니다.'); 
+			if(!ans) return false;
+			
+			location.href="${ctp}/MemDelCheck.kn_mem";
+		}
 	</script>
 	<style>
 		.btn2 {
@@ -141,7 +174,7 @@
 			  <i class="fa-solid fa-chevron-down" style="font-color:#282828"></i></a>
 			  <div id="demo" class="collapse mt-4">
 			  	<span style="font-size:18px"><i class="fa-solid fa-circle-exclamation" style="color: #491f51;"></i>&nbsp;&nbsp;&nbsp;회원등급 안내</span><br/>
-			  	- 멤버십을 통해 받은 쿠폰은 만료 시, 사용 불가능합니다.<br/>
+			  	- 멤버십을 통해 받은 쿠폰은 만료 시, 사용이 불가능합니다.<br/>
 					- 적정 금액 이상 구매한 회원은 재 로그인 시, 바로 멤버십이 업데이트 됩니다.<br/><br/><br/>
 			  	<span style="font-size:18px;"><i class="fa-solid fa-circle-exclamation" style="color: #491f51;"></i>&nbsp;&nbsp;&nbsp;등급별 혜택</span><br/>
 			  	<button type="button" class="btn btn-outline-danger ml-4 mt-3 mr-2" onclick="javascript:here1()" style="border-radius:100px">옐로우 스마일</button>
@@ -155,7 +188,7 @@
 			  <i class="fa-solid fa-chevron-down" style="font-color:#282828"></i></a>
 			  <div id="demo1" class="collapse mt-4">
 			  	<span style="font-size:18px"><i class="fa-solid fa-circle-exclamation" style="color: #491f51;"></i>&nbsp;&nbsp;&nbsp;쿠폰 안내</span><br/>
-			  	- 멤버십을 통해 받은 쿠폰은 만료 시, 사용 불가능합니다.<br/>
+			  	- 멤버십을 통해 받은 쿠폰은 만료 시, 사용이 불가능합니다.<br/>
 					- 예약 후, 차액은 자동으로 소멸됩니다.<br/><br/><br/>
 			  	<span style="font-size:18px;"><i class="fa-solid fa-circle-exclamation" style="color: #491f51;"></i>&nbsp;&nbsp;&nbsp;보유 쿠폰</span><br/>
 			  	<table class="table table-bordered table-hover text-center mb-5">
@@ -185,8 +218,8 @@
 			  <i class="fa-solid fa-chevron-down" style="font-color:#282828"></i></a>
 			  <div id="demo2" class="collapse mt-4">
 			  	<span style="font-size:18px"><i class="fa-solid fa-circle-exclamation" style="color: #491f51;"></i>&nbsp;&nbsp;&nbsp;예약 안내</span><br/>
-			  	- 멤버십을 통해 받은 쿠폰은 만료 시, 사용 불가능합니다.<br/>
-					- 예약 후, 차액은 자동으로 소멸됩니다.<br/><br/><br/>
+			  	- 예약 시, 쿠폰 사용가능 합니다.(한도 내에서 구매 가능)<br/>
+					- 제품 품질 유지를 위해 예약 시간 1시간 경과 시 상품은 폐기됩니다.(환불 및 픽업일 변경 불가)<br/><br/><br/>
 			  	<span style="font-size:18px;"><i class="fa-solid fa-circle-exclamation" style="color: #491f51;"></i>&nbsp;&nbsp;&nbsp;예약 리스트</span><br/>
 			  	<table class="table table-bordered table-hover text-center mb-5">
 			  		<tr>
@@ -196,6 +229,7 @@
 			  			<th>개수</th>
 			  			<th>결제금액</th>
 			  			<th>주문상태</th>
+			  			<th>주문취소</th>
 			  		</tr>
 				  	<c:set var="sw" value="${1}"/>
 				  	<c:forEach var="vo" items="${vos2}">
@@ -207,7 +241,20 @@
 				  		<td>${vo.menuPrice}</td>
 				  		<c:if test="${vo.pickupOk == 'NO'}"><td>픽업 전</td></c:if>
 				  		<c:if test="${vo.pickupOk == 'OK'}"><td>픽업 완료</td></c:if>
-				  		<c:if test="${sw % 6 == 0}"></tr><tr></c:if>
+				  		<c:if test="${vo.pickupOk == 'CANCEL'}"><td>예약 취소</td></c:if>
+				  		
+			  			<c:set var="now" value="<%=new java.util.Date()%>" />
+ 			  			<fmt:formatDate var="today" value="${now}" pattern="yyyy-MM-dd hh:mm:ss" />
+			  			<c:if test="${(vo.pickupDate > today) && (vo.pickupOk == 'NO')}">
+			  				<td><button class="btn btn-danger btn-sm" onclick="javascript:resvDel(${vo.idx})">취소</button></td>
+			  			</c:if>
+			  			<c:if test="${(vo.pickupDate <= today) || (vo.pickupOk == 'OK')}">
+			  				<td>취소 불가</td>
+			  			</c:if>
+			  			<c:if test="${vo.pickupOk == 'CANCEL'}">
+			  				<td>취소 완료</td>
+			  			</c:if>
+				  		<c:if test="${sw % 7 == 0}"></tr><tr></c:if>
 				  		<c:set var="sw" value="${sw+1}"/>
 				  	</c:forEach>
 				  	</tr>
@@ -299,6 +346,7 @@
         
 	      <!-- Modal footer -->
 	      <div class="modal-footer">
+      		<button type="button" class="btn btn-success" onclick="javascript:memDelCheck()">회원 탈퇴</button>
       		<button type="button" class="btn btn-success" onclick="javascript:memModifyCheck()">수정</button>
       		<button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
 	      </div>

@@ -26,10 +26,10 @@ public class OrderCommand implements ReservInterface {
 		ArrayList<Kn_CouponVO> vos2 = dao.getCouponList(memMid);
 		request.setAttribute("vos2", vos2);
 		
-		// 이거 안 쓸 듯!
-		ArrayList<Kn_CartMenuVO> vos3 = dao.getCartMenu(memMid);
-		request.setAttribute("vos3", vos3);
-		
+//		// 이거 안 쓸 듯!
+//		ArrayList<Kn_CartMenuVO> vos3 = dao.getCartMenu(memMid);
+//		request.setAttribute("vos3", vos3);
+//		
 	}
 
 }
