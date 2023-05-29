@@ -16,9 +16,7 @@
 </head>
 <body>
 <jsp:include page="/include/nav.jsp" />
-<div class="container">
-	<button onclick="here()">클릭</button>
-</div>
+	<img src="${ctp}/images/kn_brand.png"/>
 	<footer>
 		<jsp:include page="/include/footer.jsp" />
 	</footer>

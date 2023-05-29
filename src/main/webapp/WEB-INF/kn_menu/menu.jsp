@@ -96,12 +96,11 @@
 					  <a class="<c:if test="${part=='케이크'}">active</c:if> mr-2" href="${ctp}/Menu.kn_menu?pageSize=${pageSize}&pag=1&part=케이크">케이크</a>
 					  <a class="<c:if test="${part=='베이커리'}">active</c:if>" href="${ctp}/Menu.kn_menu?pageSize=${pageSize}&pag=1&part=베이커리">베이커리</a>
 					</div>
-					
 		    </div>
 		    <form name="searchForm" method="post" action="${ctp}/MenuSearch.kn_menu" class="form-inline my-2 my-lg-0">
 		      <input type="text" name="searchString" id="searchString" class="form-control mr-sm-2" autofocus aria-label="Search" />
 		      <button class="btn btn-outline-success my-2 my-sm-0" onclick="searchCheck()" style="margin-right:100px"><i class="fa-solid fa-magnifying-glass" style="color: #0cc621;"></i></button>
-		    	<input type="hidden" name="pag" value="${pag}"/>   <!-- 값을 넘겨줄 때 hidden으로 페이지 위치와 크기를 함께 보내야 한다.  -->
+		    	<input type="hidden" name="pag" value="${pag}"/>   
   				<input type="hidden" name="pageSize" value="${pageSize}"/>
   				<input type="hidden" name="part" value="${part}"/>
 		    </form>
@@ -116,7 +115,7 @@
 			<c:forEach var="vo" items="${vos}" varStatus="st">
 				<div class="col-sm-3">
 					<a href="${ctp}/MenuContent.kn_menu?idx=${vo.idx}&pageSize=${pageSize}&pag=${pag}&part=${part}" class="menuHover"><div class="d-flex flex-column">
-						<img src="${ctp}/images/kn_menu/${vo.menuPhoto}" class="img4" />
+						<%-- <img src="${ctp}/images/kn_menu/${vo.menuPhoto}" class="img4" /> --%>
 						
 						<h5 class="mt-3">
 							<c:if test="${vo.day_diff < 31}"><span class="badge badge-pill badge-warning badge-sm" style="font-size:10px">NEW</span></c:if> 

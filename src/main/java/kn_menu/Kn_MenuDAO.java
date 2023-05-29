@@ -130,7 +130,7 @@ public class Kn_MenuDAO {
 		return totRecCnt;
 	}
 
-	// 찐 검색 (MenuSearchCommand)
+	// 메뉴 검색 (MenuSearchCommand)
 	public ArrayList<Kn_MenuVO> getMenuSearch(int startIndexNo, int pageSize, String searchString) {
 		ArrayList<Kn_MenuVO> vos = new ArrayList<>();
 		try {
@@ -138,7 +138,7 @@ public class Kn_MenuDAO {
 					+ "(select count(*) from kn_menuReply where menuIdx = m.idx) as replyCount "
 					+ " from kn_menu m where menuOpen='OK' and menuName like ? order by idx asc limit ?,?";
 			pstmt = conn.prepareStatement(sql);      
-			pstmt.setString(1, "%"+searchString+"%");   // ?는 변수가 아닌 '값'에만!!! 넣는 것이다!!!!!
+			pstmt.setString(1, "%"+searchString+"%");  
 			pstmt.setInt(2, startIndexNo);
 			pstmt.setInt(3, pageSize);
 			rs = pstmt.executeQuery();

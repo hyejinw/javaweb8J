@@ -40,7 +40,7 @@ public class JoinOkCommand implements MemInterface {
 		}		
 		
 		
-		// 2. 비밀번호 암호화 처리!!!!!!
+		// 2. 비밀번호 암호화 처리
 		UUID uid = UUID.randomUUID();
 		String salt = uid.toString().substring(0,8);
 		pwd = salt + pwd;

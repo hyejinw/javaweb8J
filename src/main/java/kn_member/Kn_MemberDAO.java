@@ -194,13 +194,14 @@ public class Kn_MemberDAO {
 
 
 	// 멤버십 업데이트
-	public void setLevelUpdate(String mid, int i) {
+	public void setLevelUpdate(String mid, int i, String expiredDate) {
 		
 		try {
-			sql = "update kn_member set level=? where mid=?";
+			sql = "update kn_member set level=?, levelExpireDate = ? where mid=?";
 			pstmt = conn.prepareStatement(sql);
 			pstmt.setInt(1, i);
-			pstmt.setString(2, mid);
+			pstmt.setString(2, expiredDate);
+			pstmt.setString(3, mid);
 			pstmt.executeUpdate();
 			
 		} catch (SQLException e) {
@@ -290,12 +291,114 @@ public class Kn_MemberDAO {
 		}
 	}
 
-	// 생일 쿠폰 발급
-	public void setBirthdayCoupon() {
-		// TODO Auto-generated method stub
-		
+
+	// 만료된 쿠폰 삭제 처리
+	public void setExpiredCoupon() {
+		try {
+			sql = "delete from kn_coupon where couponExpireDate <= now()";
+			pstmt = conn.prepareStatement(sql);
+			pstmt.executeUpdate();
+			
+		} catch (SQLException e) {
+			System.out.println("SQL 에러(setExpiredCoupon) : " + e.getMessage());
+		} finally {
+			getConn.pstmtClose();
+		}
 	}
 
+	// 아이디 찾기 (IdFinderOkCommand)
+	public String getIdFinder(String email, String tel) {
+		String mid = "";
+		
+		try {
+			sql = "select mid from kn_member where email=? and tel=?";
+			pstmt = conn.prepareStatement(sql);
+			pstmt.setString(1, email);
+			pstmt.setString(2, tel);
+			rs = pstmt.executeQuery();
+			
+			if(rs.next()) {
+				mid = rs.getString(1);
+			}
+			
+		} catch (SQLException e) {
+			System.out.println("SQL 에러(getIdFinder) : " + e.getMessage());
+		} finally {
+			getConn.rsClose();
+		}
+		return mid;
+	}
+
+	// 비밀번호 찾기 (PwdFinderOkCommand)
+	public String getPwdFinder(String mid, String email) {
+		String pwd = "";
+		
+		try {
+			sql = "select pwd from kn_member where email=? and mid=?";
+			pstmt = conn.prepareStatement(sql);
+			pstmt.setString(1, email);
+			pstmt.setString(2, mid);
+			rs = pstmt.executeQuery();
+			
+			if(rs.next()) {
+				pwd = rs.getString(1);
+			}
+			
+		} catch (SQLException e) {
+			System.out.println("SQL 에러(getPwdFinder) : " + e.getMessage());
+		} finally {
+			getConn.rsClose();
+		}
+		return pwd;
+	}
+
+	// 비밀번호 재설정
+	public int getPwdUpdate(String mid, String email, String salt, String pwd) {
+		int res = 0;
+		
+		try {
+			sql = "update kn_member set pwd=?, salt=? where mid = ? and email = ?";
+			pstmt = conn.prepareStatement(sql);
+			pstmt.setString(1, pwd);
+			pstmt.setString(2, salt);
+			pstmt.setString(3, mid);
+			pstmt.setString(4, email);
+			pstmt.executeUpdate();
+			res= 1;
+			
+		} catch (SQLException e) {
+			System.out.println("SQL 에러(getPwdUpdate) : " + e.getMessage());
+		} finally {
+			getConn.pstmtClose();
+		}
+		return res;
+	}
+
+	// 회원 멤버십 만료시, level down
+	public void setLevelCheck(int level, String expiredDate, int idx) {
+		
+		try {
+			if(level == 2) {
+				sql = "update kn_member set level=2, levelStartDate=now(), levelExpireDate=? where idx=?";
+				pstmt = conn.prepareStatement(sql);
+				pstmt.setString(1, expiredDate);
+				pstmt.setInt(2, idx);
+			}
+			else {
+				sql = "update kn_member set level=level-1, levelStartDate=now(), levelExpireDate=? where idx=?";
+				pstmt = conn.prepareStatement(sql);
+				pstmt.setString(1, expiredDate);
+				pstmt.setInt(2, idx);
+			}
+			pstmt.executeUpdate();				
+			
+		} catch (SQLException e) {
+			System.out.println("SQL 에러(setLevelCheck) : " + e.getMessage());
+		} finally {
+			getConn.pstmtClose();
+		}
+		
+	}
 
 
 }

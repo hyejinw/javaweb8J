@@ -89,9 +89,9 @@
 			    <p style="font-size: 2em; color: #c3c3c3;">3,900</p>
 				</div>
 				<div class="col-xl-8 float-right" style="margin:40px 0px">
-					<a href="#"><img src="${ctp}/images/mainDonut1.png" class="img rounded-circle"/></a>&nbsp;
-					<a href="#"><img src="${ctp}/images/mainDonut2.png" class="img rounded-circle"/></a>&nbsp;
-				  <a href="#"><img src="${ctp}/images/mainDonut3.png" class="img rounded-circle" /></a>
+					<a href="${ctp}/MenuContent.kn_menu?idx=1&pageSize=24&pag=1&part=전체"><img src="${ctp}/images/mainDonut1.png" class="img rounded-circle"/></a>&nbsp;
+					<a href="${ctp}/MenuContent.kn_menu?idx=2&pageSize=24&pag=1&part=전체"><img src="${ctp}/images/mainDonut2.png" class="img rounded-circle"/></a>&nbsp;
+				  <a href="${ctp}/MenuContent.kn_menu?idx=3&pageSize=24&pag=1&part=전체"><img src="${ctp}/images/mainDonut3.png" class="img rounded-circle" /></a>
 				</div>
 			</div>
 		</div>

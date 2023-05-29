@@ -85,9 +85,10 @@
 		  
 		  
 		  let regex1 = /^[a-zA-Z0-9]{4,20}$/; //(아이디) 영문자 또는 숫자 4~20자 
-		  let regex2 = /^(?=.*[0-9])(?=.*[a-zA-Z])[a-zA-Z0-9!@#$%^&*()._-]{4,20}$/g; //(비밀번호)4자 이상 20자 이하, 영어/숫자 1개 이상 필수, 특수문자 허용
+		  let regex2 = /^(?=.*[0-9])(?=.*[a-zA-Z])[a-zA-Z0-9!@#$%^&*()._-]{4,20}$/g; 
+		  //(비밀번호)4자 이상 20자 이하, 영어/숫자 1개 이상 필수, 특수문자 허용
+		  
 		  let regex3 = /^[가-힣a-zA-Z]+$/;  // (성명)한글,영문만 적어도 1자이상 
-			/* let regex4 = /^[a-zA-Z0-9]+@[a-zA-Z0-9]$/; // 이메일 */
 	 		let regex4 = /^[0-9a-zA-Z]+$/g; // 이메일 
 	 		let regex5 = /\d{2,3}-\d{3,4}-\d{4}$/g; //(전화번호)
 			
@@ -127,7 +128,6 @@
 				  
 		  // 성명 확인
 		  if(!regex3.test(name)){
-			  console.log('성명 여기로 왔어요',name);
 		    document.getElementById("nameError").innerHTML="성명이 올바르지 않습니다.(한글/영문만 1자이상)";
 		    check = false;
 		  }
@@ -416,11 +416,6 @@
 			<input type="date" name="birthday" id="birthday" onchange="birthdayCheck()" class="form-control"/>
 			<div id="birthdayError" class="text-primary"></div>
     </div>    
-<%--    	  <!-- 생일을 null로 보내면 자꾸 오류가 생겨서 기본값을 줘버렸다. -->
-    	<c:set var="ymd" value="<%=new java.util.Date()%>" />
-      <label for="birthday">생년월일 <span class="must">*</span></label>
-			<input type="date" name="birthday" value=<fmt:formatDate value="${ymd}" pattern="yyyy-MM-dd"/> class="form-control"/>
-    </div>     --%>
     <div class="form-group">
       <div class="form-check-inline">
         <span class="input-group-text">성별 </span> &nbsp; &nbsp;

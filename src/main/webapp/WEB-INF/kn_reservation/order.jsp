@@ -47,30 +47,22 @@
 						  couponInput.innerHTML = '- <fmt:formatNumber value="4800" pattern="#,###" />원';
 						  resPrice = getCartTotPrice - 4800;
 							if(resPrice < 0) resPrice = 0;
-						  
-						  console.log("resPrice  : " + resPrice);
 						  totPriceInput.innerHTML = resPrice+"원";
 					  }
 					  else if(coupon == 3) {
 						  couponInput.innerHTML = '- <fmt:formatNumber value="6500" pattern="#,###" />원';
 						  resPrice = getCartTotPrice - 6500;
 							if(resPrice < 0) resPrice = 0;
-						  
-						  console.log("resPrice  : " + resPrice);
 						  totPriceInput.innerHTML = resPrice+"원";
 					  }
 					  else if(coupon == 4) {
 						  couponInput.innerHTML = '- <fmt:formatNumber value="23000" pattern="#,###" />원';
 						  resPrice = getCartTotPrice - 23000;
 							if(resPrice < 0) resPrice = 0;
-						  
-						  console.log("resPrice  : " + resPrice);
 						  totPriceInput.innerHTML = resPrice+"원";
 					  }
-	              
 			  }
 			})
-			
 		}
 	
 		function orderCheck(storeIdx, pickupDate, menuIdx) {
@@ -116,7 +108,7 @@
 	<div id="container">
 	<div class="container-xl p-5 my-5" style="margin-top:100px">
 	<h2 class="text-center" style="margin:0px auto;">결제</h2>
-		<div class="container" style="padding-top:100px; width:100%"> <!-- 이 부분 추후에 반응형 사이즈로 재조절 필요 -->
+		<div class="container" style="padding-top:100px; width:100%"> 
 			<div class="row">
 				<div class="col-sm-5">
 					<div style="border-radius: 100px; background-color:#ebebeb; padding:10px" class="mb-3 ml-3">주문매장 : ${vos[0].storeName}</div>

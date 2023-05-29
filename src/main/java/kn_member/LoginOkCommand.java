@@ -45,15 +45,6 @@ public class LoginOkCommand implements MemInterface {
 			return;
 		}
 		
-		// 1개월 전에 탈퇴한 회원이 있는지 확인 후, 정말 탈퇴 처리
-		dao.setDeletedMem();
-		
-		// 생일인 회원, 생일 쿠폰 발급 
-		int res = 0;
-		
-		// 만료 날짜 지난 쿠폰 삭제처리(? 어떻게 할 건지 결정!!)
-		
-		
 		// 로그인 성공
 		// 1. 세션 처리
 		HttpSession session = request.getSession();
@@ -68,16 +59,16 @@ public class LoginOkCommand implements MemInterface {
 		
 		
 
-		Calendar couponExpired = Calendar.getInstance();
-		
 		// 쿠폰 만료 날짜 계산 (3개월 후)  => sql 문으로 처리하는 게 더 좋다.
 		SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+		Calendar couponExpired = Calendar.getInstance();
 		couponExpired.add(couponExpired.MONTH, +3);
 		String date = sdf.format(couponExpired.getTime());
+		
+		int res = 0;
 
 		// 1-1. 일반 회원 첫 로그인이면 가입 쿠폰을 준다.(회원 관리는 전부 고유 번호로 진행)
 		if(vo.getTotCnt() == 0 && vo.getLevel() == 2) {
-			
 			dao.setCoupon(vo.getMid(), 1, date);
 		}
 		
@@ -85,12 +76,20 @@ public class LoginOkCommand implements MemInterface {
 		// 총 예약 금액 구하기
 		int totResvPrice = dao.getTotResvPrice(mid);
 		
+    // 멤버십 만료 날짜 계산 (1년 후)
+    Calendar cal = Calendar.getInstance();
+    Calendar cal2 = Calendar.getInstance();
+
+    cal.add(cal.YEAR, +1);
+    String expiredDate = sdf.format(cal.getTime());
+    String now = sdf.format(cal2.getTime());
+    
 		if(totResvPrice > 100000 && vo.getLevel() == 2) {
 			// 현재 쿠폰 유무 확인  --> 멤버십 유지 기간 동안, 관리자가 쿠폰 삭제하지 못함.
 			res = dao.getCouponCheck(mid, 3);
 			if(res == 0) { // 없다면 발급하고, 멤버십 업데이트
 				dao.setCoupon(vo.getMid(), 3, date);
-				dao.setLevelUpdate(mid, 3);
+				dao.setLevelUpdate(mid, 3, expiredDate);
 			}
 		}
 		if(totResvPrice > 150000 && vo.getLevel() == 3) {
@@ -98,13 +97,22 @@ public class LoginOkCommand implements MemInterface {
 			if(res == 0) {
 				dao.setCoupon(vo.getMid(), 3, date);
 				dao.setCoupon(vo.getMid(), 4, date);
-				dao.setLevelUpdate(mid, 4);
+				dao.setLevelUpdate(mid, 4, expiredDate);
 			}
 		}
 		
-
+		// 1-3. 회원 멤버십 만료일 지나면 변경
+		if(vo.getLevelExpireDate().compareTo(now) < 0) {
+			dao.setLevelCheck(vo.getLevel(), expiredDate, vo.getIdx());
+		}
 		
-		
+		// 1-4. 관리자 로그인 시
+		if(vo.getLevel() == 0) {
+			// 1) 1개월 전에 탈퇴한 회원이 있는지 확인 후, 정말 탈퇴 처리
+			dao.setDeletedMem();
+			// 2) 만료 날짜 지난 쿠폰 삭제처리
+			dao.setExpiredCoupon();
+		}
 		
 		
 
@@ -122,7 +130,7 @@ public class LoginOkCommand implements MemInterface {
 		// 필요한 내용 업데이트 
 		dao.setMemberTotalUpdate(vo.getIdx());
 
-		// 3 로그인시 아이디저장시킨다고 체크하면 쿠키에 아이디 저장하고, 그렇지 않으면 쿠키에서 아이디를 제거한다.
+		// 3 로그인시 아이디 저장에 체크하면 쿠키에 아이디 저장하고, 그렇지 않으면 쿠키에서 아이디를 제거한다.
 		String idSave = request.getParameter("idSave") == null ? "off" : "on";
 		
 		Cookie cookieMid = new Cookie("cMid", mid);

@@ -90,20 +90,12 @@
 		<form name="myform" method="post" action="${ctp}/LoginOk.kn_mem" style="margin-top:50px">
 			<div class="form-group" style="margin:0px auto; padding-top:50px; width:60%"> <!-- 이 부분 추후에 반응형 사이즈로 재조절 필요 -->
 				<div class="row" style="margin-bottom:30px">
-<!-- 					<div class="col-md-3 text-center"><label for="mid">아이디</label></div> -->
 					<div class="col-md-3 text-center">아이디</div>
-					<div class="col-md-9"><input type="text" class="form-control" name="mid" id="mid" value="${cMid}" placeholder="아이디를 입력하세요" autofocus required /></div>
-				</div>
-				<div class="row">
-					<div class="col"><div id="midError" class="text-left text-danger"></div></div>
+					<div class="col-md-9"><input type="text" class="form-control" name="mid" id="mid" value="${cMid}" placeholder="아이디를 입력해주세요" autofocus required /></div>
 				</div>
 				<div class="row" style="margin-bottom:30px">
-<!-- 					<div class="col-md-3 text-center"><label for="pwd">비밀번호</label></div> -->
 					<div class="col-md-3 text-center">비밀번호</div>
 					<div class="col-md-9"><input type="password" class="form-control" name="pwd" id="pwd" placeholder="비밀번호를 입력해주세요" required/></div>
-				</div>
-				<div class="row">
-					<div class="col"><div id="midError" class="text-left text-danger"></div></div>
 				</div>
 				<hr/>
 				<div class="row" style="margin:30px 0px">

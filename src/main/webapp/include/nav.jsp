@@ -67,7 +67,7 @@
 </style>
 
 <nav class="navbar navbar-expand-sm navbar-dark" style="background-color: rgba(253, 250, 247, 0.8)">
-  <a class="navbar-brand" href="http://localhost:9090/javaweb8J/"><img src="${ctp}/images/knotted_logo.png" style="width: 90px; height: 50px;"/></a>
+  <a class="navbar-brand" href="http://localhost:9090/javaweb8J/"><img src="${ctp}/images/knotted_logo.png" style="width: 100px; height: 50px;"/></a>
   <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#collapsibleNavbar" style="background-color: #ffa0c5;">
     <span class="navbar-toggler-icon"></span>
   </button>

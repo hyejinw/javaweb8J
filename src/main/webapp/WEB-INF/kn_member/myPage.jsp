@@ -107,7 +107,6 @@
 			  check = false;
 		  }
 			else {
-		   // myform.address.value = postcode + "/" + roadAddress + "/" + detailAddress + "/" + extraAddress + "/";
 		    myform.submit();
 			}
 		}
@@ -143,6 +142,33 @@
 			
 			location.href="${ctp}/MemDelCheck.kn_mem";
 		}
+		
+		function pwdUpdateCheck() {
+			let pwd1 = myform2.pwd1.value.trim();
+			let pwd2 = myform2.pwd2.value.trim();
+			let pwd3 = myform2.pwd3.value.trim();
+			const regex2 = /^(?=.*[0-9])(?=.*[a-zA-Z])[a-zA-Z0-9!@#$%^&*()._-]{4,20}$/g; //(비밀번호)4자 이상 20자 이하, 영어/숫자 1개 이상 필수, 특수문자 허용
+			const regex3 = /^(?=.*[0-9])(?=.*[a-zA-Z])[a-zA-Z0-9!@#$%^&*()._-]{4,20}$/g; //(비밀번호)4자 이상 20자 이하, 영어/숫자 1개 이상 필수, 특수문자 허용
+			
+		  // 비밀번호 확인
+		  if(!regex2.test(pwd1)) {
+		    alert("기존 비밀번호의 형식이 올바르지 않습니다.\n(영어/숫자 필수, 특수문자 가능 4~20자)");
+		    myform2.pwd1.focus();
+		    return false;
+		  }
+		  if(!regex3.test(pwd2)) {
+		    alert("새 비밀번호의 형식이 올바르지 않습니다.\n(영어/숫자 필수, 특수문자 가능 4~20자)");
+		    myform2.pwd2.focus();
+		    return false;
+		  }
+		  if(pwd2 != pwd3) {
+		    alert("새 비밀번호 확인이 새 비밀번호와 다릅니다.");
+		    myform2.pwd3.focus();
+		    return false;
+		  }
+			myform2.submit();
+		}
+			
 	</script>
 	<style>
 		.btn2 {
@@ -167,7 +193,14 @@
 		</div>
 	  <div style="margin:10px 10px">
 			<div class="container">
-				<div class="col"><button class="btn btn2 mb-5" style="background-color:#D2E9E9; font-size:1.1em;" data-toggle="modal" data-target="#memModifyClick">회원 정보 수정</button></div>
+				<div class="row">
+					<div class="col">
+						<button class="btn btn2 mb-2" style="background-color:#D2E9E9; font-size:1.1em;" data-toggle="modal" data-target="#memModifyClick">회원 정보 수정</button>
+					</div>
+					<div class="col">
+						<button class="btn btn2 mb-5" style="background-color:#D2E8E8; font-size:1.1em;" data-toggle="modal" data-target="#pwdUpdateClick">비밀번호 변경</button>
+					</div>
+				</div>
 			  
 			  
 			  <a href="#demo" class="btn form-control text-left" style="font-size:20px" data-toggle="collapse">멤버십 정보&nbsp;&nbsp;&nbsp;
@@ -305,24 +338,6 @@
 		      		<div class="col">
 		      			주소: <input type="text" name="address" id="address" value="${vo.address}" class="form-control" />
 		      			
-	<!-- 					    <div class="form-group">
-						      <label for="address">주소 </label>
-						      <input type="hidden" name="address" id="address">
-						      <div class="input-group mb-1">
-						        <input type="text" name="postcode" id="sample6_postcode" placeholder="우편번호" class="form-control">
-						        <div class="input-group-append">
-						          <input type="button" onclick="sample6_execDaumPostcode()" value="우편번호 찾기" class="btn btn-sm">
-						        </div>
-						      </div>
-						      <input type="text" name="roadAddress" id="sample6_address" size="50" placeholder="주소" class="form-control mb-1">
-						      <div class="input-group mb-1">
-						        <input type="text" name="detailAddress" id="sample6_detailAddress" placeholder="상세주소" class="form-control"> &nbsp;&nbsp;
-						        <div class="input-group-append">
-						          <input type="text" name="extraAddress" id="sample6_extraAddress" placeholder="참고항목" class="form-control">
-						        </div>
-						      </div>
-						    </div> -->
-						    
 							</div>						
 		      	</div>
 		      	<div class="row mb-2">
@@ -349,6 +364,49 @@
       		<button type="button" class="btn btn-success" onclick="javascript:memDelCheck()">회원 탈퇴</button>
       		<button type="button" class="btn btn-success" onclick="javascript:memModifyCheck()">수정</button>
       		<button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+	      </div>
+        
+      </div>
+    </div>
+  </div>
+	
+   <!-- The Modal -->
+  <div class="modal fade" id="pwdUpdateClick">
+    <div class="modal-dialog modal-dialog-centered modal-lg">  <!--modal-lg 로 할까?  -->
+      <div class="modal-content">
+      
+        <!-- Modal Header -->
+        <div class="modal-header">
+          <h4 class="modal-title">비밀번호 변경</h4>
+          <button type="button" class="close" data-dismiss="modal">&times;</button>
+        </div>
+        
+        <!-- Modal body -->
+    		<div class="modal-body">
+      		<form name="myform2" method="post" action="${ctp}/PwdUpdateOkMypage.kn_mem">
+		      	<div class="row mb-3">
+		      		<div class="col">
+		      			기존 비밀번호: <input type="password" name="pwd1" id="pwd1" autofocus placeholder="(영어/숫자 필수, 특수문자 가능 4~20자)" class="form-control" />
+							</div>						
+		      	</div>
+		      	<div class="row mb-3">
+		      		<div class="col">
+		      			새 비밀번호 : <input type="password" name="pwd2" id="pwd2" placeholder="(영어/숫자 필수, 특수문자 가능 4~20자)" class="form-control"/>
+	      			</div>
+	      		</div>
+		      	<div class="row mb-4">
+		      		<div class="col">
+		      			새 비밀번호 확인 : <input type="password" name="pwd3" id="pwd3" placeholder="(영어/숫자 필수, 특수문자 가능 4~20자)" class="form-control"/>
+	      			</div>
+	      		</div>
+      		</form>      
+    	  </div>
+        
+	      <!-- Modal footer -->
+	      <div class="modal-footer">
+      		<button type="button" class="btn btn-success" onclick="javascript:pwdUpdateCheck()">변경</button>
+      		<button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+      		<input type="hidden" name="email" value="${vo.email}"/>
 	      </div>
         
       </div>
