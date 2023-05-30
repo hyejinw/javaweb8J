@@ -166,26 +166,8 @@
 		function memberModify(){
 			let ans = confirm('수정하시겠습니까?');
 			if(!ans) return false;
-			
-/* 		  let idx =	$('#idx').val(),
-			let mid =	$('#mid').val();
-			let name =	$('#name').val();
-			let email =	$('#email').val();
-			let tel =	$('#tel').val();
-			let birthday =	$('#birthday').val();
-			let address =	$('#address').val();
-			let gender = $('#gender').val();
-			let memType =	$('#memType').val();
-			let level =	$('#level').val();
-			let levelStartDate =	$('#levelStartDate').val();
-			let levelExpireDate =	$('#levelExpireDate').val();
-			let totCnt =	$('#totCnt').val();
-			let todayCnt =	$('#todayCnt').val();
-			let firstVisit =	$('#firstVisit').val();
-			let lastVisit =	$('#lastVisit').val();
-			let memberDel =	$('#memberDel').val();
-		 */
-		  let idx =	memberForm.idx.value
+
+			let idx =	memberForm.idx.value
 			let mid =	memberForm.mid.value;
 			let name =	memberForm.name.value;
 			let email =	memberForm.email.value;

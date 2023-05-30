@@ -21,7 +21,6 @@ public class PwdUpdateOkMypageCommand implements MemInterface {
 		String pwd1 = request.getParameter("pwd1")==null ? "" : request.getParameter("pwd1");
 		String pwd2 = request.getParameter("pwd2")==null ? "" : request.getParameter("pwd2");
 		
-		
 		Kn_MemberDAO dao = new Kn_MemberDAO();
 		Kn_MemberVO vo = dao.getMidCheck(mid);
 		
@@ -38,7 +37,6 @@ public class PwdUpdateOkMypageCommand implements MemInterface {
 			return;
 		}
 		
-		
 		// 비밀번호 암호화 처리
 		UUID uid = UUID.randomUUID();
 		String salt = uid.toString().substring(0,8);
@@ -48,16 +46,13 @@ public class PwdUpdateOkMypageCommand implements MemInterface {
     pwd2 = security.encryptSHA256(pwd2);
 
 		
-		
 		int res = dao.getPwdUpdate(mid, email, salt, pwd2);
 		
 		if(res == 1) {
 			request.setAttribute("msg", "비밀번호가 변경되었습니다.");
-			
 		}
 		else {
 			request.setAttribute("msg", "다시 시도해주세요.");
-			
 		}
 		request.setAttribute("url", request.getContextPath() + "/MyPage.kn_mem");
 	}

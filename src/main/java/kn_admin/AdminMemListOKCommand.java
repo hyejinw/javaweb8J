@@ -21,15 +21,11 @@ public class AdminMemListOKCommand implements AdminInterface {
 		Kn_AdminDAO dao = new Kn_AdminDAO();
 
 		ArrayList<Kn_MemberVO> vos = dao.getMemberList();
-
-//		request.setAttribute("vos", vos);
 		
-		//HashMap<String, String> memData;
 		JSONObject memberObj = new JSONObject();
 		JSONArray memberArray = new JSONArray();
 		
 	  for(int i=0; i<vos.size(); i++) { 
-	  	//memData = new HashMap<>(); 
 	  	
 	  	JSONObject mem = new JSONObject();
 	  	mem.put("idx", vos.get(i).getIdx() + "");

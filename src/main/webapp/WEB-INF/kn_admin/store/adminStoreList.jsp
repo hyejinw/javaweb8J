@@ -43,7 +43,6 @@
 	              $('#storeTel').val(rowData.storeTel);
 	              $('#storeAddress').val(rowData.storeAddress);
 	              $('#storePhoto').val(rowData.storePhoto);
-	              $('#location').val(rowData.location);
 	              $('#opHour').val(rowData.opHour);
 	              $('#storeMenu').val(rowData.storeMenu);
 	              $('#storeRate').val(rowData.menuRate);
@@ -62,7 +61,6 @@
 	        {data: "storeAddress"},
 	        {data: "storePhoto"},
 	        {data: "opHour"},
-	        {data: "location"},
 	        {data: "storeMenu" },
 	        {data: "storeRate"},
 	        {data: "storeModify"},
@@ -95,7 +93,7 @@
 		    	{targets:6, width:5}
 		    ],
 		    
-/* 		    scrollX: 100, */
+		    scrollX: 100,
 		    scrollY: 500,
 		    
 		    "language": {
@@ -250,7 +248,6 @@
 					<th class="text-center">주소</th>
 					<th class="text-center">매장 사진</th>
 					<th class="text-center">영업시간</th>
-					<th class="text-center">지도</th>
 					<th class="text-center">가능 메뉴</th>
 					<th class="text-center">총 평점</th>
 					<th class="text-center">수정 중 유무</th>

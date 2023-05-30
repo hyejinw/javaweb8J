@@ -24,9 +24,7 @@
 	</style>
 	
 	<script>
-		/* $(document).ready(function() { 이렇게 적어도 된다!! */
 		jQuery(function($){
-			
 			let table = $('#memberTable').DataTable({
 				responsive: true,
 	   	  "ajax": {
@@ -113,7 +111,6 @@
 	  						return '<button class="btn btn-danger btn-sm" data-toggle="modal" data-target="#deleteClick">'+data+'</button>'
   						}
   					}
-  					
   			  }
 		    ],
 		    

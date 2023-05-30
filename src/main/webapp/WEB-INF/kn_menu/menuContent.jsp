@@ -163,7 +163,7 @@
 		  			</td>
 		  		</tr>
 		  		<tr>
-		  			<td style="width:75%" class="text-left">   <!-- 이렇게 비율로 설정해주면 반응형으로 바뀐다. -->
+		  			<td style="width:75%" class="text-left">  
 		  				<input type="file" name="m_ReplyPhoto" id="m_ReplyPhoto" class="form-control"/>
 		  			</td>
 		  			<td style="width:25%" class="text-center">
@@ -182,7 +182,7 @@
 				<div class="row mt-3">
 					<div class="col" style="font-size:1.4em">
   					<c:if test="${sMid == replyVo.memMid || sLevel == 0}">
-  						<a href="javascript:replyDelete(${replyVo.idx}, ${replyVo.menuIdx})"><span class="badge badge-pill badge-danger">❌</span></a>
+  					<a href="javascript:replyDelete(${replyVo.idx}, ${replyVo.menuIdx})"><span class="badge badge-pill badge-danger">❌</span></a>
   					</c:if>&nbsp;
   					${replyVo.memMid}
 						<span style="font-size:0.6em">&nbsp;&nbsp;${fn: substring (replyVo.m_ReplyDate,0,10)}</span>

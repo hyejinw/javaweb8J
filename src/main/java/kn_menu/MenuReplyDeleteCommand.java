@@ -18,7 +18,6 @@ public class MenuReplyDeleteCommand implements MenuInterface {
 		
 		response.getWriter().write(res);
 		
-		
 		// MenuReplyInputCommand에도 있는 내용
 		// 댓글 총 평점 구하기 (1.해당 메뉴에 매겨진 평점 총합, 2.평점 개수)  == 댓글을 삭제하면 평점도 바뀌는 게 맞다.
 		Kn_MenuReplyVO vo = dao.getTotMenuRate(menuIdx);
