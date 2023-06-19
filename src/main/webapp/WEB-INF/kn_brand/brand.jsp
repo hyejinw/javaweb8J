@@ -16,7 +16,7 @@
 </head>
 <body>
 <jsp:include page="/include/nav.jsp" />
-	<img src="${ctp}/images/kn_brand.png"/>
+	<img src="${ctp}/images/kn_brand.png" style="width:100%"/>
 	<footer>
 		<jsp:include page="/include/footer.jsp" />
 	</footer>

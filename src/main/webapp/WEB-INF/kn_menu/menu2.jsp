@@ -8,8 +8,8 @@
 	<meta name="viewport" content="width=device-width, initial-scale=1">
 	<title>menu.jsp</title>
 	<jsp:include page="/include/bs4.jsp" />
-	<link rel="icon" href="/favicon.ico" type="image/x-icon">
- 	<style>
+	<!-- <link rel="icon" href="/favicon.ico" type="image/x-icon"> -->
+	<style>
 		.pill-nav a {
 		  display: inline-block;
 		  color: black;
@@ -43,11 +43,11 @@
 		  text-decoration: underline;
 	  	text-decoration-color: #ffa0c5;
 		}
- 		.menuHover:visited {  방문 후 링크 상태 
+		.menuHover:visited { /* 방문 후 링크 상태 */
 	    color: pink;
 	    background-color: transparent;
 	    text-decoration: none;
-		} 
+		}
 		h5 {
 			color:#282828;
 			font-size:1.3em;
@@ -72,7 +72,9 @@
     		searchForm.searchString.focus();
     		return false;
     	}
+
   		searchForm.submit();
+    	   	
 		}
 	
 	</script>
@@ -113,7 +115,7 @@
 			<c:forEach var="vo" items="${vos}" varStatus="st">
 				<div class="col-sm-3">
 					<a href="${ctp}/MenuContent.kn_menu?idx=${vo.idx}&pageSize=${pageSize}&pag=${pag}&part=${part}" class="menuHover"><div class="d-flex flex-column">
-						<img src="${ctp}/images/kn_menu/${vo.menuPhoto}" class="img4" />
+						<%-- <img src="${ctp}/images/kn_menu/${vo.menuPhoto}" class="img4" /> --%>
 						
 						<h5 class="mt-3">
 							<c:if test="${vo.day_diff < 31}"><span class="badge badge-pill badge-warning badge-sm" style="font-size:10px">NEW</span></c:if> 
@@ -140,9 +142,10 @@
 					<div class="row text-center mb-5" >
 				</c:if>
 			</c:forEach>
-			</div>
+			<div>
 		</div>
 	</div>
+		
 		
 	<!-- 블록 페이징 -->
 	<!-- 4페이지(1블록)에서 0블록으로 가게되면 현재페이지는 1페이지가 블록의 시작페이지가 된다. -->
@@ -159,7 +162,7 @@
 	    <c:if test="${pag < totPage}"><li class="page-item"><a class="page-link text-secondary" href="${ctp}/Menu.kn_menu?pageSize=${pageSize}&pag=${totPage}&part=${part}">▷▷</a></li></c:if>
  		</ul>
   </div>
-  
+	</div>
 	<footer>
 		<jsp:include page="/include/footer.jsp" />
 	</footer>

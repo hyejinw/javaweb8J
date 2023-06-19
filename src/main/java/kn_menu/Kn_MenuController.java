@@ -39,7 +39,7 @@ public class Kn_MenuController extends HttpServlet {
 			viewPage += "/menuSearch.jsp";
 		}
 		// 메뉴 상세 페이지
-		if(com.equals("/MenuContent")) {
+		else if(com.equals("/MenuContent")) {
 			command = new MenuContentCommand();
 			command.execute(request, response);
 			viewPage += "/menuContent.jsp";
@@ -52,19 +52,19 @@ public class Kn_MenuController extends HttpServlet {
 		
 		
 		// 댓글 입력
-		if(com.equals("/MenuReplyInput")) {
+		else if(com.equals("/MenuReplyInput")) {
 			command = new MenuReplyInputCommand();
 			command.execute(request, response);
 			return;
 		}
 		// 댓글 삭제
-		if(com.equals("/MenuReplyDelete")) {
+		else if(com.equals("/MenuReplyDelete")) {
 			command = new MenuReplyDeleteCommand();
 			command.execute(request, response);
 			return;
 		}
 		// 댓글 좋아요 증가
-		if(com.equals("/MenuGood")) {
+		else if(com.equals("/MenuGood")) {
 			command = new MenuGoodCommand();
 			command.execute(request, response);
 			viewPage += "/menuContent.jsp";
