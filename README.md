@@ -6,6 +6,7 @@
 
 사이트 링크 : http://49.142.157.251:9090/javaweb8J/ <br/>
 PPT 미리보기 (38장) : https://www.miricanvas.com/v/123c9ye <br/> 
+PPT 다운로드 : https://drive.google.com/file/d/1YuvXyCf69VEZiI3ql_eZopcWU0dzBAW1/view?usp=sharing <br/><hr/>
 기획서 및 제작과정 : https://docs.google.com/spreadsheets/d/1JJpuV_yccxDZlcDeTWBFe7ow5mrsIqVjEsVXZ7pktCc/edit?usp=sharing <br/>
 
 <h1>사용 기술 스택</h1>
